@@ -7,33 +7,16 @@
 \Newlabel{inst1}{a}
 \citation{pwc2024graphllm}
 \citation{lewis2020rag}
-\citation{pwc2024graphllm}
-\citation{islam2023financebench,ragfinancial2025}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
-\newlabel{sec:introduction}{{1}{2}{Introduction}{section.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Context}{2}{subsection.1.1}\protected@file@percent }
-\newlabel{sec:context}{{1.1}{2}{Context}{subsection.1.1}{}}
 \citation{han2025ragvsgraphrag}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Problem statement}{3}{subsection.1.2}\protected@file@percent }
-\newlabel{sec:problem}{{1.2}{3}{Problem statement}{subsection.1.2}{}}
 \citation{edge2024graphrag}
 \citation{sarmah2024hybridrag,arun2025finreflectkg,graphcompliance2025}
 \citation{terag2025,lazygraphrag2025,polyg2025}
-\citation{ragsecurity2025,privacyrisks2025,sag2025}
-\citation{sarmah2024hybridrag}
-\citation{graphcompliance2025}
-\citation{arun2025finreflectkg}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Gap in the literature}{4}{subsection.1.3}\protected@file@percent }
-\newlabel{sec:gap}{{1.3}{4}{Gap in the literature}{subsection.1.3}{}}
-\citation{terag2025}
-\citation{polyg2025}
-\citation{ragsecurity2025,privacyrisks2025,sag2025}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Contributions}{5}{subsection.1.4}\protected@file@percent }
-\newlabel{sec:contributions}{{1.4}{5}{Contributions}{subsection.1.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.5}Paper organization}{6}{subsection.1.5}\protected@file@percent }
-\newlabel{sec:organization}{{1.5}{6}{Paper organization}{subsection.1.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Related work}{6}{section.2}\protected@file@percent }
-\newlabel{sec:related}{{2}{6}{Related work}{section.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{2}{Introduction}{section.1}{}}
+\citation{lewis2020rag}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related work}{3}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{3}{Related work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}From VectorRAG to GraphRAG}{3}{subsection.2.1}\protected@file@percent }
 \citation{edge2024graphrag}
 \citation{traag2019leiden}
 \citation{peng2024graphrag}
@@ -41,190 +24,91 @@
 \citation{guo2024lightrag}
 \citation{gutierrez2024hipporag}
 \citation{li2025subgraphrag}
-\citation{hu2024grag}
-\citation{chang2024communitykg}
-\citation{corehierarchy2026}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}GraphRAG architectures}{7}{subsection.2.1}\protected@file@percent }
-\newlabel{sec:rw-graphrag}{{2.1}{7}{GraphRAG architectures}{subsection.2.1}{}}
 \citation{unbiased2025}
 \citation{whenusegraphs2025}
 \citation{sarmah2024hybridrag}
 \citation{arun2025finreflectkg}
-\citation{li2024findkg}
 \citation{graphcompliance2025}
-\citation{jomraj2025ragulating}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}RAG for financial applications}{8}{subsection.2.2}\protected@file@percent }
-\newlabel{sec:rw-finance}{{2.2}{8}{RAG for financial applications}{subsection.2.2}{}}
 \citation{islam2023financebench}
-\citation{frauddetection2024}
-\citation{kgaudit2024}
-\citation{kgfinreporting2025}
-\citation{vectorinstitute2024}
-\citation{zhu2025kg2rag}
-\citation{ragsecurity2025}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Security in RAG systems}{9}{subsection.2.3}\protected@file@percent }
-\newlabel{sec:rw-security}{{2.3}{9}{Security in RAG systems}{subsection.2.3}{}}
-\citation{privacyrisks2025}
-\citation{sag2025}
-\citation{privacyaware2025}
-\citation{fairrag2025}
-\citation{mia2024}
 \citation{terag2025}
 \citation{lazygraphrag2025}
 \citation{polyg2025}
-\citation{zhao2025e2graphrag}
-\citation{sarthi2024raptor}
-\citation{luo2025gfmrag}
-\citation{ragefficiency2025}
 \citation{benchmarkretrieval2025}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Token efficiency in GraphRAG}{11}{subsection.2.4}\protected@file@percent }
-\newlabel{sec:rw-tokens}{{2.4}{11}{Token efficiency in GraphRAG}{subsection.2.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Summary and positioning}{12}{subsection.2.5}\protected@file@percent }
-\newlabel{sec:rw-summary}{{2.5}{12}{Summary and positioning}{subsection.2.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}System architecture}{12}{section.3}\protected@file@percent }
-\newlabel{sec:architecture}{{3}{12}{System architecture}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Formal notation and ontology}{12}{subsection.3.1}\protected@file@percent }
-\newlabel{sec:notation}{{3.1}{12}{Formal notation and ontology}{subsection.3.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparison of the proposed system against related work across six dimensions. Symbols: \text  {$\mathsurround \z@ \mathchar "458$}{} = fully addressed, $\sim $ = partially addressed, -- = not addressed.}}{13}{table.1}\protected@file@percent }
-\newlabel{tab:comparison}{{1}{13}{Comparison of the proposed system against related work across six dimensions. Symbols: \checkmark {} = fully addressed, $\sim $ = partially addressed, -- = not addressed}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}RAG for financial applications}{4}{subsection.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Comparison of the proposed system against related work. Symbols: \text  {$\mathsurround \z@ \mathchar "458$}{} = fully addressed, $\sim $ = partially addressed, -- = not addressed.}}{5}{table.1}\protected@file@percent }
+\newlabel{tab:comparison}{{1}{5}{Comparison of the proposed system against related work. Symbols: \checkmark {} = fully addressed, $\sim $ = partially addressed, -- = not addressed}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Token efficiency}{5}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Positioning}{5}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}System architecture}{6}{section.3}\protected@file@percent }
+\newlabel{sec:architecture}{{3}{6}{System architecture}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Formal notation and ontology}{6}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:notation}{{3.1}{6}{Formal notation and ontology}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Ingestion pipeline}{6}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:ingestion}{{3.2}{6}{Ingestion pipeline}{subsection.3.2}{}}
 \citation{traag2019leiden}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Financial domain ontology: entity types with descriptions and examples from the evaluation corpus.}}{14}{table.2}\protected@file@percent }
-\newlabel{tab:ontology}{{2}{14}{Financial domain ontology: entity types with descriptions and examples from the evaluation corpus}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Ingestion pipeline}{15}{subsection.3.2}\protected@file@percent }
-\newlabel{sec:ingestion}{{3.2}{15}{Ingestion pipeline}{subsection.3.2}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Ingestion Pipeline}}{16}{algorithm.1}\protected@file@percent }
-\newlabel{alg:ingestion}{{1}{16}{Ingestion pipeline}{algorithm.1}{}}
-\citation{traag2019leiden}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Multi-strategy retrieval}{17}{subsection.3.3}\protected@file@percent }
-\newlabel{sec:retrieval}{{3.3}{17}{Multi-strategy retrieval}{subsection.3.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Intent parser}{17}{subsubsection.3.3.1}\protected@file@percent }
-\newlabel{sec:intent-parser}{{3.3.1}{17}{Intent parser}{subsubsection.3.3.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Intent-aware retrieval weights. Each row specifies the relative contribution of graph, vector, and community retrieval strategies for a given query intent type.}}{18}{table.3}\protected@file@percent }
-\newlabel{tab:weights}{{3}{18}{Intent-aware retrieval weights. Each row specifies the relative contribution of graph, vector, and community retrieval strategies for a given query intent type}{table.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Graph retriever}{18}{subsubsection.3.3.2}\protected@file@percent }
-\newlabel{sec:graph-retriever}{{3.3.2}{18}{Graph retriever}{subsubsection.3.3.2}{}}
-\newlabel{eq:graph-score}{{5}{18}{Graph retriever}{equation.3.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Vector retriever}{18}{subsubsection.3.3.3}\protected@file@percent }
-\newlabel{sec:vector-retriever}{{3.3.3}{18}{Vector retriever}{subsubsection.3.3.3}{}}
-\citation{ragsecurity2025,privacyrisks2025,mia2024}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Community retriever}{19}{subsubsection.3.3.4}\protected@file@percent }
-\newlabel{sec:community-retriever}{{3.3.4}{19}{Community retriever}{subsubsection.3.3.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5}Context ranking and fusion}{19}{subsubsection.3.3.5}\protected@file@percent }
-\newlabel{sec:context-ranker}{{3.3.5}{19}{Context ranking and fusion}{subsubsection.3.3.5}{}}
-\newlabel{eq:fusion}{{6}{19}{Context ranking and fusion}{equation.3.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Security model}{19}{subsection.3.4}\protected@file@percent }
-\newlabel{sec:security}{{3.4}{19}{Security model}{subsection.3.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Threat model}{19}{subsubsection.3.4.1}\protected@file@percent }
-\newlabel{sec:threat-model}{{3.4.1}{19}{Threat model}{subsubsection.3.4.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Defense mechanisms}{19}{subsubsection.3.4.2}\protected@file@percent }
-\newlabel{sec:defenses}{{3.4.2}{19}{Defense mechanisms}{subsubsection.3.4.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Financial domain ontology: entity types with examples.}}{7}{table.2}\protected@file@percent }
+\newlabel{tab:ontology}{{2}{7}{Financial domain ontology: entity types with examples}{table.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Ingestion Pipeline}}{8}{algorithm.1}\protected@file@percent }
+\newlabel{alg:ingestion}{{1}{8}{Ingestion pipeline}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Multi-strategy retrieval}{8}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:retrieval}{{3.3}{8}{Multi-strategy retrieval}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Intent parser}{8}{subsubsection.3.3.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Multi-Strategy Intent-Aware Retrieval}}{9}{algorithm.2}\protected@file@percent }
+\newlabel{alg:retrieval}{{2}{9}{Multi-strategy retrieval}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Graph retriever}{9}{subsubsection.3.3.2}\protected@file@percent }
+\newlabel{eq:graph-score}{{3}{9}{Graph retriever}{equation.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Vector retriever}{9}{subsubsection.3.3.3}\protected@file@percent }
 \citation{edge2024graphrag}
 \citation{sarmah2024hybridrag}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Threat model for GraphRAG in financial institutions. Each threat is characterized by its attack vector, potential impact, and the regulatory provisions it may violate.}}{20}{table.4}\protected@file@percent }
-\newlabel{tab:threats}{{4}{20}{Threat model for GraphRAG in financial institutions. Each threat is characterized by its attack vector, potential impact, and the regulatory provisions it may violate}{table.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Regulatory compliance mapping}{20}{subsubsection.3.4.3}\protected@file@percent }
-\newlabel{sec:compliance}{{3.4.3}{20}{Regulatory compliance mapping}{subsubsection.3.4.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental methodology}{20}{section.4}\protected@file@percent }
-\newlabel{sec:methodology}{{4}{20}{Experimental methodology}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Baselines}{20}{subsection.4.1}\protected@file@percent }
-\newlabel{sec:baselines}{{4.1}{20}{Baselines}{subsection.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Intent-aware retrieval weights for each query type.}}{10}{table.3}\protected@file@percent }
+\newlabel{tab:weights}{{3}{10}{Intent-aware retrieval weights for each query type}{table.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Community retriever}{10}{subsubsection.3.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5}Fusion and ranking}{10}{subsubsection.3.3.5}\protected@file@percent }
+\newlabel{eq:fusion}{{4}{10}{Fusion and ranking}{equation.3.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental methodology}{10}{section.4}\protected@file@percent }
+\newlabel{sec:methodology}{{4}{10}{Experimental methodology}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Baselines}{10}{subsection.4.1}\protected@file@percent }
 \citation{islam2023financebench}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Defense mechanisms with implementation details and threat coverage.}}{21}{table.5}\protected@file@percent }
-\newlabel{tab:defenses}{{5}{21}{Defense mechanisms with implementation details and threat coverage}{table.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Metrics}{21}{subsection.4.2}\protected@file@percent }
-\newlabel{sec:metrics}{{4.2}{21}{Metrics}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Datasets}{21}{subsection.4.3}\protected@file@percent }
-\newlabel{sec:datasets}{{4.3}{21}{Datasets}{subsection.4.3}{}}
-\citation{mia2024}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Mapping of defense mechanisms to regulatory requirements. Each cell indicates which defense mechanisms address the corresponding regulatory provision.}}{22}{table.6}\protected@file@percent }
-\newlabel{tab:compliance}{{6}{22}{Mapping of defense mechanisms to regulatory requirements. Each cell indicates which defense mechanisms address the corresponding regulatory provision}{table.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System architecture overview. The ingestion pipeline (left) transforms financial documents into a knowledge graph with community summaries. The retrieval pipeline (right) processes authenticated queries through intent classification, parallel multi-strategy retrieval, weighted fusion, and attributed response generation.}}{23}{figure.1}\protected@file@percent }
-\newlabel{fig:architecture}{{1}{23}{System architecture overview. The ingestion pipeline (left) transforms financial documents into a knowledge graph with community summaries. The retrieval pipeline (right) processes authenticated queries through intent classification, parallel multi-strategy retrieval, weighted fusion, and attributed response generation}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Evaluation protocol}{23}{subsection.4.4}\protected@file@percent }
-\newlabel{sec:protocol}{{4.4}{23}{Evaluation protocol}{subsection.4.4}{}}
-\citation{ragsecurity2025}
-\citation{mia2024}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Multi-strategy retrieval pipeline with intent-aware fusion. Queries are classified by intent type, routed to three parallel retrievers with intent-specific weights, and results are fused, deduplicated, truncated to the token budget, and filtered for security compliance. Timing annotations show median latencies from experimental evaluation.}}{24}{figure.2}\protected@file@percent }
-\newlabel{fig:retrieval}{{2}{24}{Multi-strategy retrieval pipeline with intent-aware fusion. Queries are classified by intent type, routed to three parallel retrievers with intent-specific weights, and results are fused, deduplicated, truncated to the token budget, and filtered for security compliance. Timing annotations show median latencies from experimental evaluation}{figure.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Baseline systems. All systems use the same LLM (Claude) for generation to isolate the effect of retrieval strategy.}}{25}{table.7}\protected@file@percent }
-\newlabel{tab:baselines}{{7}{25}{Baseline systems. All systems use the same LLM (Claude) for generation to isolate the effect of retrieval strategy}{table.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{25}{section.5}\protected@file@percent }
-\newlabel{sec:results}{{5}{25}{Results}{section.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Evaluation metrics organized by the four assessment pillars.}}{26}{table.8}\protected@file@percent }
-\newlabel{tab:metrics}{{8}{26}{Evaluation metrics organized by the four assessment pillars}{table.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Experiment 1: Hallucination reduction}{26}{subsection.5.1}\protected@file@percent }
-\newlabel{sec:res-hallucination}{{5.1}{26}{Experiment 1: Hallucination reduction}{subsection.5.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Hallucination reduction results on the 200-question regulatory dataset. Faithfulness measures the proportion of response claims grounded in retrieved context, factual accuracy is expert-assessed on a continuous scale, and grounding rate measures the proportion of responses with explicit source attribution. Best results in \textbf  {bold}.}}{27}{table.9}\protected@file@percent }
-\newlabel{tab:hallucination}{{9}{27}{Hallucination reduction results on the 200-question regulatory dataset. Faithfulness measures the proportion of response claims grounded in retrieved context, factual accuracy is expert-assessed on a continuous scale, and grounding rate measures the proportion of responses with explicit source attribution. Best results in \textbf {bold}}{table.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Faithfulness and grounding rate by question difficulty. Multi-hop questions require traversal across multiple entity relationships, where graph-based retrieval provides the greatest advantage. Best results in \textbf  {bold}.}}{28}{table.10}\protected@file@percent }
-\newlabel{tab:hallucination-difficulty}{{10}{28}{Faithfulness and grounding rate by question difficulty. Multi-hop questions require traversal across multiple entity relationships, where graph-based retrieval provides the greatest advantage. Best results in \textbf {bold}}{table.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Faithfulness scores by question category across all systems. The proposed multi-strategy GraphRAG system achieves the highest faithfulness in all categories, with particularly strong performance in audit (+16.46 pp over VectorRAG) and compliance (+14.76 pp) categories where structured regulatory relationships are most prevalent.}}{29}{figure.3}\protected@file@percent }
-\newlabel{fig:faithfulness-category}{{3}{29}{Faithfulness scores by question category across all systems. The proposed multi-strategy GraphRAG system achieves the highest faithfulness in all categories, with particularly strong performance in audit (+16.46 pp over VectorRAG) and compliance (+14.76 pp) categories where structured regulatory relationships are most prevalent}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Experiment 2: Token economy analysis}{29}{subsection.5.2}\protected@file@percent }
-\newlabel{sec:res-tokens}{{5.2}{29}{Experiment 2: Token economy analysis}{subsection.5.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Token consumption and cost per 1,000 queries. Context tokens represent the retrieved content provided to the LLM. Total tokens include system prompt, context, and output. The FullDocument baseline passes the complete source document as context. Costs computed at current API pricing. Best retrieval-augmented results in \textbf  {bold}.}}{30}{table.11}\protected@file@percent }
-\newlabel{tab:tokens}{{11}{30}{Token consumption and cost per 1,000 queries. Context tokens represent the retrieved content provided to the LLM. Total tokens include system prompt, context, and output. The FullDocument baseline passes the complete source document as context. Costs computed at current API pricing. Best retrieval-augmented results in \textbf {bold}}{table.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Knowledge graph indexation costs for the 150-document corpus (6,750 triples). Batch API provides a 50\% discount for asynchronous processing.}}{30}{table.12}\protected@file@percent }
-\newlabel{tab:indexing}{{12}{30}{Knowledge graph indexation costs for the 150-document corpus (6,750 triples). Batch API provides a 50\% discount for asynchronous processing}{table.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Token composition breakdown per query. The proposed system achieves the lowest total token consumption among retrieval-augmented approaches (4,784 tokens), with 73.5\% fewer context tokens than FullDocument retrieval (3,982 vs. 15,014).}}{31}{figure.4}\protected@file@percent }
-\newlabel{fig:token-composition}{{4}{31}{Token composition breakdown per query. The proposed system achieves the lowest total token consumption among retrieval-augmented approaches (4,784 tokens), with 73.5\% fewer context tokens than FullDocument retrieval (3,982 vs. 15,014)}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Experiment 3: Processing speed}{31}{subsection.5.3}\protected@file@percent }
-\newlabel{sec:res-speed}{{5.3}{31}{Experiment 3: Processing speed}{subsection.5.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces End-to-end latency (milliseconds) across system configurations. p50 and p95 represent the median and 95th percentile latencies. The proposed system is evaluated in three configurations: serial retrieval, parallel retrieval, and parallel retrieval with query caching. Best retrieval-augmented p50 latency in \textbf  {bold}.}}{32}{table.13}\protected@file@percent }
-\newlabel{tab:latency}{{13}{32}{End-to-end latency (milliseconds) across system configurations. p50 and p95 represent the median and 95th percentile latencies. The proposed system is evaluated in three configurations: serial retrieval, parallel retrieval, and parallel retrieval with query caching. Best retrieval-augmented p50 latency in \textbf {bold}}{table.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Latency decomposition by pipeline stage. Serial retrieval is dominated by the retrieval phase (60.0\%). Parallel execution and caching progressively shift the bottleneck to LLM generation (70.7\% with cache), which becomes the primary optimization target for future work.}}{33}{figure.5}\protected@file@percent }
-\newlabel{fig:latency-breakdown}{{5}{33}{Latency decomposition by pipeline stage. Serial retrieval is dominated by the retrieval phase (60.0\%). Parallel execution and caching progressively shift the bottleneck to LLM generation (70.7\% with cache), which becomes the primary optimization target for future work}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Experiment 4: Security evaluation}{33}{subsection.5.4}\protected@file@percent }
-\newlabel{sec:res-security}{{5.4}{33}{Experiment 4: Security evaluation}{subsection.5.4}{}}
-\citation{privacyrisks2025}
-\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Red-team security evaluation results. Three attack campaigns were executed with 200 total adversarial queries. Targets are defined based on regulatory requirements and the threat model (Section~\ref {sec:threat-model}). All targets are met.}}{34}{table.14}\protected@file@percent }
-\newlabel{tab:security}{{14}{34}{Red-team security evaluation results. Three attack campaigns were executed with 200 total adversarial queries. Targets are defined based on regulatory requirements and the threat model (Section~\ref {sec:threat-model}). All targets are met}{table.14}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {15}{\ignorespaces Regulatory compliance assessment summary. Ten requirements across four regulatory frameworks were evaluated. Eight are fully compliant and two are partially compliant, with identified remediation paths.}}{35}{table.15}\protected@file@percent }
-\newlabel{tab:compliance-results}{{15}{35}{Regulatory compliance assessment summary. Ten requirements across four regulatory frameworks were evaluated. Eight are fully compliant and two are partially compliant, with identified remediation paths}{table.15}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Experiment 5: End-to-end benchmark and ablation study}{35}{subsection.5.5}\protected@file@percent }
-\newlabel{sec:res-benchmark}{{5.5}{35}{Experiment 5: End-to-end benchmark and ablation study}{subsection.5.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {16}{\ignorespaces End-to-end benchmark results on the 50-question financial benchmark. The weighted score combines entity coverage (40\%), concept coverage (30\%), source attribution (20\%), and response quality (10\%). Best results in \textbf  {bold}.}}{36}{table.16}\protected@file@percent }
-\newlabel{tab:benchmark}{{16}{36}{End-to-end benchmark results on the 50-question financial benchmark. The weighted score combines entity coverage (40\%), concept coverage (30\%), source attribution (20\%), and response quality (10\%). Best results in \textbf {bold}}{table.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Weighted benchmark scores by category. The proposed system achieves the highest scores in all categories, with the largest advantage in Audit (92.76\%, +20.21 pp over HybridRAG) where structured entity relationships and source attribution are critical. The gap over VectorRAG is most pronounced in Audit (+40.18 pp) and least in Financial Analysis (+24.98 pp).}}{37}{figure.6}\protected@file@percent }
-\newlabel{fig:benchmark-category}{{6}{37}{Weighted benchmark scores by category. The proposed system achieves the highest scores in all categories, with the largest advantage in Audit (92.76\%, +20.21 pp over HybridRAG) where structured entity relationships and source attribution are critical. The gap over VectorRAG is most pronounced in Audit (+40.18 pp) and least in Financial Analysis (+24.98 pp)}{figure.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {17}{\ignorespaces Ablation study: impact of removing individual retrieval strategies on the weighted benchmark score. $\Delta $ indicates the change relative to the full system (87.95\%). Each row represents the system with one strategy disabled.}}{38}{table.17}\protected@file@percent }
-\newlabel{tab:ablation}{{17}{38}{Ablation study: impact of removing individual retrieval strategies on the weighted benchmark score. $\Delta $ indicates the change relative to the full system (87.95\%). Each row represents the system with one strategy disabled}{table.17}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Empirical applications}{38}{section.6}\protected@file@percent }
-\newlabel{sec:applications}{{6}{38}{Empirical applications}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Application 1: Regulatory compliance QA}{38}{subsection.6.1}\protected@file@percent }
-\newlabel{sec:app-compliance}{{6.1}{38}{Application 1: Regulatory compliance QA}{subsection.6.1}{}}
-\newlabel{lst:compliance1}{{1}{39}{Regulatory compliance query with source attribution. The system traces the response to specific regulatory articles through knowledge graph triples}{lstlisting.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Regulatory compliance query with source attribution. The system traces the response to specific regulatory articles through knowledge graph triples.}{39}{lstlisting.1}\protected@file@percent }
-\newlabel{lst:compliance2}{{2}{39}{Multi-hop compliance query requiring traversal across three entity relationships. VectorRAG fails to connect the regulatory chain}{lstlisting.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Multi-hop compliance query requiring traversal across three entity relationships. VectorRAG fails to connect the regulatory chain.}{39}{lstlisting.2}\protected@file@percent }
-\newlabel{lst:compliance3}{{3}{40}{Cross-regulation comparison query leveraging the graph's ability to traverse relationships between different regulatory frameworks}{lstlisting.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Cross-regulation comparison query leveraging the graph's ability to traverse relationships between different regulatory frameworks.}{40}{lstlisting.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Application 2: Financial report analysis}{41}{subsection.6.2}\protected@file@percent }
-\newlabel{sec:app-reports}{{6.2}{41}{Application 2: Financial report analysis}{subsection.6.2}{}}
-\newlabel{lst:financial1}{{4}{41}{Multi-hop financial analysis query requiring entity traversal across company-subsidiary-metric relationships. The knowledge graph enables systematic comparison}{lstlisting.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Multi-hop financial analysis query requiring entity traversal across company-subsidiary-metric relationships. The knowledge graph enables systematic comparison.}{41}{lstlisting.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Application 3: Internal audit QA system}{42}{subsection.6.3}\protected@file@percent }
-\newlabel{sec:app-audit}{{6.3}{42}{Application 3: Internal audit QA system}{subsection.6.3}{}}
-\newlabel{lst:audit-rbac}{{5}{42}{Role-based access control demonstration. Auditor A (assigned to Tenant 1) and Auditor B (assigned to Tenant 2) receive different results for the same query, demonstrating tenant isolation}{lstlisting.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}Role-based access control demonstration. Auditor A (assigned to Tenant 1) and Auditor B (assigned to Tenant 2) receive different results for the same query, demonstrating tenant isolation.}{42}{lstlisting.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {18}{\ignorespaces Audit system latency under concurrent access. Median latency increases modestly with concurrent users, confirming that tenant isolation does not introduce substantial overhead.}}{43}{table.18}\protected@file@percent }
-\newlabel{tab:audit-concurrent}{{18}{43}{Audit system latency under concurrent access. Median latency increases modestly with concurrent users, confirming that tenant isolation does not introduce substantial overhead}{table.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System architecture overview. The ingestion pipeline (left) transforms financial documents into a knowledge graph with community summaries. The retrieval pipeline (right) processes queries through intent classification, parallel multi-strategy retrieval, weighted fusion, and attributed response generation.}}{11}{figure.1}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{11}{System architecture overview. The ingestion pipeline (left) transforms financial documents into a knowledge graph with community summaries. The retrieval pipeline (right) processes queries through intent classification, parallel multi-strategy retrieval, weighted fusion, and attributed response generation}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Metrics}{11}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Datasets}{11}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Baseline systems for comparison.}}{12}{table.4}\protected@file@percent }
+\newlabel{tab:baselines}{{4}{12}{Baseline systems for comparison}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Evaluation protocol}{12}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{12}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{5}{12}{Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Hallucination reduction}{12}{subsection.5.1}\protected@file@percent }
+\newlabel{sec:res-hallucination}{{5.1}{12}{Hallucination reduction}{subsection.5.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Hallucination reduction results on the 200-question regulatory dataset. Best results in \textbf  {bold}.}}{13}{table.5}\protected@file@percent }
+\newlabel{tab:hallucination}{{5}{13}{Hallucination reduction results on the 200-question regulatory dataset. Best results in \textbf {bold}}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Token economy}{13}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:res-tokens}{{5.2}{13}{Token economy}{subsection.5.2}{}}
 \citation{benchmarkretrieval2025}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Discussion}{44}{section.7}\protected@file@percent }
-\newlabel{sec:discussion}{{7}{44}{Discussion}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Key findings}{44}{subsection.7.1}\protected@file@percent }
-\newlabel{sec:disc-findings}{{7.1}{44}{Key findings}{subsection.7.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Faithfulness scores by question category. The proposed system achieves the highest faithfulness in all categories.}}{14}{figure.2}\protected@file@percent }
+\newlabel{fig:faithfulness-category}{{2}{14}{Faithfulness scores by question category. The proposed system achieves the highest faithfulness in all categories}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Processing speed}{14}{subsection.5.3}\protected@file@percent }
+\newlabel{sec:res-speed}{{5.3}{14}{Processing speed}{subsection.5.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}End-to-end benchmark and ablation study}{14}{subsection.5.4}\protected@file@percent }
+\newlabel{sec:res-benchmark}{{5.4}{14}{End-to-end benchmark and ablation study}{subsection.5.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Token consumption and cost per 1,000 queries. Best retrieval-augmented results in \textbf  {bold}.}}{15}{table.6}\protected@file@percent }
+\newlabel{tab:tokens}{{6}{15}{Token consumption and cost per 1,000 queries. Best retrieval-augmented results in \textbf {bold}}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces End-to-end latency (milliseconds). Best retrieval-augmented p50 in \textbf  {bold}.}}{15}{table.7}\protected@file@percent }
+\newlabel{tab:latency}{{7}{15}{End-to-end latency (milliseconds). Best retrieval-augmented p50 in \textbf {bold}}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces End-to-end benchmark results (50 questions). Best results in \textbf  {bold}.}}{16}{table.8}\protected@file@percent }
+\newlabel{tab:benchmark}{{8}{16}{End-to-end benchmark results (50 questions). Best results in \textbf {bold}}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Ablation study: impact of removing individual retrieval strategies on the weighted benchmark score.}}{16}{table.9}\protected@file@percent }
+\newlabel{tab:ablation}{{9}{16}{Ablation study: impact of removing individual retrieval strategies on the weighted benchmark score}{table.9}{}}
 \citation{whenusegraphs2025}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}When to use GraphRAG versus VectorRAG}{45}{subsection.7.2}\protected@file@percent }
-\newlabel{sec:disc-when}{{7.2}{45}{When to use GraphRAG versus VectorRAG}{subsection.7.2}{}}
-\citation{sag2025}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Limitations}{47}{subsection.7.3}\protected@file@percent }
-\newlabel{sec:disc-limitations}{{7.3}{47}{Limitations}{subsection.7.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Practical implications}{48}{subsection.7.4}\protected@file@percent }
-\newlabel{sec:disc-implications}{{7.4}{48}{Practical implications}{subsection.7.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{49}{section.8}\protected@file@percent }
-\newlabel{sec:conclusion}{{8}{49}{Conclusion}{section.8}{}}
-\citation{sag2025}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{17}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{17}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Key findings}{17}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}When to use GraphRAG versus VectorRAG}{17}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:disc-when}{{6.2}{17}{When to use GraphRAG versus VectorRAG}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Limitations}{18}{subsection.6.3}\protected@file@percent }
+\newlabel{sec:disc-limitations}{{6.3}{18}{Limitations}{subsection.6.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{18}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{7}{18}{Conclusion}{section.7}{}}
 \citation{li2024findkg}
 \citation{li2025subgraphrag}
 \bibstyle{elsarticle-harv}
@@ -270,6 +154,4 @@
 \bibcite{whenusegraphs2025}{{39}{2026}{{When-to-Use Authors}}{{}}}
 \bibcite{zhao2025e2graphrag}{{40}{2025}{{Zhao et~al.}}{{}}}
 \bibcite{zhu2025kg2rag}{{41}{2025}{{Zhu et~al.}}{{}}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Multi-Strategy Intent-Aware Retrieval}}{57}{algorithm.2}\protected@file@percent }
-\newlabel{alg:retrieval}{{2}{57}{Multi-strategy retrieval}{algorithm.2}{}}
-\gdef \@abspage@last{58}
+\gdef \@abspage@last{25}
