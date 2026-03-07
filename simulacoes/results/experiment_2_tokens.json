@@ -1,0 +1,305 @@
+{
+  "experiment": "experiment_2_tokens",
+  "timestamp": "2026-03-07T04:58:05.181469+00:00",
+  "mode": "simulation",
+  "config": {
+    "neo4j_uri": "bolt://localhost:7687",
+    "datasets_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/datasets",
+    "results_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/results",
+    "max_questions": 0,
+    "seed": 42,
+    "simulate": true
+  },
+  "results": {
+    "per_system": {
+      "MultiStrategy_GraphRAG": {
+        "display_name": "Multi-Strategy GraphRAG (ours)",
+        "n_queries": 200,
+        "context_tokens": {
+          "mean": 3981.7,
+          "std": 527.8,
+          "median": 3968.9
+        },
+        "output_tokens": {
+          "mean": 452.0,
+          "std": 101.7
+        },
+        "system_prompt_tokens": 350.0,
+        "total_tokens": {
+          "mean": 4783.7,
+          "median": 4744.6,
+          "p95": 5649.8
+        },
+        "cost_per_query": {
+          "haiku_usd": 0.005273,
+          "sonnet_usd": 0.019775
+        },
+        "cost_per_1000_queries": {
+          "haiku_usd": 5.2734,
+          "sonnet_usd": 19.7753
+        }
+      },
+      "VectorRAG": {
+        "display_name": "VectorRAG",
+        "n_queries": 200,
+        "context_tokens": {
+          "mean": 5918.3,
+          "std": 1216.8,
+          "median": 5905.9
+        },
+        "output_tokens": {
+          "mean": 495.6,
+          "std": 121.8
+        },
+        "system_prompt_tokens": 300.0,
+        "total_tokens": {
+          "mean": 6713.8,
+          "median": 6740.3,
+          "p95": 8636.2
+        },
+        "cost_per_query": {
+          "haiku_usd": 0.006957,
+          "sonnet_usd": 0.026089
+        },
+        "cost_per_1000_queries": {
+          "haiku_usd": 6.957,
+          "sonnet_usd": 26.0886
+        }
+      },
+      "MS_GraphRAG": {
+        "display_name": "MS GraphRAG",
+        "n_queries": 200,
+        "context_tokens": {
+          "mean": 5173.7,
+          "std": 907.7,
+          "median": 5227.0
+        },
+        "output_tokens": {
+          "mean": 481.2,
+          "std": 106.3
+        },
+        "system_prompt_tokens": 320.0,
+        "total_tokens": {
+          "mean": 5974.9,
+          "median": 6037.1,
+          "p95": 7444.4
+        },
+        "cost_per_query": {
+          "haiku_usd": 0.00632,
+          "sonnet_usd": 0.023699
+        },
+        "cost_per_1000_queries": {
+          "haiku_usd": 6.3198,
+          "sonnet_usd": 23.6993
+        }
+      },
+      "HybridRAG": {
+        "display_name": "HybridRAG",
+        "n_queries": 200,
+        "context_tokens": {
+          "mean": 5454.2,
+          "std": 1062.7,
+          "median": 5500.6
+        },
+        "output_tokens": {
+          "mean": 478.7,
+          "std": 119.4
+        },
+        "system_prompt_tokens": 310.0,
+        "total_tokens": {
+          "mean": 6242.9,
+          "median": 6273.9,
+          "p95": 7883.8
+        },
+        "cost_per_query": {
+          "haiku_usd": 0.006526,
+          "sonnet_usd": 0.024473
+        },
+        "cost_per_1000_queries": {
+          "haiku_usd": 6.5262,
+          "sonnet_usd": 24.4731
+        }
+      },
+      "NoRetrieval": {
+        "display_name": "No Retrieval",
+        "n_queries": 200,
+        "context_tokens": {
+          "mean": 0.0,
+          "std": 0.0,
+          "median": 0.0
+        },
+        "output_tokens": {
+          "mean": 573.3,
+          "std": 145.4
+        },
+        "system_prompt_tokens": 500.0,
+        "total_tokens": {
+          "mean": 1073.3,
+          "median": 1086.5,
+          "p95": 1311.9
+        },
+        "cost_per_query": {
+          "haiku_usd": 0.002693,
+          "sonnet_usd": 0.010099
+        },
+        "cost_per_1000_queries": {
+          "haiku_usd": 2.693,
+          "sonnet_usd": 10.0988
+        }
+      },
+      "FullDocument": {
+        "display_name": "FullDocument",
+        "n_queries": 200,
+        "context_tokens": {
+          "mean": 15013.8,
+          "std": 2848.7,
+          "median": 15178.8
+        },
+        "output_tokens": {
+          "mean": 554.7,
+          "std": 139.0
+        },
+        "system_prompt_tokens": 300.0,
+        "total_tokens": {
+          "mean": 15868.5,
+          "median": 16052.6,
+          "p95": 20528.4
+        },
+        "cost_per_query": {
+          "haiku_usd": 0.01447,
+          "sonnet_usd": 0.054262
+        },
+        "cost_per_1000_queries": {
+          "haiku_usd": 14.4698,
+          "sonnet_usd": 54.2618
+        }
+      }
+    },
+    "indexing_costs": {
+      "corpus_stats": {
+        "n_documents": 150,
+        "avg_tokens_per_document": 8000,
+        "avg_triples_per_document": 45,
+        "total_triples": 6750
+      },
+      "individual_api": {
+        "total_input_tokens": 1200000,
+        "total_output_tokens": 337500,
+        "cost_haiku_usd": 2.31,
+        "cost_sonnet_usd": 8.6625
+      },
+      "batch_api": {
+        "discount_pct": 50,
+        "cost_haiku_usd": 1.155,
+        "cost_sonnet_usd": 4.3312
+      },
+      "savings_batch_vs_individual": {
+        "haiku_usd": 1.155,
+        "sonnet_usd": 4.3312
+      }
+    },
+    "summary": {
+      "token_savings_vs_baselines": {
+        "VectorRAG": {
+          "tokens_saved_per_query": 1930.1,
+          "pct_reduction": 28.75
+        },
+        "MS_GraphRAG": {
+          "tokens_saved_per_query": 1191.2,
+          "pct_reduction": 19.94
+        },
+        "HybridRAG": {
+          "tokens_saved_per_query": 1459.2,
+          "pct_reduction": 23.37
+        },
+        "NoRetrieval": {
+          "tokens_saved_per_query": -3710.4,
+          "pct_reduction": -345.7
+        },
+        "FullDocument": {
+          "tokens_saved_per_query": 11084.8,
+          "pct_reduction": 69.85
+        }
+      },
+      "most_efficient_system": "MultiStrategy_GraphRAG",
+      "context_token_reduction_vs_full_doc": 69.85
+    }
+  },
+  "tables": {
+    "main_comparison": [
+      {
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "context_tokens": "3982",
+        "output_tokens": "452",
+        "total_tokens": "4784",
+        "cost_1k_haiku": "$5.2734",
+        "cost_1k_sonnet": "$19.7753"
+      },
+      {
+        "system": "VectorRAG",
+        "context_tokens": "5918",
+        "output_tokens": "496",
+        "total_tokens": "6714",
+        "cost_1k_haiku": "$6.9570",
+        "cost_1k_sonnet": "$26.0886"
+      },
+      {
+        "system": "MS GraphRAG",
+        "context_tokens": "5174",
+        "output_tokens": "481",
+        "total_tokens": "5975",
+        "cost_1k_haiku": "$6.3198",
+        "cost_1k_sonnet": "$23.6993"
+      },
+      {
+        "system": "HybridRAG",
+        "context_tokens": "5454",
+        "output_tokens": "479",
+        "total_tokens": "6243",
+        "cost_1k_haiku": "$6.5262",
+        "cost_1k_sonnet": "$24.4731"
+      },
+      {
+        "system": "No Retrieval",
+        "context_tokens": "0",
+        "output_tokens": "573",
+        "total_tokens": "1073",
+        "cost_1k_haiku": "$2.6930",
+        "cost_1k_sonnet": "$10.0988"
+      },
+      {
+        "system": "FullDocument",
+        "context_tokens": "15014",
+        "output_tokens": "555",
+        "total_tokens": "15868",
+        "cost_1k_haiku": "$14.4698",
+        "cost_1k_sonnet": "$54.2618"
+      }
+    ],
+    "indexing_costs": [
+      {
+        "corpus_stats": {
+          "n_documents": 150,
+          "avg_tokens_per_document": 8000,
+          "avg_triples_per_document": 45,
+          "total_triples": 6750
+        },
+        "individual_api": {
+          "total_input_tokens": 1200000,
+          "total_output_tokens": 337500,
+          "cost_haiku_usd": 2.31,
+          "cost_sonnet_usd": 8.6625
+        },
+        "batch_api": {
+          "discount_pct": 50,
+          "cost_haiku_usd": 1.155,
+          "cost_sonnet_usd": 4.3312
+        },
+        "savings_batch_vs_individual": {
+          "haiku_usd": 1.155,
+          "sonnet_usd": 4.3312
+        }
+      }
+    ]
+  }
+}

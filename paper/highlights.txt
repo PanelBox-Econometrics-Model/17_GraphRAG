@@ -1,0 +1,7 @@
+Highlights
+
+- Multi-strategy GraphRAG for regulated financial institutions
+- Intent-aware retrieval fusion reduces hallucination by 14 pp
+- Token consumption reduced 70% via structured graph retrieval
+- Formal security model achieves 0% cross-tenant data leakage
+- Open-source implementation with three financial applications

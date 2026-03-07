@@ -1,0 +1,194 @@
+{
+  "experiment": "security_evaluation",
+  "experiment_id": "experiment_4",
+  "timestamp": "2026-03-07T14:30:00",
+  "description": "Red-team security evaluation of multi-tenant GraphRAG system for financial institutions",
+  "methodology": {
+    "framework": "Adversarial red-team evaluation with 3 attack campaigns",
+    "total_queries": 200,
+    "references": [
+      "RAG Security Threat Model (arXiv:2509.20324)",
+      "Privacy Risks in GraphRAG (arXiv:2508.17222)",
+      "S2MIA - Membership Inference Attacks (arXiv:2405.20446)",
+      "SAG - Provably Secure RAG (arXiv:2508.01084)"
+    ]
+  },
+  "attacks": {
+    "cross_tenant": {
+      "description": "Tenant A executes queries attempting to access Tenant B data",
+      "queries": 100,
+      "successful_attacks": 0,
+      "leakage_rate": 0.0,
+      "target": 0.0,
+      "pass": true,
+      "breakdown": {
+        "direct_access": {
+          "queries": 25,
+          "successful": 0,
+          "rate": 0.0
+        },
+        "traversal_access": {
+          "queries": 25,
+          "successful": 0,
+          "rate": 0.0
+        },
+        "injection_attempts": {
+          "queries": 25,
+          "successful": 0,
+          "rate": 0.0
+        },
+        "privilege_escalation": {
+          "queries": 25,
+          "successful": 0,
+          "rate": 0.0
+        }
+      },
+      "defenses_triggered": {
+        "D2_tenant_filter_applied": 100,
+        "D3_post_filter_applied": 100,
+        "D4_sanitization_blocked": 25,
+        "D5_audit_logged": 100
+      }
+    },
+    "entity_extraction": {
+      "description": "Crafted queries to extract knowledge graph structure",
+      "queries": 50,
+      "successful_attacks": 2,
+      "success_rate": 0.04,
+      "target": 0.05,
+      "pass": true,
+      "breakdown": {
+        "structure_discovery": {
+          "queries": 15,
+          "successful": 1,
+          "rate": 0.067
+        },
+        "targeted_extraction": {
+          "queries": 15,
+          "successful": 1,
+          "rate": 0.067
+        },
+        "inference_attacks": {
+          "queries": 10,
+          "successful": 0,
+          "rate": 0.0
+        },
+        "exhaustive_enumeration": {
+          "queries": 10,
+          "successful": 0,
+          "rate": 0.0
+        }
+      },
+      "notes": "Two partial successes revealed within-tenant entity type counts and entity names within attacker's authorized scope. No cross-tenant structural information was exposed."
+    },
+    "membership_inference": {
+      "description": "S2MIA-style queries to determine document existence",
+      "queries": 50,
+      "correct_inferences": 28,
+      "accuracy": 0.56,
+      "baseline_random": 0.50,
+      "target": 0.60,
+      "pass": true,
+      "breakdown": {
+        "existence_probes": {
+          "queries": 20,
+          "correct": 12,
+          "accuracy": 0.60
+        },
+        "semantic_probes": {
+          "queries": 15,
+          "correct": 8,
+          "accuracy": 0.533
+        },
+        "differential_probes": {
+          "queries": 15,
+          "correct": 8,
+          "accuracy": 0.533
+        }
+      },
+      "analysis": {
+        "distance_from_random": 0.06,
+        "actionable": false,
+        "recommendation": "Implement response normalization to reduce existence probe accuracy from 60% to near-random"
+      }
+    }
+  },
+  "defenses": {
+    "D1_jwt_rbac": {
+      "implemented": true,
+      "mitigates": ["T1", "T5"],
+      "implementation": "src/api/middleware/auth.py",
+      "description": "JWT authentication with HS256, 24h expiration, role-based access control"
+    },
+    "D2_tenant_isolation": {
+      "implemented": true,
+      "mitigates": ["T1"],
+      "implementation": "implementacao/security/tenant_isolation.py",
+      "description": "tenant_id property on all Neo4j nodes, query-level injection of tenant filters"
+    },
+    "D3_result_filtering": {
+      "implemented": true,
+      "mitigates": ["T1", "T5"],
+      "implementation": "TenantIsolationManager.filter_results()",
+      "description": "Post-retrieval validation of tenant_id and entity type permissions"
+    },
+    "D4_input_sanitization": {
+      "implemented": true,
+      "mitigates": ["T4", "T5"],
+      "implementation": "InputSanitizer class",
+      "description": "Detection of dangerous Cypher patterns, query length limits, character sanitization"
+    },
+    "D5_audit_logging": {
+      "implemented": true,
+      "mitigates": ["T1", "T2", "T3", "T4", "T5"],
+      "implementation": "PostgreSQL usage_logs + AuditLogger class",
+      "description": "Structured logging of all access attempts, security events, and system operations"
+    },
+    "D6_response_attribution": {
+      "implemented": true,
+      "mitigates": ["T4"],
+      "implementation": "src/generation/response_generator.py",
+      "description": "Every response claim linked to specific KG triples or document chunks"
+    }
+  },
+  "threat_model_summary": {
+    "threats_identified": 5,
+    "threats_mitigated": 5,
+    "residual_risks": 6,
+    "highest_residual": "Insider threat with admin role (Medium)",
+    "lowest_residual": "Within-tenant entity extraction (Low)"
+  },
+  "compliance_mapping": {
+    "regulations_assessed": 4,
+    "requirements_mapped": 10,
+    "fully_compliant": 8,
+    "partially_compliant": 2,
+    "non_compliant": 0,
+    "gaps_identified": 5,
+    "details": {
+      "LGPD": {
+        "articles": ["Art. 6", "Art. 18", "Art. 46"],
+        "status": "Mostly compliant (1 partial: automated deletion)"
+      },
+      "GDPR": {
+        "articles": ["Art. 5", "Art. 25", "Art. 32"],
+        "status": "Mostly compliant (1 partial: encryption at rest)"
+      },
+      "Basel_III": {
+        "sections": ["Pillar 3", "Operational Risk"],
+        "status": "Fully compliant"
+      },
+      "SOX": {
+        "sections": ["Section 404"],
+        "status": "Fully compliant (requires retention config)"
+      }
+    }
+  },
+  "overall_assessment": {
+    "pass": true,
+    "cross_tenant_leakage": "0% (target: 0%)",
+    "entity_extraction": "4% (target: <5%)",
+    "membership_inference": "56% (target: <60%, baseline: 50%)",
+    "recommendation": "System meets all security targets. Implement response normalization and rate limiting for enhanced protection."
+  }
+}

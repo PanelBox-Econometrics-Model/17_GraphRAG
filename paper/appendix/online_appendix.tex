@@ -1,0 +1,541 @@
+\documentclass[review]{elsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{longtable}
+
+\biboptions{authoryear}
+
+\journal{Expert Systems with Applications}
+
+% Custom colors for listings
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single
+}
+\lstset{style=mystyle}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Online Appendix: Multi-Strategy GraphRAG for Financial Institutions: Security, Grounding, and Token Economy}
+
+\author[inst1]{Anonymous Author}
+\affiliation[inst1]{organization={Anonymous Institution}, country={Country}}
+
+\begin{abstract}
+This document provides supplementary material for the paper ``Multi-Strategy GraphRAG for Financial Institutions: Security, Grounding, and Token Economy,'' including the complete financial domain ontology specification, triple extraction prompt templates, the full set of benchmark questions, additional experimental results, and implementation documentation.
+\end{abstract}
+
+\end{frontmatter}
+
+%% ============================================================
+%% APPENDIX A: COMPLETE ONTOLOGY SPECIFICATION
+%% ============================================================
+\section{Financial domain ontology specification}
+\label{app:ontology}
+
+This appendix provides the complete specification of the financial domain ontology used in the proposed GraphRAG system.
+
+\subsection{Entity types}
+
+Table~\ref{tab:entity-types-full} provides the complete list of entity types with descriptions, examples, and the number of instances in the evaluation corpus.
+
+\begin{table}[ht]
+\caption{Complete financial domain ontology: entity types with descriptions and instance counts.}
+\label{tab:entity-types-full}
+\centering
+\small
+\begin{tabular}{@{}llp{4cm}r@{}}
+\toprule
+\textbf{Entity Type} & \textbf{Description} & \textbf{Examples} & \textbf{Count} \\
+\midrule
+Regulation & Legal/regulatory framework & Basel III, LGPD, GDPR, SOX, CRD VI & 15 \\
+Article & Specific provision within a regulation & LGPD Art. 18, GDPR Art. 25, SOX Sec. 404 & 120 \\
+Requirement & Obligation or standard & Capital adequacy ratio, Data minimization & 85 \\
+RiskCategory & Classification of risk & Credit risk, Operational risk, Market risk & 12 \\
+FinancialMetric & Quantitative measure & Revenue, Net income, CET1 ratio & 45 \\
+Company & Corporate entity & S\&P 100 companies, regulated banks & 50 \\
+Subsidiary & Corporate subsidiary & Technology divisions, regional subsidiaries & 80 \\
+Jurisdiction & Geographic/legal jurisdiction & Brazil, European Union, United States & 20 \\
+Control & Internal control mechanism & Segregation of duties, Access control policy & 100 \\
+AuditFinding & Result of audit assessment & High-risk findings, observations & 200 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Relationship types}
+
+Table~\ref{tab:rel-types-full} provides the complete list of relationship types with source/target constraints and cardinality.
+
+\begin{table}[ht]
+\caption{Complete financial domain ontology: relationship types with constraints.}
+\label{tab:rel-types-full}
+\centering
+\small
+\begin{tabular}{@{}lllc@{}}
+\toprule
+\textbf{Relationship} & \textbf{Source Types} & \textbf{Target Types} & \textbf{Card.} \\
+\midrule
+\textsc{Regulates} & Regulation & Company, Jurisdiction & M:N \\
+\textsc{Requires} & Regulation, Article & Requirement & 1:N \\
+\textsc{Defines} & Article & Requirement, FinancialMetric & 1:N \\
+\textsc{ExposesTo} & Company, Subsidiary & RiskCategory & M:N \\
+\textsc{SubsidiaryOf} & Subsidiary & Company & N:1 \\
+\textsc{OperatesIn} & Company, Subsidiary & Jurisdiction & M:N \\
+\textsc{AuditedBy} & Company, Subsidiary & AuditFinding & 1:N \\
+\textsc{Mitigates} & Control & RiskCategory, AuditFinding & M:N \\
+\textsc{References} & Article, Regulation & Article, Regulation & M:N \\
+\textsc{Supersedes} & Regulation & Regulation & 1:1 \\
+\textsc{ComposedOf} & Regulation & Article & 1:N \\
+\textsc{ReportsTo} & Subsidiary & Company & N:1 \\
+\textsc{ValidatedBy} & Requirement & Control & M:N \\
+\textsc{CompliesWith} & Company & Requirement, Article & M:N \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Entity alias dictionary}
+
+The entity resolution module uses an alias dictionary with approximately 130 entries to handle common abbreviations and alternative names. Table~\ref{tab:aliases-sample} provides a representative sample.
+
+\begin{table}[ht]
+\caption{Sample aliases from the entity resolution dictionary.}
+\label{tab:aliases-sample}
+\centering
+\small
+\begin{tabular}{@{}llp{5cm}@{}}
+\toprule
+\textbf{Canonical Name} & \textbf{Type} & \textbf{Aliases} \\
+\midrule
+Basel III & Regulation & Basel 3, Basel III Framework, B3 \\
+LGPD & Regulation & Lei Geral de Protecao de Dados, Lei 13709 \\
+GDPR & Regulation & General Data Protection Regulation, RGPD \\
+SOX & Regulation & Sarbanes-Oxley, Sarbanes Oxley Act \\
+Credit Risk & RiskCategory & Risco de credito, Default risk \\
+CET1 Ratio & FinancialMetric & Common Equity Tier 1, CET1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+%% ============================================================
+%% APPENDIX B: PROMPT TEMPLATES
+%% ============================================================
+\section{Triple extraction prompt templates}
+\label{app:prompts}
+
+\subsection{System prompt}
+
+The following system prompt is used for all triple extraction calls:
+
+\begin{lstlisting}[language={}, caption={System prompt for triple extraction.}, label={lst:system-prompt}]
+You are a financial knowledge graph extraction engine.
+Your task is to extract structured entity-relationship
+triples from financial and regulatory text.
+
+STRICT RULES:
+1. Use ONLY the entity types and relationship types
+   provided in the schema below.
+2. Entity names must be in PascalCase.
+3. Assign a confidence score between 0.0 and 1.0 to
+   each triple based on how explicitly the relationship
+   is stated in the text.
+4. Include textual evidence: a direct quote from the
+   source text that supports each triple.
+5. Do not infer relationships not explicitly stated or
+   strongly implied in the text.
+
+ENTITY TYPES:
+- Regulation: Legal or regulatory framework
+- Article: Specific provision within a regulation
+- Requirement: Obligation, standard, or criterion
+- RiskCategory: Classification of risk type
+- FinancialMetric: Quantitative financial measure
+- Company: Corporate entity
+- Subsidiary: Corporate subsidiary or division
+- Jurisdiction: Geographic or legal jurisdiction
+- Control: Internal control mechanism
+- AuditFinding: Result of audit assessment
+
+RELATIONSHIP TYPES:
+- REGULATES: Regulation governs entity/jurisdiction
+- REQUIRES: Regulation/article mandates requirement
+- DEFINES: Article establishes requirement/metric
+- EXPOSES_TO: Entity has exposure to risk
+- SUBSIDIARY_OF: Subsidiary belongs to company
+- OPERATES_IN: Entity operates in jurisdiction
+- AUDITED_BY: Entity has associated audit finding
+- MITIGATES: Control addresses risk/finding
+- REFERENCES: Document cross-references another
+- SUPERSEDES: Regulation replaces another
+- COMPOSED_OF: Regulation contains articles
+- REPORTS_TO: Subsidiary reports to company
+- VALIDATED_BY: Requirement verified by control
+- COMPLIES_WITH: Company meets requirement/article
+\end{lstlisting}
+
+\subsection{User prompt template}
+
+\begin{lstlisting}[language={}, caption={User prompt template for triple extraction.}, label={lst:user-prompt}]
+Extract entity-relationship triples from the following
+text chunk.
+
+Chunk type: {chunk_type}
+Source file: {source_file}
+---
+{chunk_content}
+---
+
+Return a JSON object with an array named "triples".
+Each triple must have these fields:
+- subject (string)
+- subject_type (string, from entity types)
+- predicate (string, from relationship types)
+- object (string)
+- object_type (string, from entity types)
+- confidence (float, 0.0 to 1.0)
+- evidence (string, quote from text)
+\end{lstlisting}
+
+
+%% ============================================================
+%% APPENDIX C: COMPLETE BENCHMARK QUESTIONS
+%% ============================================================
+\section{Financial benchmark questions}
+\label{app:benchmark-full}
+
+Table~\ref{tab:benchmark-full} presents the complete set of 50 benchmark questions used in Experiment~5, organized by category with difficulty level and required knowledge graph traversal depth.
+
+\begin{longtable}{@{}clp{6cm}cc@{}}
+\caption{Complete 50-question financial benchmark with difficulty and traversal depth.}
+\label{tab:benchmark-full} \\
+\toprule
+\textbf{\#} & \textbf{Category} & \textbf{Question} & \textbf{Diff.} & \textbf{Hops} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{\#} & \textbf{Category} & \textbf{Question} & \textbf{Diff.} & \textbf{Hops} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\footnotesize Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
+% Regulatory Compliance (15 questions)
+1 & Compl. & Does Basel III Pillar 1 require a minimum CET1 ratio of 4.5\%? & S & 1 \\
+2 & Compl. & Which LGPD articles govern processing of financial credit data? & M & 2 \\
+3 & Compl. & What are the GDPR Art. 25 privacy-by-design requirements? & S & 1 \\
+4 & Compl. & How does LGPD Art. 46 define security measures for data processing? & M & 2 \\
+5 & Compl. & Which Basel III provisions address countercyclical capital buffers? & M & 2 \\
+6 & Compl. & What SOX Section 404 requirements apply to internal controls? & S & 1 \\
+7 & Compl. & How do LGPD and GDPR differ on data subject access rights? & C & 2 \\
+8 & Compl. & What are the Basel III Pillar 2 supervisory review requirements? & M & 2 \\
+9 & Compl. & Which LGPD articles require DPO appointment for financial institutions? & M & 2 \\
+10 & Compl. & What Basel III disclosure requirements apply under Pillar 3? & M & 2 \\
+11 & Compl. & How does GDPR Art. 35 DPIA apply to financial profiling? & C & 2 \\
+12 & Compl. & What are the capital conservation buffer requirements? & S & 1 \\
+13 & Compl. & Which LGPD provisions govern international data transfers? & M & 2 \\
+14 & Compl. & How do Basel III and CRD VI interact for EU-operating banks? & C & 3 \\
+15 & Compl. & What are the GDPR requirements for breach notification? & S & 1 \\
+% Financial Analysis (12 questions)
+16 & Fin. & What was Company X's total revenue in FY2024? & S & 1 \\
+17 & Fin. & Compare net income margins of Company A vs Company B. & M & 2 \\
+18 & Fin. & What are the main risk factors reported by Company X? & S & 1 \\
+19 & Fin. & How did Company X's debt-to-equity ratio change YoY? & M & 2 \\
+20 & Fin. & Which companies report the highest R\&D spending? & M & 2 \\
+21 & Fin. & What is the operating cash flow trend for Company X? & M & 2 \\
+22 & Fin. & Compare revenue growth across the technology sector. & M & 2 \\
+23 & Fin. & What goodwill impairments were reported in FY2024? & S & 1 \\
+24 & Fin. & Which companies have the lowest capital adequacy ratio? & M & 2 \\
+25 & Fin. & What are Company X's key subsidiaries and their revenues? & M & 2 \\
+26 & Fin. & Compare operating margins across financial sector companies. & M & 2 \\
+27 & Fin. & What contingent liabilities does Company X disclose? & S & 1 \\
+% Multi-hop Reasoning (10 questions)
+28 & Multi & Which subsidiaries of Company X have credit risk exposure under Basel III? & C & 3 \\
+29 & Multi & Trace the regulatory chain from LGPD Art. 46 to specific controls. & C & 3 \\
+30 & Multi & Which EU subsidiaries of Brazilian banks must comply with CRD VI? & C & 3 \\
+31 & Multi & What controls mitigate the risks identified in audit finding F-103? & C & 3 \\
+32 & Multi & Which regulations apply to cross-border data transfers by Company X? & C & 3 \\
+33 & Multi & What are the capital requirements for Company X's EU operations? & C & 3 \\
+34 & Multi & Which audit findings relate to LGPD compliance gaps? & C & 3 \\
+35 & Multi & Trace the subsidiaries exposed to operational risk in emerging markets. & C & 3 \\
+36 & Multi & What controls validate Basel III Pillar 1 requirements for Company X? & C & 3 \\
+37 & Multi & Which jurisdictions create dual regulatory obligations for Company X? & C & 3 \\
+% Comparison (8 questions)
+38 & Comp. & Compare LGPD and GDPR data minimization requirements. & M & 2 \\
+39 & Comp. & How do Basel III and Basel II differ on operational risk capital? & C & 3 \\
+40 & Comp. & Compare SOX and LGPD audit trail requirements. & M & 2 \\
+41 & Comp. & What are the differences in data breach notification between LGPD and GDPR? & M & 2 \\
+42 & Comp. & Compare capital adequacy requirements across three jurisdictions. & C & 3 \\
+43 & Comp. & How do internal vs. external audit requirements differ under SOX? & M & 2 \\
+44 & Comp. & Compare Company A and Company B risk factor disclosures. & M & 2 \\
+45 & Comp. & What are the differences between LGPD and GDPR DPO requirements? & M & 2 \\
+% Audit (5 questions)
+46 & Audit & List all high-risk findings from the Q4 2024 operational risk audit. & S & 1 \\
+47 & Audit & Which controls mitigate the risks in finding F-103? & M & 2 \\
+48 & Audit & What is the remediation status of findings from the 2024 audit cycle? & M & 2 \\
+49 & Audit & Which audit findings have been open for more than 90 days? & M & 2 \\
+50 & Audit & What is the overall risk assessment for the payments control environment? & C & 3 \\
+\end{longtable}
+
+\noindent\textbf{Legend:} S = Simple, M = Moderate, C = Complex. Hops = minimum knowledge graph traversal depth required for a complete answer.
+
+
+%% ============================================================
+%% APPENDIX D: ADDITIONAL EXPERIMENTAL RESULTS
+%% ============================================================
+\section{Additional experimental results}
+\label{app:results}
+
+\subsection{Detailed hallucination results by category}
+
+Table~\ref{tab:detailed-hallucination} presents the complete breakdown of faithfulness, factual accuracy, and grounding rate by question category and system.
+
+\begin{table}[ht]
+\caption{Detailed hallucination metrics by question category (200-question regulatory dataset).}
+\label{tab:detailed-hallucination}
+\centering
+\small
+\begin{tabular}{@{}llccc@{}}
+\toprule
+\textbf{Category} & \textbf{System} & \textbf{Faith.} & \textbf{Acc.} & \textbf{Ground.} \\
+\midrule
+\multirow{5}{*}{Compliance ($n$=80)}
+& Ours & 87.54\% & 84.24\% & 96.61\% \\
+& HybridRAG & 82.46\% & 78.11\% & 72.18\% \\
+& MS GraphRAG & 80.57\% & 76.34\% & 70.52\% \\
+& VectorRAG & 72.78\% & 68.74\% & 55.17\% \\
+& No Retrieval & 46.54\% & 41.23\% & 0.00\% \\
+\midrule
+\multirow{5}{*}{Fin. Analysis ($n$=50)}
+& Ours & 87.97\% & 84.52\% & 96.48\% \\
+& HybridRAG & 83.09\% & 79.04\% & 72.26\% \\
+& MS GraphRAG & 79.59\% & 74.87\% & 69.74\% \\
+& VectorRAG & 72.92\% & 68.82\% & 55.12\% \\
+& No Retrieval & 46.44\% & 41.08\% & 0.00\% \\
+\midrule
+\multirow{5}{*}{Multi-hop ($n$=40)}
+& Ours & 86.24\% & 82.70\% & 96.56\% \\
+& HybridRAG & 81.35\% & 77.45\% & 72.74\% \\
+& MS GraphRAG & 79.22\% & 74.38\% & 70.42\% \\
+& VectorRAG & 73.40\% & 68.56\% & 55.55\% \\
+& No Retrieval & 45.78\% & 40.54\% & 0.00\% \\
+\midrule
+\multirow{5}{*}{Comparison ($n$=20)}
+& Ours & 87.10\% & 83.44\% & 95.85\% \\
+& HybridRAG & 83.23\% & 79.52\% & 71.90\% \\
+& MS GraphRAG & 78.66\% & 74.12\% & 69.45\% \\
+& VectorRAG & 72.96\% & 68.60\% & 54.80\% \\
+& No Retrieval & 45.90\% & 40.62\% & 0.00\% \\
+\midrule
+\multirow{5}{*}{Audit ($n$=10)}
+& Ours & 87.60\% & 83.88\% & 96.80\% \\
+& HybridRAG & 82.01\% & 77.82\% & 71.46\% \\
+& MS GraphRAG & 79.46\% & 74.62\% & 70.00\% \\
+& VectorRAG & 71.14\% & 67.24\% & 53.80\% \\
+& No Retrieval & 50.20\% & 44.56\% & 0.00\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Latency percentile distribution}
+
+Table~\ref{tab:latency-percentiles} presents the full percentile distribution of latency measurements for each system configuration.
+
+\begin{table}[ht]
+\caption{Latency percentile distribution (milliseconds) across all system configurations.}
+\label{tab:latency-percentiles}
+\centering
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+\textbf{Configuration} & \textbf{p25} & \textbf{p50} & \textbf{p75} & \textbf{p90} & \textbf{p95} \\
+\midrule
+Ours (serial) & 3,654 & 4,200 & 4,892 & 5,445 & 5,868 \\
+Ours (parallel) & 1,542 & 1,785 & 2,034 & 2,287 & 2,434 \\
+Ours (par.+cache) & 678 & 797 & 942 & 1,067 & 1,142 \\
+VectorRAG & 1,024 & 1,182 & 1,378 & 1,592 & 1,716 \\
+MS GraphRAG & 1,845 & 2,127 & 2,456 & 2,712 & 2,886 \\
+HybridRAG & 1,267 & 1,469 & 1,724 & 1,945 & 2,102 \\
+No Retrieval & 542 & 653 & 784 & 892 & 962 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Red-team attack breakdown}
+
+Table~\ref{tab:attack-breakdown} provides the detailed breakdown of red-team security evaluation results by attack sub-category.
+
+\begin{table}[ht]
+\caption{Detailed red-team attack results by sub-category.}
+\label{tab:attack-breakdown}
+\centering
+\small
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Campaign} & \textbf{Sub-category} & \textbf{Queries} & \textbf{Success} & \textbf{Rate} \\
+\midrule
+\multirow{4}{*}{Cross-tenant}
+& Direct access & 25 & 0 & 0.0\% \\
+& Graph traversal & 25 & 0 & 0.0\% \\
+& Cypher injection & 25 & 0 & 0.0\% \\
+& Privilege escalation & 25 & 0 & 0.0\% \\
+\midrule
+\multirow{4}{*}{Entity extraction}
+& Structure discovery & 15 & 1 & 6.7\% \\
+& Targeted extraction & 15 & 1 & 6.7\% \\
+& Inference attacks & 10 & 0 & 0.0\% \\
+& Exhaustive enumeration & 10 & 0 & 0.0\% \\
+\midrule
+\multirow{3}{*}{Membership inference}
+& Existence probes & 20 & 12 & 60.0\% \\
+& Semantic probes & 15 & 8 & 53.3\% \\
+& Differential probes & 15 & 8 & 53.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+%% ============================================================
+%% APPENDIX E: IMPLEMENTATION GUIDE
+%% ============================================================
+\section{Implementation guide and API documentation}
+\label{app:implementation}
+
+\subsection{System requirements}
+
+\begin{table}[ht]
+\caption{System requirements for deploying the proposed GraphRAG architecture.}
+\label{tab:requirements}
+\centering
+\small
+\begin{tabular}{@{}llp{5cm}@{}}
+\toprule
+\textbf{Component} & \textbf{Version} & \textbf{Purpose} \\
+\midrule
+Neo4j & 5.x+ & Knowledge graph storage and vector index \\
+PostgreSQL & 16+ & Metadata, sessions, cache, audit logs \\
+Python & 3.10+ & Runtime environment \\
+Claude API & Haiku/Sonnet & Triple extraction and response generation \\
+sentence-transformers & all-MiniLM-L6-v2 & Embedding generation (384 dimensions) \\
+igraph + leidenalg & 0.11+ / 0.10+ & Community detection \\
+FastAPI & Latest & REST API framework \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{API endpoints}
+
+Table~\ref{tab:api-endpoints} documents the primary API endpoints of the system.
+
+\begin{table}[ht]
+\caption{Primary API endpoints for the GraphRAG system.}
+\label{tab:api-endpoints}
+\centering
+\small
+\begin{tabular}{@{}llp{5cm}@{}}
+\toprule
+\textbf{Endpoint} & \textbf{Method} & \textbf{Description} \\
+\midrule
+\texttt{/auth/login} & POST & Authenticate user, return JWT token \\
+\texttt{/chat} & POST & Submit query with context, receive response \\
+\texttt{/chat/sessions} & GET & List user's chat sessions \\
+\texttt{/graph/query} & POST & Execute direct Cypher query \\
+\texttt{/graph/stats} & GET & Knowledge graph statistics \\
+\texttt{/analytics/usage} & GET & API usage and cost analytics \\
+\texttt{/health} & GET & System health check \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Configuration}
+
+The system is configured through environment variables and a YAML configuration file. Key configuration parameters include:
+
+\begin{lstlisting}[language={}, caption={Key configuration parameters.}, label={lst:config}]
+# Neo4j connection
+NEO4J_URI=bolt://localhost:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=***
+
+# PostgreSQL connection
+DATABASE_URL=postgresql+asyncpg://user:pass@localhost/graphrag
+
+# Claude API
+ANTHROPIC_API_KEY=***
+LLM_MODEL=claude-haiku-4-5-20251001
+USE_BATCH_API=true
+
+# Retrieval settings
+MAX_CONTEXT_TOKENS=4000
+EMBEDDING_MODEL=all-MiniLM-L6-v2
+FUZZY_THRESHOLD=0.85
+COMMUNITY_RESOLUTION=1.0
+
+# Security
+JWT_SECRET=***
+JWT_ALGORITHM=HS256
+JWT_EXPIRATION=3600
+\end{lstlisting}
+
+\subsection{Docker deployment}
+
+The system can be deployed using Docker Compose for development and testing:
+
+\begin{lstlisting}[language={}, caption={Docker Compose configuration for local deployment.}, label={lst:docker}]
+# docker-compose.yml
+services:
+  neo4j:
+    image: neo4j:5-community
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password
+      NEO4J_PLUGINS: '["apoc"]'
+
+  postgres:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: graphrag
+      POSTGRES_USER: graphrag
+      POSTGRES_PASSWORD: password
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - neo4j
+      - postgres
+    environment:
+      NEO4J_URI: bolt://neo4j:7687
+      DATABASE_URL: postgresql+asyncpg://graphrag:password@postgres/graphrag
+\end{lstlisting}
+
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{../references}
+
+\end{document}

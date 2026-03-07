@@ -1,0 +1,874 @@
+{
+  "metadata": {
+    "name": "Financial Benchmark Questions",
+    "version": "1.0",
+    "created": "2026-03-07",
+    "description": "50 curated financial questions across 5 categories for comprehensive GraphRAG benchmark evaluation",
+    "scoring_weights": {
+      "entity_coverage": 0.40,
+      "concept_coverage": 0.30,
+      "source_attribution": 0.20,
+      "response_quality": 0.10
+    },
+    "categories": {
+      "regulatory_compliance": {"count": 15, "weight": 0.30},
+      "financial_analysis": {"count": 12, "weight": 0.25},
+      "multi_hop_reasoning": {"count": 10, "weight": 0.20},
+      "comparison": {"count": 8, "weight": 0.15},
+      "audit": {"count": 5, "weight": 0.10}
+    },
+    "total_questions": 50
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "What are the minimum Common Equity Tier 1 (CET1) capital requirements under Basel III, and how do they differ from the previous Basel II framework?",
+      "category": "regulatory_compliance",
+      "difficulty": "medium",
+      "ground_truth": "Under Basel III, the minimum CET1 capital requirement is set at 4.5% of risk-weighted assets (RWA), which is significantly higher than the Basel II requirement of 2% for core Tier 1 capital. Basel III also introduced the Capital Conservation Buffer (CCB) of 2.5%, effectively raising the total CET1 requirement to 7%. Additionally, Basel III imposed stricter criteria for what qualifies as CET1, excluding certain hybrid instruments that were previously allowed under Basel II. These changes were phased in gradually between 2013 and 2019 to allow banks time to build up their capital buffers.",
+      "expected_entities": ["Basel_III", "CET1", "Basel_II", "Capital_Conservation_Buffer", "RWA"],
+      "expected_concepts": ["capital_adequacy", "risk_weighting", "minimum_capital_requirements", "regulatory_capital"],
+      "source_references": ["Basel III Framework, Section II.A", "BCBS 189, Paragraph 50-56"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Basel_III", "CET1", "RWA", "Capital_Conservation_Buffer"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["capital_adequacy", "minimum_capital_requirements"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must specify exact CET1 percentage (4.5%) and CCB (2.5%), and explain the change from Basel II"}
+      }
+    },
+    {
+      "id": 2,
+      "question": "What are the key principles of the LGPD (Lei Geral de Protecao de Dados) regarding the processing of personal data by financial institutions in Brazil?",
+      "category": "regulatory_compliance",
+      "difficulty": "medium",
+      "ground_truth": "The LGPD establishes ten legal bases for processing personal data, including consent, legitimate interest, and regulatory compliance. For financial institutions, key principles include purpose limitation, data minimization, transparency, and accountability. Financial institutions must appoint a Data Protection Officer (DPO), maintain records of processing activities, and implement appropriate technical and organizational security measures. The LGPD also grants data subjects rights such as access, correction, deletion, and portability of their personal data. Non-compliance can result in fines of up to 2% of revenue, capped at R$50 million per violation.",
+      "expected_entities": ["LGPD", "DPO", "ANPD", "financial_institutions", "data_subjects"],
+      "expected_concepts": ["purpose_limitation", "data_minimization", "consent", "legitimate_interest", "data_protection"],
+      "source_references": ["LGPD, Articles 6-10", "LGPD, Article 41", "LGPD, Article 52"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["LGPD", "DPO", "data_subjects"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["purpose_limitation", "data_minimization", "consent"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["LGPD"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must mention at least three legal bases, key principles, and penalty provisions"}
+      }
+    },
+    {
+      "id": 3,
+      "question": "How does the Countercyclical Capital Buffer (CCyB) work under Basel III, and when can national regulators activate it?",
+      "category": "regulatory_compliance",
+      "difficulty": "hard",
+      "ground_truth": "The Countercyclical Capital Buffer (CCyB) is a macroprudential tool under Basel III that can range from 0% to 2.5% of risk-weighted assets, composed of CET1 capital. National regulators can activate the CCyB during periods of excessive aggregate credit growth that are judged to be associated with a buildup of system-wide risk. The buffer is designed to ensure that the banking sector builds up capital in good times that can be drawn down during stress periods. The credit-to-GDP gap is the primary reference indicator used by regulators to guide CCyB decisions. When activated, banks are given up to 12 months to comply with the higher requirement.",
+      "expected_entities": ["CCyB", "Basel_III", "CET1", "BCBS", "national_regulators"],
+      "expected_concepts": ["macroprudential_policy", "credit_cycle", "systemic_risk", "credit_to_GDP_gap", "countercyclical_policy"],
+      "source_references": ["Basel III Framework, Section II.B", "BCBS Guidance on CCyB, 2010"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["CCyB", "Basel_III", "CET1"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["macroprudential_policy", "credit_cycle", "systemic_risk"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain the 0-2.5% range, activation conditions, and credit-to-GDP gap indicator"}
+      }
+    },
+    {
+      "id": 4,
+      "question": "What obligations does GDPR impose on financial institutions acting as data controllers for cross-border data transfers?",
+      "category": "regulatory_compliance",
+      "difficulty": "hard",
+      "ground_truth": "Under GDPR, financial institutions acting as data controllers must ensure that cross-border transfers of personal data to third countries outside the EEA are carried out with adequate safeguards. These safeguards include adequacy decisions by the European Commission, Standard Contractual Clauses (SCCs), Binding Corporate Rules (BCRs), or approved codes of conduct and certification mechanisms. Following the Schrems II ruling, controllers must also conduct Transfer Impact Assessments (TIAs) to evaluate the legal framework of the recipient country. Financial institutions must document these transfers in their Record of Processing Activities (ROPA) and inform data subjects about the transfer mechanisms used.",
+      "expected_entities": ["GDPR", "EEA", "European_Commission", "SCCs", "BCRs", "Schrems_II"],
+      "expected_concepts": ["cross_border_transfer", "adequacy_decision", "data_controller", "transfer_impact_assessment", "data_protection"],
+      "source_references": ["GDPR, Chapter V, Articles 44-49", "Schrems II Ruling, CJEU C-311/18"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "SCCs", "BCRs", "Schrems_II"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["cross_border_transfer", "adequacy_decision", "data_controller"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Chapter V"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must name at least three transfer mechanisms and reference the Schrems II impact"}
+      }
+    },
+    {
+      "id": 5,
+      "question": "What is the leverage ratio requirement under Basel III, and why was it introduced as a non-risk-based measure?",
+      "category": "regulatory_compliance",
+      "difficulty": "medium",
+      "ground_truth": "The Basel III leverage ratio requires banks to maintain a minimum Tier 1 capital of 3% relative to the bank's total exposure measure, which includes on-balance-sheet exposures, derivative exposures, securities financing transaction exposures, and off-balance-sheet items. The leverage ratio was introduced as a simple, non-risk-based backstop to complement the risk-weighted capital requirements. It addresses the risk that banks might underestimate risk weights using internal models, effectively gaming the risk-weighted framework. For Global Systemically Important Banks (G-SIBs), an additional leverage ratio buffer of 50% of the G-SIB higher-loss-absorbency surcharge applies. The leverage ratio became a binding Pillar 1 requirement starting January 2018.",
+      "expected_entities": ["Basel_III", "leverage_ratio", "Tier_1_capital", "G-SIBs", "Pillar_1"],
+      "expected_concepts": ["non_risk_based_measure", "backstop_measure", "total_exposure", "model_risk", "loss_absorbency"],
+      "source_references": ["Basel III Framework, Section III", "BCBS 270, Leverage Ratio Framework"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Basel_III", "leverage_ratio", "Tier_1_capital", "G-SIBs"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["non_risk_based_measure", "backstop_measure", "total_exposure"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must specify the 3% minimum, explain the exposure measure components, and rationale for non-risk-based approach"}
+      }
+    },
+    {
+      "id": 6,
+      "question": "What are the requirements for Pillar 3 disclosure under the Basel III framework, and what information must banks publicly report?",
+      "category": "regulatory_compliance",
+      "difficulty": "medium",
+      "ground_truth": "Pillar 3 of the Basel III framework requires banks to publicly disclose key information about their risk management practices, capital adequacy, and risk exposures to promote market discipline. Required disclosures include capital composition and adequacy ratios, credit risk exposures by asset class, market risk and operational risk measures, leverage ratio, liquidity coverage ratio, and remuneration policies. The BCBS introduced standardized disclosure templates (the DIS series) to improve comparability across institutions. Banks must publish these disclosures at least semi-annually, with some key metrics required quarterly. The revised Pillar 3 framework also requires disclosure of risk-weighted asset calculations and the impact of Basel III reforms.",
+      "expected_entities": ["Pillar_3", "Basel_III", "BCBS", "market_discipline", "DIS_templates"],
+      "expected_concepts": ["public_disclosure", "transparency", "market_discipline", "risk_reporting", "comparability"],
+      "source_references": ["Basel III Framework, Pillar 3", "BCBS 309, Revised Pillar 3 Disclosure Requirements"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Pillar_3", "Basel_III", "BCBS"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["public_disclosure", "market_discipline", "transparency"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, Pillar 3"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must list at least four categories of required disclosures and mention disclosure frequency"}
+      }
+    },
+    {
+      "id": 7,
+      "question": "What are the GDPR principles relating to the lawfulness, fairness, and transparency of personal data processing?",
+      "category": "regulatory_compliance",
+      "difficulty": "simple",
+      "ground_truth": "Article 5 of the GDPR establishes seven key data processing principles. Lawfulness requires that data processing has a valid legal basis from among the six listed in Article 6, such as consent, contractual necessity, or legitimate interest. Fairness means that data must be processed in a way that data subjects would reasonably expect and not in ways that produce unjustified adverse effects. Transparency requires controllers to provide clear, plain-language information about how data is collected, used, and shared through privacy notices. These three principles together form the foundation of the GDPR's data processing framework and are enforceable by Supervisory Authorities with fines of up to 4% of annual global turnover or EUR 20 million.",
+      "expected_entities": ["GDPR", "Article_5", "Article_6", "Supervisory_Authority", "data_controller"],
+      "expected_concepts": ["lawfulness", "fairness", "transparency", "legal_basis", "data_processing_principles"],
+      "source_references": ["GDPR, Article 5(1)(a)", "GDPR, Article 6", "GDPR, Article 83"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "Article_5", "Article_6"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["lawfulness", "fairness", "transparency"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Article 5"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain each of the three principles and reference legal bases for lawfulness"}
+      }
+    },
+    {
+      "id": 8,
+      "question": "What are the capital buffer requirements for Global Systemically Important Banks (G-SIBs) under Basel III?",
+      "category": "regulatory_compliance",
+      "difficulty": "hard",
+      "ground_truth": "G-SIBs are subject to an additional Higher Loss Absorbency (HLA) requirement beyond the standard Basel III capital requirements. This surcharge ranges from 1% to 3.5% of risk-weighted assets depending on the bank's systemic importance, classified into five buckets. The assessment methodology uses twelve indicators across five categories: size, interconnectedness, substitutability/financial institution infrastructure, complexity, and cross-jurisdictional activity. The HLA surcharge must be met with CET1 capital. Combined with the minimum CET1 (4.5%), the Capital Conservation Buffer (2.5%), and potentially the CCyB (0-2.5%), G-SIBs may need to hold total CET1 capital of up to 13% of RWA. The G-SIB list is updated annually by the Financial Stability Board (FSB).",
+      "expected_entities": ["G-SIBs", "Basel_III", "HLA", "FSB", "CET1", "CCyB", "Capital_Conservation_Buffer"],
+      "expected_concepts": ["systemic_importance", "loss_absorbency", "capital_surcharge", "bucket_classification", "too_big_to_fail"],
+      "source_references": ["BCBS 255, G-SIB Assessment Methodology", "Basel III Framework, Section II.C"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["G-SIBs", "HLA", "FSB", "CET1"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["systemic_importance", "loss_absorbency", "capital_surcharge"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 255"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must specify the surcharge range (1-3.5%), the five assessment categories, and cumulative capital requirements"}
+      }
+    },
+    {
+      "id": 9,
+      "question": "What are the data subject rights under the LGPD and how must financial institutions respond to such requests?",
+      "category": "regulatory_compliance",
+      "difficulty": "medium",
+      "ground_truth": "Under Article 18 of the LGPD, data subjects have nine fundamental rights including confirmation of data processing, access to their data, correction of inaccurate data, anonymization or deletion of unnecessary data, data portability, information about shared data with third parties, information about consent denial consequences, and revocation of consent. Financial institutions must respond to these requests within 15 days and must provide clear, adequate, and accessible communication. The Data Protection Officer (DPO) is responsible for receiving and processing these requests. Financial institutions must maintain internal procedures for handling data subject requests and must ensure their response mechanisms are documented and auditable by the ANPD (Autoridade Nacional de Protecao de Dados).",
+      "expected_entities": ["LGPD", "Article_18", "DPO", "ANPD", "data_subjects"],
+      "expected_concepts": ["data_subject_rights", "right_of_access", "right_to_deletion", "data_portability", "consent_revocation"],
+      "source_references": ["LGPD, Article 18", "LGPD, Article 19", "LGPD, Article 41"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["LGPD", "Article_18", "DPO", "ANPD"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["data_subject_rights", "right_of_access", "data_portability"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["LGPD, Article 18"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must list at least five specific data subject rights and mention the 15-day response period"}
+      }
+    },
+    {
+      "id": 10,
+      "question": "What are the GDPR requirements for Data Protection Impact Assessments (DPIAs) applicable to financial institutions?",
+      "category": "regulatory_compliance",
+      "difficulty": "medium",
+      "ground_truth": "Under GDPR Article 35, Data Protection Impact Assessments (DPIAs) are mandatory when data processing is likely to result in a high risk to the rights and freedoms of individuals. Financial institutions must conduct DPIAs when engaging in automated decision-making including profiling, large-scale processing of special categories of data, or systematic monitoring. The DPIA must contain a systematic description of the processing operations, an assessment of necessity and proportionality, an assessment of risks to data subjects, and the measures planned to address those risks. If the DPIA indicates high residual risk after mitigation, the controller must consult with the Supervisory Authority under Article 36 prior to processing. Financial institutions commonly need DPIAs for credit scoring systems, fraud detection algorithms, and KYC/AML processing.",
+      "expected_entities": ["GDPR", "DPIA", "Article_35", "Article_36", "Supervisory_Authority"],
+      "expected_concepts": ["impact_assessment", "high_risk_processing", "automated_decision_making", "risk_mitigation", "proportionality"],
+      "source_references": ["GDPR, Article 35", "GDPR, Article 36", "WP29 Guidelines on DPIAs"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "DPIA", "Article_35", "Supervisory_Authority"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["impact_assessment", "high_risk_processing", "automated_decision_making"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Article 35"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain when DPIAs are required, their mandatory contents, and the consultation requirement for high residual risk"}
+      }
+    },
+    {
+      "id": 11,
+      "question": "What are the Pillar 2 supervisory review process requirements under Basel III?",
+      "category": "regulatory_compliance",
+      "difficulty": "hard",
+      "ground_truth": "Pillar 2 of the Basel III framework establishes the Supervisory Review Process (SRP), which requires banks to develop an Internal Capital Adequacy Assessment Process (ICAAP) and supervisors to evaluate it. The four key principles are: banks must have a process for assessing overall capital adequacy relative to their risk profile; supervisors should review and evaluate these assessments; supervisors should expect banks to operate above minimum regulatory capital ratios; and supervisors should intervene early to prevent capital from falling below minimum levels. The ICAAP must cover risks not fully captured under Pillar 1, including concentration risk, interest rate risk in the banking book (IRRBB), liquidity risk, and reputational risk. Supervisors may set institution-specific Pillar 2 add-ons above the minimum requirements.",
+      "expected_entities": ["Pillar_2", "Basel_III", "ICAAP", "SRP", "IRRBB"],
+      "expected_concepts": ["supervisory_review", "capital_adequacy_assessment", "risk_profile", "Pillar_2_add_ons", "early_intervention"],
+      "source_references": ["Basel III Framework, Pillar 2", "BCBS Core Principles, Principle 16"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Pillar_2", "ICAAP", "SRP"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["supervisory_review", "capital_adequacy_assessment", "risk_profile"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, Pillar 2"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain the four key principles of Pillar 2 and mention at least two risks covered beyond Pillar 1"}
+      }
+    },
+    {
+      "id": 12,
+      "question": "What are the Basel III requirements for the treatment of credit valuation adjustment (CVA) risk?",
+      "category": "regulatory_compliance",
+      "difficulty": "hard",
+      "ground_truth": "Basel III introduced explicit capital charges for Credit Valuation Adjustment (CVA) risk, which reflects the risk of loss due to changes in the credit spread of a counterparty in derivative transactions. The CVA framework requires banks to hold capital against the variability of CVA, not just against counterparty default. Under the revised Basel III standards (Basel III Final Reforms), banks can use the Basic Approach (BA-CVA) or the Standardized Approach (SA-CVA). The BA-CVA is a simplified formula-based approach, while the SA-CVA is based on the bank's ability to calculate CVA sensitivities. Certain transactions, such as those with central counterparties (CCPs) and securities financing transactions (SFTs), may be exempt from CVA capital charges. The CVA framework was fully revised in 2017 and implementation is scheduled with the broader Basel III final reforms.",
+      "expected_entities": ["Basel_III", "CVA", "BA-CVA", "SA-CVA", "CCPs", "SFTs"],
+      "expected_concepts": ["credit_valuation_adjustment", "counterparty_credit_risk", "credit_spread", "capital_charges", "derivative_exposures"],
+      "source_references": ["Basel III Final Reforms, CVA Framework", "BCBS 424, Section 5"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Basel_III", "CVA", "BA-CVA", "SA-CVA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["credit_valuation_adjustment", "counterparty_credit_risk", "capital_charges"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Final Reforms"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain CVA risk, distinguish between BA-CVA and SA-CVA approaches, and mention CCP exemptions"}
+      }
+    },
+    {
+      "id": 13,
+      "question": "What is the role of the ANPD (Autoridade Nacional de Protecao de Dados) in enforcing the LGPD for financial institutions?",
+      "category": "regulatory_compliance",
+      "difficulty": "simple",
+      "ground_truth": "The ANPD is the Brazilian national authority responsible for implementing, overseeing, and enforcing the LGPD. For financial institutions, the ANPD has the power to issue guidelines and technical standards, receive complaints and conduct investigations, apply administrative sanctions including fines of up to 2% of revenue (capped at R$50 million per violation), and promote public awareness of data protection. The ANPD works in coordination with sector-specific regulators such as the Central Bank of Brazil (BCB) for financial institutions. It maintains a National Data Protection Council and can request reports and audits from data controllers. The ANPD also has the authority to approve binding corporate rules and certifications for international data transfers.",
+      "expected_entities": ["ANPD", "LGPD", "BCB", "National_Data_Protection_Council"],
+      "expected_concepts": ["enforcement", "administrative_sanctions", "regulatory_oversight", "inter_agency_coordination", "data_protection_authority"],
+      "source_references": ["LGPD, Articles 55-A to 55-L", "LGPD, Article 52"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["ANPD", "LGPD", "BCB"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["enforcement", "administrative_sanctions", "regulatory_oversight"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["LGPD"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must describe ANPD powers, sanction levels, and coordination with the Central Bank"}
+      }
+    },
+    {
+      "id": 14,
+      "question": "What are the Basel III requirements for operational risk capital calculation under the Standardized Measurement Approach (SMA)?",
+      "category": "regulatory_compliance",
+      "difficulty": "hard",
+      "ground_truth": "The Basel III final reforms replaced all existing approaches for operational risk capital with the single Standardized Measurement Approach (SMA). The SMA calculates operational risk capital using two components: the Business Indicator Component (BIC), which is based on a bank's income statement items including interest, services, and financial components; and the Internal Loss Multiplier (ILM), which adjusts the BIC based on the bank's own loss history. The Business Indicator (BI) is calculated as the sum of the interest, leases, and dividends component, the services component, and the financial component. Banks are classified into three buckets based on BI size, with marginal coefficients of 12%, 15%, and 18%. Supervisors may set the ILM equal to 1 at the national level, effectively making only the BIC relevant.",
+      "expected_entities": ["Basel_III", "SMA", "BIC", "ILM", "Business_Indicator"],
+      "expected_concepts": ["operational_risk", "capital_calculation", "loss_history", "standardized_approach", "income_based_indicator"],
+      "source_references": ["Basel III Final Reforms, Operational Risk Chapter", "BCBS 424, Section 7"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["SMA", "BIC", "ILM", "Business_Indicator"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["operational_risk", "capital_calculation", "loss_history"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Final Reforms"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain BIC and ILM components, the three BI buckets, and the rationale for replacing previous approaches"}
+      }
+    },
+    {
+      "id": 15,
+      "question": "What are the GDPR requirements for breach notification by financial institutions?",
+      "category": "regulatory_compliance",
+      "difficulty": "simple",
+      "ground_truth": "Under GDPR Articles 33 and 34, financial institutions must notify the competent Supervisory Authority of a personal data breach within 72 hours of becoming aware of it, unless the breach is unlikely to result in a risk to the rights and freedoms of individuals. The notification must include the nature of the breach, approximate number of data subjects affected, the name and contact details of the DPO, likely consequences of the breach, and measures taken to address and mitigate the breach. If the breach is likely to result in a high risk to data subjects, the controller must also communicate the breach directly to affected individuals without undue delay. Financial institutions must maintain a breach register documenting all breaches, regardless of whether notification was required.",
+      "expected_entities": ["GDPR", "Article_33", "Article_34", "Supervisory_Authority", "DPO"],
+      "expected_concepts": ["breach_notification", "72_hour_deadline", "risk_assessment", "data_breach", "incident_response"],
+      "source_references": ["GDPR, Article 33", "GDPR, Article 34", "WP29 Guidelines on Breach Notification"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "Article_33", "Article_34", "Supervisory_Authority"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["breach_notification", "72_hour_deadline", "risk_assessment"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Article 33"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must specify the 72-hour timeline, notification contents, and the threshold for notifying data subjects"}
+      }
+    },
+    {
+      "id": 16,
+      "question": "How is the Common Equity Tier 1 (CET1) capital ratio calculated, and what are its key components?",
+      "category": "financial_analysis",
+      "difficulty": "simple",
+      "ground_truth": "The CET1 capital ratio is calculated by dividing Common Equity Tier 1 capital by total risk-weighted assets (RWA). CET1 capital comprises common shares issued by the bank, retained earnings, accumulated other comprehensive income (AOCI), and disclosed reserves, minus regulatory adjustments and deductions such as goodwill, intangible assets, deferred tax assets, and investments in financial institutions. RWA represents the total of all assets weighted by their risk category, where risk weights are assigned based on the credit risk, market risk, and operational risk of each exposure. A CET1 ratio of 4.5% is the minimum requirement, while the effective minimum including the Capital Conservation Buffer is 7%. Banks with CET1 ratios below 7% face restrictions on capital distributions.",
+      "expected_entities": ["CET1", "RWA", "AOCI", "Capital_Conservation_Buffer", "goodwill"],
+      "expected_concepts": ["capital_ratio_calculation", "regulatory_adjustments", "risk_weighting", "capital_deductions", "retained_earnings"],
+      "source_references": ["Basel III Framework, Section II.A", "BCBS 189, Definition of Capital"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["CET1", "RWA", "AOCI"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["capital_ratio_calculation", "regulatory_adjustments", "risk_weighting"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must present the formula CET1/RWA, list key components and deductions, and state the 4.5% minimum"}
+      }
+    },
+    {
+      "id": 17,
+      "question": "How are Risk-Weighted Assets (RWA) calculated under the Standardized Approach for credit risk?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "Under the Standardized Approach for credit risk, RWA are calculated by multiplying each exposure by a prescribed risk weight that depends on the asset class and the external credit rating of the obligor. Asset classes include sovereigns (0-150% risk weight), banks (20-150%), corporates (20-150%), retail (75%), residential mortgages (20-70% under revised SA), and commercial real estate (varies). The revised Basel III Standardized Approach reduces reliance on external credit ratings by introducing due diligence requirements and alternative risk-weight determination for unrated exposures. Certain credit risk mitigation techniques such as collateral, guarantees, and credit derivatives can reduce the exposure amount or shift it to a lower risk-weight category. The total RWA for credit risk is the sum of all risk-weighted exposures across all asset classes.",
+      "expected_entities": ["RWA", "Standardized_Approach", "Basel_III", "ECAI", "credit_risk_mitigation"],
+      "expected_concepts": ["risk_weighting", "asset_classification", "credit_ratings", "exposure_calculation", "due_diligence"],
+      "source_references": ["Basel III Framework, Credit Risk Standardized Approach", "BCBS 424, Section 2"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["RWA", "Standardized_Approach", "Basel_III"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["risk_weighting", "asset_classification", "credit_ratings"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain the RWA formula, provide specific risk weights for at least three asset classes, and mention CRM techniques"}
+      }
+    },
+    {
+      "id": 18,
+      "question": "What is the Liquidity Coverage Ratio (LCR) and how is it calculated?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "The Liquidity Coverage Ratio (LCR) is a Basel III short-term liquidity standard that requires banks to hold sufficient High-Quality Liquid Assets (HQLA) to cover total net cash outflows over a 30-day stress scenario. The LCR is calculated as HQLA divided by Total Net Cash Outflows over 30 days, with a minimum requirement of 100%. HQLA are classified into three levels: Level 1 assets (cash, central bank reserves, government securities) with no haircut; Level 2A assets (certain government and corporate bonds) with a 15% haircut; and Level 2B assets (certain corporate bonds and equities) with a 25-50% haircut. Level 2 assets are capped at 40% of total HQLA, and Level 2B assets are capped at 15%. Net cash outflows are calculated as the expected outflows minus expected inflows, with inflows capped at 75% of outflows.",
+      "expected_entities": ["LCR", "HQLA", "Basel_III", "Level_1_assets", "Level_2A_assets", "Level_2B_assets"],
+      "expected_concepts": ["liquidity_coverage", "stress_scenario", "cash_outflows", "high_quality_liquid_assets", "haircuts"],
+      "source_references": ["Basel III Framework, LCR Standard", "BCBS 238, LCR Disclosure Standards"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["LCR", "HQLA", "Level_1_assets", "Level_2A_assets"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["liquidity_coverage", "stress_scenario", "high_quality_liquid_assets"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, LCR Standard"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must present the LCR formula, explain HQLA levels with haircuts, and state the 100% minimum requirement"}
+      }
+    },
+    {
+      "id": 19,
+      "question": "What is the Net Stable Funding Ratio (NSFR) and what does it measure?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "The Net Stable Funding Ratio (NSFR) is a Basel III long-term liquidity standard that requires banks to maintain a stable funding profile in relation to their on- and off-balance-sheet activities. The NSFR is calculated as Available Stable Funding (ASF) divided by Required Stable Funding (RSF), with a minimum requirement of 100%. ASF is determined by assigning factors (0-100%) to liability and equity categories based on their stability: capital instruments and liabilities with maturities over one year receive 100%, stable retail deposits receive 95%, and less stable retail deposits receive 90%. RSF is determined by assigning factors to asset categories based on their liquidity: cash and short-term government securities receive 0%, while long-term loans to corporates receive 65-85%. The NSFR complements the LCR by addressing structural liquidity mismatches over a one-year time horizon.",
+      "expected_entities": ["NSFR", "ASF", "RSF", "Basel_III", "LCR"],
+      "expected_concepts": ["stable_funding", "funding_profile", "liquidity_mismatch", "funding_factors", "structural_liquidity"],
+      "source_references": ["Basel III Framework, NSFR Standard", "BCBS 295, Net Stable Funding Ratio"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["NSFR", "ASF", "RSF", "Basel_III"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["stable_funding", "funding_profile", "liquidity_mismatch"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, NSFR Standard"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must present the NSFR formula (ASF/RSF), explain ASF and RSF factors with examples, and state the 100% minimum"}
+      }
+    },
+    {
+      "id": 20,
+      "question": "How is the leverage ratio exposure measure calculated under Basel III?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "The leverage ratio exposure measure under Basel III consists of four main components: on-balance-sheet exposures, derivative exposures, securities financing transaction (SFT) exposures, and off-balance-sheet (OBS) items. On-balance-sheet exposures are generally measured at accounting values net of specific provisions and accounting valuation adjustments, but without netting of physical or financial collateral. Derivative exposures are measured using the Standardized Approach for Counterparty Credit Risk (SA-CCR), which includes the replacement cost plus the Potential Future Exposure (PFE). SFT exposures include the gross SFT assets plus a counterparty credit risk add-on. OBS items are converted using credit conversion factors (CCFs), with unconditionally cancellable commitments receiving a minimum 10% CCF. The total exposure measure serves as the denominator of the leverage ratio, with Tier 1 capital as the numerator.",
+      "expected_entities": ["leverage_ratio", "SA-CCR", "SFT", "PFE", "CCF"],
+      "expected_concepts": ["exposure_measure", "on_balance_sheet", "off_balance_sheet", "derivative_exposures", "credit_conversion"],
+      "source_references": ["Basel III Framework, Leverage Ratio", "BCBS 270, Leverage Ratio Framework"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["leverage_ratio", "SA-CCR", "SFT", "CCF"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["exposure_measure", "on_balance_sheet", "off_balance_sheet", "derivative_exposures"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 270"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must describe all four components of the exposure measure and mention SA-CCR for derivatives"}
+      }
+    },
+    {
+      "id": 21,
+      "question": "How are expected credit losses calculated under the IFRS 9 impairment model and what are its three stages?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "Under IFRS 9, expected credit losses (ECL) are calculated using a three-stage impairment model. Stage 1 applies to performing assets with no significant increase in credit risk since origination, requiring recognition of 12-month ECL. Stage 2 applies to assets with a significant increase in credit risk (SICR) but not yet credit-impaired, requiring recognition of lifetime ECL. Stage 3 applies to credit-impaired assets, also requiring lifetime ECL but with interest revenue calculated on the net carrying amount. The ECL calculation incorporates three key parameters: Probability of Default (PD), Loss Given Default (LGD), and Exposure at Default (EAD), each forward-looking and incorporating macroeconomic scenarios. Banks must use probability-weighted scenarios to estimate ECL. This model replaced the previous IAS 39 incurred loss model, which was criticized for recognizing credit losses too late.",
+      "expected_entities": ["IFRS_9", "ECL", "IAS_39", "PD", "LGD", "EAD"],
+      "expected_concepts": ["expected_credit_loss", "impairment_stages", "significant_increase_credit_risk", "lifetime_ECL", "forward_looking_provisioning"],
+      "source_references": ["IFRS 9, Section 5.5", "BCBS Guidance on ECL Accounting"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["IFRS_9", "ECL", "PD", "LGD", "EAD"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["expected_credit_loss", "impairment_stages", "forward_looking_provisioning"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["IFRS 9"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must clearly describe all three stages, the ECL calculation parameters (PD, LGD, EAD), and contrast with IAS 39"}
+      }
+    },
+    {
+      "id": 22,
+      "question": "How are market risk capital requirements calculated under the Fundamental Review of the Trading Book (FRTB)?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "The FRTB introduced two approaches for calculating market risk capital: the Internal Models Approach (IMA) and the Standardized Approach (SA). The SA uses a sensitivities-based method with three components: a delta-risk charge based on instrument sensitivities to seven risk classes (GIRR, CSR, FX, equity, commodity, CSR securitization, and CSR correlation trading), a vega risk charge for options, and a curvature risk charge for non-linear risks. The IMA requires banks to calculate Expected Shortfall (ES) at a 97.5% confidence level, replacing the previous Value-at-Risk (VaR) measure. The FRTB also introduced stricter boundaries between the banking book and trading book, a desk-level approval process for IMA, and a Profit-and-Loss Attribution (PLA) test. The revised framework also includes a default risk charge (DRC) and a residual risk add-on (RRAO).",
+      "expected_entities": ["FRTB", "IMA", "SA", "Expected_Shortfall", "VaR", "GIRR"],
+      "expected_concepts": ["market_risk", "trading_book", "sensitivities_based_method", "expected_shortfall", "desk_level_approval"],
+      "source_references": ["Basel III Final Reforms, Market Risk Chapter", "BCBS 352, FRTB Standards"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["FRTB", "IMA", "Expected_Shortfall", "VaR"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["market_risk", "trading_book", "expected_shortfall"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 352"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain both SA and IMA approaches, the shift from VaR to ES, and at least three SA components"}
+      }
+    },
+    {
+      "id": 23,
+      "question": "How is the output floor applied under the Basel III final reforms and what is its impact on capital requirements?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "The output floor under the Basel III final reforms sets a minimum level for banks' risk-weighted assets calculated using internal models at 72.5% of the RWA calculated using the Standardized Approaches. This means that banks using the Internal Ratings-Based (IRB) approach for credit risk, the Internal Models Approach (IMA) for market risk, or the Advanced Measurement Approach (AMA, now replaced by SMA) for operational risk cannot benefit from model-based RWA reductions beyond 27.5% compared to standardized calculations. The output floor is being phased in from 50% in 2023 to 72.5% by 2028. Its purpose is to reduce excessive variability in RWA across banks and restore credibility in the calculation of risk-weighted assets. The floor is applied at the consolidated level and impacts banks whose internal model outputs produce significantly lower RWA than standardized approaches.",
+      "expected_entities": ["output_floor", "Basel_III", "IRB", "RWA", "Standardized_Approach", "SMA"],
+      "expected_concepts": ["model_risk", "RWA_variability", "capital_floor", "internal_models", "phase_in_period"],
+      "source_references": ["Basel III Final Reforms, Output Floor", "BCBS 424, Section 9"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["output_floor", "IRB", "RWA", "Standardized_Approach"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["model_risk", "RWA_variability", "capital_floor"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Final Reforms"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must state the 72.5% floor level, explain the phase-in timeline, and describe the rationale for reducing RWA variability"}
+      }
+    },
+    {
+      "id": 24,
+      "question": "How do banks conduct stress testing under the supervisory framework, and what parameters are typically tested?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "Supervisory stress testing requires banks to evaluate their capital adequacy under hypothetical adverse economic scenarios prescribed by regulators. Key parameters tested include GDP decline (typically 3-8% below baseline), unemployment increase (2-5 percentage points above baseline), equity market decline (40-60%), housing price drops (20-30%), and interest rate shocks (200-300 basis points). The stress test process involves projecting pre-provision net revenue, credit losses across all portfolios, trading and counterparty losses, and operational risk losses under stress. Banks must demonstrate they maintain capital ratios above minimum thresholds throughout the stress period, typically two to three years. Major supervisory exercises include the Fed's CCAR/DFAST in the US, the EBA stress test in Europe, and the Bank of England's concurrent stress test.",
+      "expected_entities": ["stress_testing", "CCAR", "DFAST", "EBA", "Bank_of_England"],
+      "expected_concepts": ["adverse_scenario", "capital_adequacy_under_stress", "macroeconomic_variables", "loss_projection", "supervisory_exercise"],
+      "source_references": ["BCBS Stress Testing Principles, 2018", "Federal Reserve CCAR Framework"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["stress_testing", "CCAR", "DFAST", "EBA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["adverse_scenario", "capital_adequacy_under_stress", "loss_projection"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS Stress Testing Principles"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must describe specific stress parameters, the projection process, and name at least two supervisory exercises"}
+      }
+    },
+    {
+      "id": 25,
+      "question": "How is the Total Loss-Absorbing Capacity (TLAC) requirement calculated for G-SIBs?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "The Total Loss-Absorbing Capacity (TLAC) standard requires G-SIBs to maintain a minimum TLAC of the greater of 18% of risk-weighted assets (RWA) or 6.75% of the leverage ratio exposure measure, effective from January 2022. TLAC-eligible instruments include CET1, Additional Tier 1 (AT1), Tier 2, and other subordinated debt instruments that meet specific eligibility criteria including a minimum remaining maturity of one year and subordination to excluded liabilities. At least 33% of TLAC must be composed of instruments other than regulatory capital (i.e., eligible long-term debt). The TLAC requirement is set at the resolution entity level and ensures that G-SIBs have sufficient loss-absorbing and recapitalization capacity to implement an orderly resolution without taxpayer bailout. Internal TLAC may be required for material sub-groups within the resolution structure.",
+      "expected_entities": ["TLAC", "G-SIBs", "CET1", "AT1", "Tier_2", "FSB"],
+      "expected_concepts": ["loss_absorbing_capacity", "resolution_planning", "bail_in", "eligible_instruments", "recapitalization"],
+      "source_references": ["FSB TLAC Term Sheet, 2015", "FSB TLAC Principles and Term Sheet"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["TLAC", "G-SIBs", "CET1", "AT1"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["loss_absorbing_capacity", "resolution_planning", "bail_in"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["FSB TLAC Term Sheet"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must state the 18% RWA and 6.75% leverage thresholds, explain eligible instruments, and the 33% debt requirement"}
+      }
+    },
+    {
+      "id": 26,
+      "question": "How are credit risk mitigation techniques treated under the Basel III Standardized Approach?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "Under the Basel III Standardized Approach, credit risk mitigation (CRM) techniques allow banks to reduce their capital requirements by adjusting the exposure amount or the applicable risk weight. The two main approaches are the Simple Approach, where the risk weight of the collateral instrument substitutes the risk weight of the exposure, and the Comprehensive Approach, which adjusts the exposure amount through haircuts applied to both the exposure and the collateral. Eligible collateral includes cash, gold, certain debt securities, equities listed on recognized exchanges, and units in collective investment schemes. Guarantees and credit derivatives can shift the risk weight to that of the protection provider, subject to operational requirements. The revised Basel III framework tightened the eligibility criteria for CRM and introduced specific requirements for the recognition of netting agreements. Maturity mismatches between the exposure and the protection reduce the effective protection amount.",
+      "expected_entities": ["CRM", "Basel_III", "Standardized_Approach", "Simple_Approach", "Comprehensive_Approach"],
+      "expected_concepts": ["credit_risk_mitigation", "collateral_haircuts", "risk_weight_substitution", "netting", "maturity_mismatch"],
+      "source_references": ["Basel III Framework, CRM Section", "BCBS 424, Section 2.3"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["CRM", "Simple_Approach", "Comprehensive_Approach"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["credit_risk_mitigation", "collateral_haircuts", "risk_weight_substitution"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must distinguish Simple and Comprehensive approaches, list eligible collateral types, and mention maturity mismatch treatment"}
+      }
+    },
+    {
+      "id": 27,
+      "question": "What is the Interest Rate Risk in the Banking Book (IRRBB) framework, and what are the standardized shock scenarios?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "The IRRBB framework, detailed in BCBS 368, establishes standards for banks to measure and manage the risk of losses in the banking book arising from changes in interest rates. The framework defines six standardized interest rate shock scenarios: parallel shift up, parallel shift down, steepening of the yield curve, flattening of the yield curve, short-rate shock up, and short-rate shock down. Banks must measure IRRBB using two complementary metrics: the Economic Value of Equity (EVE), which captures the change in net present value of assets, liabilities, and off-balance-sheet items, and Net Interest Income (NII), which measures the impact on earnings over a 12-month horizon. Supervisors apply an outlier test, flagging banks whose EVE change exceeds 15% of Tier 1 capital under any scenario. Banks must use behavioral assumptions for non-maturity deposits, loan prepayments, and term deposit early redemptions.",
+      "expected_entities": ["IRRBB", "EVE", "NII", "BCBS_368", "Tier_1_capital"],
+      "expected_concepts": ["interest_rate_risk", "banking_book", "yield_curve_scenarios", "economic_value", "outlier_test"],
+      "source_references": ["BCBS 368, IRRBB Standards", "Basel III Framework, Pillar 2"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["IRRBB", "EVE", "NII", "BCBS_368"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["interest_rate_risk", "banking_book", "yield_curve_scenarios"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 368"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must describe all six shock scenarios, explain EVE and NII metrics, and mention the 15% outlier test"}
+      }
+    },
+    {
+      "id": 28,
+      "question": "How does a bank's adoption of the IRB approach for credit risk affect its CET1 capital ratio through the output floor, and what is the resulting impact on its buffer usability?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "When a bank adopts the IRB approach, its internally modeled RWA may be significantly lower than the Standardized Approach RWA. However, the Basel III output floor requires that IRB-calculated RWA cannot be lower than 72.5% of the Standardized Approach RWA. If the floor binds (i.e., the IRB RWA is below the floor), the bank must use the higher floor-adjusted RWA for capital ratio calculations. This directly reduces the CET1 ratio (CET1 capital / RWA), potentially pushing the bank closer to its combined buffer requirement (CCB + CCyB + G-SIB surcharge). When the CET1 ratio falls within the buffer zone, the bank faces automatic restrictions on dividends, share buybacks, and bonus payments through the Maximum Distributable Amount (MDA). Thus, the output floor creates a chain: IRB adoption leads to floor-adjusted RWA, which reduces the capital ratio, which may constrain capital distributions.",
+      "expected_entities": ["IRB", "CET1", "output_floor", "RWA", "Standardized_Approach", "MDA", "CCB"],
+      "expected_concepts": ["capital_ratio_impact", "buffer_usability", "distribution_restrictions", "model_output_floor", "combined_buffer_requirement"],
+      "source_references": ["Basel III Final Reforms, Output Floor", "Basel III Framework, Capital Conservation Buffer", "BCBS 424"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["IRB", "CET1", "output_floor", "RWA", "MDA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["capital_ratio_impact", "buffer_usability", "distribution_restrictions"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Final Reforms", "Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must trace the full chain from IRB adoption to output floor to CET1 impact to MDA constraints"}
+      }
+    },
+    {
+      "id": 29,
+      "question": "How does a significant increase in credit risk under IFRS 9 Stage 2 affect a bank's RWA through higher provisioning and subsequently impact its LCR?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "When a bank identifies a significant increase in credit risk (SICR) for a portfolio, IFRS 9 requires moving those assets from Stage 1 (12-month ECL) to Stage 2 (lifetime ECL), resulting in substantially higher provisions. These increased provisions reduce the carrying value of assets on the balance sheet, which can affect CET1 capital through retained earnings. Simultaneously, the deterioration in credit quality may increase the credit risk weights applied under the IRB approach (due to higher PDs), increasing RWA and reducing capital ratios. The downstream impact on LCR occurs because deteriorating asset quality may reduce the value or eligibility of assets qualifying as HQLA, while potential depositor concerns could increase expected cash outflows in the 30-day stress scenario. Additionally, reduced profitability from higher provisions may limit the bank's ability to issue new HQLA-eligible instruments, creating a compounding liquidity pressure.",
+      "expected_entities": ["IFRS_9", "Stage_2", "ECL", "RWA", "LCR", "HQLA", "CET1", "PD"],
+      "expected_concepts": ["significant_increase_credit_risk", "lifetime_ECL", "provisioning_impact", "capital_depletion", "liquidity_pressure"],
+      "source_references": ["IFRS 9, Section 5.5", "Basel III Framework, LCR Standard", "BCBS Guidance on ECL"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["IFRS_9", "Stage_2", "ECL", "RWA", "LCR", "HQLA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["significant_increase_credit_risk", "lifetime_ECL", "capital_depletion", "liquidity_pressure"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["IFRS 9", "Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must trace the path from SICR to higher ECL to capital impact to RWA change to LCR effect"}
+      }
+    },
+    {
+      "id": 30,
+      "question": "How does a GDPR data breach at a bank trigger LGPD obligations when the affected data subjects include Brazilian nationals, and what are the combined regulatory consequences?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "When a bank operating in the EU experiences a GDPR-notifiable data breach affecting personal data of Brazilian nationals, it triggers parallel obligations under both GDPR and LGPD due to the extraterritorial scope of both regulations. Under GDPR Article 33, the bank must notify the relevant EU Supervisory Authority within 72 hours, while under the LGPD the bank must notify the ANPD within a reasonable timeframe. The bank must assess whether each regulation's threshold for notifying affected individuals is met (GDPR Article 34 requires high risk to rights and freedoms; LGPD Article 48 requires relevant risk). The combined regulatory consequences include potential fines under both jurisdictions (up to 4% of global turnover under GDPR and up to 2% of Brazilian revenue under LGPD), dual supervisory investigations, and the requirement to implement remediation measures satisfying both regulatory frameworks. Cross-border data transfer mechanisms (SCCs, BCRs) may also come under scrutiny if the breach reveals inadequate transfer safeguards.",
+      "expected_entities": ["GDPR", "LGPD", "ANPD", "Supervisory_Authority", "Article_33", "Article_48", "SCCs", "BCRs"],
+      "expected_concepts": ["extraterritorial_scope", "dual_jurisdiction", "breach_notification", "cross_border_impact", "combined_sanctions"],
+      "source_references": ["GDPR, Articles 33-34", "LGPD, Articles 48-49", "GDPR, Chapter V"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "LGPD", "ANPD", "Supervisory_Authority", "SCCs"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["extraterritorial_scope", "dual_jurisdiction", "breach_notification"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Articles 33-34", "LGPD"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain dual notification obligations, different timelines, combined penalties, and cross-border transfer implications"}
+      }
+    },
+    {
+      "id": 31,
+      "question": "How does a G-SIB's resolution planning under TLAC interact with its going-concern capital requirements (CET1, AT1, Tier 2) and its LCR obligations during a stress event?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "A G-SIB must simultaneously satisfy going-concern capital requirements (CET1 minimum 4.5%, total capital 8%, plus buffers) and gone-concern TLAC requirements (minimum 18% of RWA). During a stress event, the G-SIB's losses first erode CET1, then may trigger AT1 conversion or write-down (if contractual triggers are breached), and ultimately may require bail-in of TLAC-eligible debt instruments. As capital is consumed, the bank approaches its combined buffer requirement, triggering MDA restrictions that limit capital distributions. Simultaneously, market stress increases liquidity demands: wholesale funding markets may freeze, depositors may withdraw funds, and derivative counterparties may increase margin calls. The LCR constraint becomes binding as HQLA values decline (due to market price falls and rating downgrades) while net cash outflows increase. The interaction creates a potential death spiral where capital stress and liquidity stress reinforce each other, which is precisely why resolution planning requires pre-positioned TLAC and liquidity reserves at the resolution entity level.",
+      "expected_entities": ["G-SIBs", "TLAC", "CET1", "AT1", "Tier_2", "LCR", "HQLA", "MDA"],
+      "expected_concepts": ["resolution_planning", "loss_absorption_waterfall", "going_concern_vs_gone_concern", "capital_liquidity_nexus", "bail_in"],
+      "source_references": ["FSB TLAC Term Sheet", "Basel III Framework", "FSB Key Attributes of Effective Resolution Regimes"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["G-SIBs", "TLAC", "CET1", "AT1", "LCR", "MDA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["resolution_planning", "loss_absorption_waterfall", "capital_liquidity_nexus"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["FSB TLAC Term Sheet", "Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must trace the loss absorption waterfall, explain MDA triggers, and describe the capital-liquidity stress interaction"}
+      }
+    },
+    {
+      "id": 32,
+      "question": "How does a bank's transition from the Standardized Approach to the IRB approach for credit risk affect its Pillar 3 disclosure requirements and market discipline?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "medium",
+      "ground_truth": "When a bank transitions from the Standardized Approach to the IRB approach for credit risk, its Pillar 3 disclosure requirements expand significantly. Under the Standardized Approach, banks disclose exposures and risk weights by regulatory asset class with limited detail. Under IRB, banks must additionally disclose their internal PD, LGD, and EAD estimates, exposure-weighted average risk weights by PD grade, validation results including backtesting of PD models, migration analysis across risk grades, and a comparison between internal estimates and actual outcomes. The bank must also disclose the impact of the output floor on its RWA. This enhanced transparency strengthens market discipline by allowing investors, analysts, and counterparties to assess the quality and conservatism of the bank's internal models. However, it also creates a potential tension: if disclosed model parameters reveal overly optimistic risk estimates, the bank may face market pressure (widening credit spreads, share price decline) even before supervisors impose Pillar 2 add-ons, demonstrating the interconnection between Pillar 1, 2, and 3.",
+      "expected_entities": ["IRB", "Standardized_Approach", "Pillar_3", "Pillar_2", "PD", "LGD", "EAD", "output_floor"],
+      "expected_concepts": ["disclosure_requirements", "market_discipline", "model_transparency", "backtesting", "pillar_interconnection"],
+      "source_references": ["Basel III Framework, Pillar 3", "BCBS 309", "BCBS 424"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["IRB", "Pillar_3", "PD", "LGD", "EAD"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["disclosure_requirements", "market_discipline", "model_transparency"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, Pillar 3", "BCBS 309"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must compare SA vs IRB disclosures, explain expanded requirements, and describe the market discipline feedback loop"}
+      }
+    },
+    {
+      "id": 33,
+      "question": "How does a CCyB activation by a national regulator propagate through a multinational bank's capital planning, affecting both its home and host jurisdictions?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "When a national regulator activates the CCyB, the requirement applies to all banks with credit exposures in that jurisdiction, including foreign branches and subsidiaries. For a multinational bank, the jurisdiction-specific CCyB is applied to credit exposures in the activating country, and the bank's consolidated CCyB is calculated as a weighted average of all jurisdictional CCyBs based on the geographic distribution of its credit exposures. This means the home supervisor sees an increased consolidated buffer requirement, even though the credit cycle concern originates abroad. The bank's capital planning must account for: increased CET1 requirements at the consolidated level, potential need to raise capital or reduce exposures, MDA constraints if the buffer is not fully met, and potential divergence between home and host capital expectations. Additionally, the host regulator's CCyB activation may signal deteriorating credit conditions that could affect asset quality and provisioning in that jurisdiction. The reciprocity principle requires other BCBS member jurisdictions to recognize and apply CCyB rates up to 2.5%.",
+      "expected_entities": ["CCyB", "CET1", "MDA", "BCBS", "home_regulator", "host_regulator"],
+      "expected_concepts": ["macroprudential_policy", "reciprocity", "cross_border_banking", "capital_planning", "weighted_average_buffer"],
+      "source_references": ["Basel III Framework, CCyB Section", "BCBS Guidance on CCyB, 2010"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["CCyB", "CET1", "MDA", "BCBS"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["macroprudential_policy", "reciprocity", "cross_border_banking", "capital_planning"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, CCyB Section"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain the weighted-average calculation, reciprocity principle, and capital planning implications for both home and host"}
+      }
+    },
+    {
+      "id": 34,
+      "question": "How does a bank's NSFR compliance interact with its IRRBB management when interest rates rise sharply?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "When interest rates rise sharply, a bank faces simultaneous challenges to both its NSFR compliance and its IRRBB management. On the NSFR side, rising rates may decrease the market value of long-term fixed-rate assets on the balance sheet, potentially increasing RSF requirements if these assets need to be refinanced. Meanwhile, depositors may shift from non-maturity deposits (high ASF factor) to term deposits or money market instruments (potentially lower ASF factor or external to the bank), reducing available stable funding. On the IRRBB side, the bank's EVE declines if it has a positive duration gap (assets have longer duration than liabilities), as the present value of long-term assets falls more than short-term liabilities. However, NII may initially increase if the bank has floating-rate assets repricing faster than fixed-rate funding costs. The interaction creates tension: strategies to improve IRRBB (such as shortening asset duration or increasing floating-rate assets) may worsen NSFR by reducing the term of assets, and vice versa. Effective ALM requires balancing both constraints simultaneously through hedging instruments and duration management.",
+      "expected_entities": ["NSFR", "IRRBB", "ASF", "RSF", "EVE", "NII", "ALM"],
+      "expected_concepts": ["interest_rate_sensitivity", "duration_gap", "funding_stability", "asset_liability_management", "regulatory_trade_offs"],
+      "source_references": ["Basel III Framework, NSFR Standard", "BCBS 368, IRRBB Standards"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["NSFR", "IRRBB", "ASF", "RSF", "EVE", "NII"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["interest_rate_sensitivity", "duration_gap", "funding_stability", "regulatory_trade_offs"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, NSFR Standard", "BCBS 368"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain the dual impact on NSFR and IRRBB, the tension between optimizing for both, and how ALM bridges the gap"}
+      }
+    },
+    {
+      "id": 35,
+      "question": "How does a bank's automated credit scoring system create interconnected obligations under both GDPR (right to explanation of automated decisions) and Basel III (IRB model governance)?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "A bank's automated credit scoring system sits at the intersection of GDPR data protection requirements and Basel III IRB model governance. Under GDPR Article 22, data subjects have the right not to be subject to decisions based solely on automated processing that significantly affect them, and under Articles 13-15, they have the right to meaningful information about the logic involved. This creates explainability requirements for the scoring model. Simultaneously, under Basel III IRB requirements, the bank must validate its PD, LGD, and EAD models through backtesting, benchmarking, and independent review, maintaining detailed documentation of model methodology and performance. The interconnection arises because: model changes required by IRB validation (e.g., recalibration due to poor backtesting results) may affect the explanation provided to data subjects; data minimization under GDPR may conflict with the IRB requirement to use all relevant risk drivers; and the right to erasure under GDPR could compromise the historical data needed for model validation. Banks must design their model governance framework to simultaneously satisfy both regulatory regimes, typically requiring collaboration between risk management and data protection functions.",
+      "expected_entities": ["GDPR", "Article_22", "IRB", "PD", "LGD", "EAD", "Basel_III", "DPO"],
+      "expected_concepts": ["automated_decision_making", "right_to_explanation", "model_governance", "model_validation", "data_minimization_vs_model_inputs"],
+      "source_references": ["GDPR, Article 22", "GDPR, Articles 13-15", "Basel III Framework, IRB Section", "BCBS Model Risk Management Principles"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "Article_22", "IRB", "PD", "LGD"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["automated_decision_making", "right_to_explanation", "model_governance", "data_minimization_vs_model_inputs"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Article 22", "Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must identify at least three specific tension points between GDPR requirements and IRB model governance"}
+      }
+    },
+    {
+      "id": 36,
+      "question": "How does a sovereign credit rating downgrade affect a bank's capital ratios through multiple channels: RWA increase, HQLA reclassification, and derivative collateral requirements?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "A sovereign credit rating downgrade triggers cascading effects through multiple regulatory channels. First, under the Basel III Standardized Approach, government bond risk weights increase (e.g., from 0% for AAA-AA to 20% for A+ to A- ratings), directly increasing RWA and reducing the CET1 ratio. Second, government bonds may be reclassified from HQLA Level 1 to Level 2A or become ineligible, reducing the LCR numerator and potentially forcing the bank to acquire alternative liquid assets. Third, the downgrade may trigger additional margin calls on derivative contracts (CSA thresholds are often rating-dependent), creating immediate cash outflows that further stress liquidity. Fourth, the sovereign ceiling principle may trigger downgrades of domestic bank ratings, increasing their funding costs and potentially causing deposit outflows. The combined effect creates a feedback loop: capital stress leads to higher funding costs, which reduce profitability, which further erodes capital. Banks with concentrated sovereign exposures are particularly vulnerable to this channel contagion effect.",
+      "expected_entities": ["sovereign_rating", "RWA", "HQLA", "LCR", "CET1", "CSA", "Standardized_Approach"],
+      "expected_concepts": ["rating_downgrade_impact", "sovereign_ceiling", "channel_contagion", "collateral_requirements", "feedback_loops"],
+      "source_references": ["Basel III Framework, Credit Risk SA", "Basel III Framework, LCR Standard", "ISDA CSA Documentation"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["sovereign_rating", "RWA", "HQLA", "LCR", "CET1", "CSA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["rating_downgrade_impact", "sovereign_ceiling", "channel_contagion", "feedback_loops"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must trace at least four distinct channels of impact and explain the feedback loop mechanism"}
+      }
+    },
+    {
+      "id": 37,
+      "question": "How does the interaction between FRTB's revised trading book boundary and IFRS 9's business model assessment create challenges for banks in classifying financial instruments?",
+      "category": "multi_hop_reasoning",
+      "difficulty": "hard",
+      "ground_truth": "The FRTB introduced a stricter boundary between the trading book and banking book based on the purpose of holding instruments, with specific presumptions and limitations on reclassification. Instruments held for short-term trading, market-making, or hedging trading positions must be in the trading book; instruments held to collect contractual cash flows or for sale must be in the banking book. Meanwhile, IFRS 9 classifies financial assets based on a business model assessment (hold to collect, hold to collect and sell, or other) and the Solely Payments of Principal and Interest (SPPI) test. The challenge arises because the regulatory classification (FRTB) and accounting classification (IFRS 9) serve different purposes and may produce inconsistent results. For example, an instrument classified in the banking book for capital purposes may be measured at fair value through profit or loss (FVTPL) under IFRS 9, creating different valuation bases for capital and accounting. Additionally, FRTB's strict limits on reclassification (requiring senior management and supervisory approval) conflict with IFRS 9's principle-based approach to business model changes. Banks must maintain parallel classification frameworks and reconcile differences for financial reporting and regulatory capital calculation.",
+      "expected_entities": ["FRTB", "IFRS_9", "trading_book", "banking_book", "SPPI", "FVTPL"],
+      "expected_concepts": ["book_boundary", "business_model_assessment", "instrument_classification", "valuation_inconsistency", "regulatory_accounting_divergence"],
+      "source_references": ["BCBS 352, FRTB Standards", "IFRS 9, Section 4.1", "BCBS 424"],
+      "requires_multi_hop": true,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["FRTB", "IFRS_9", "trading_book", "banking_book", "SPPI"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["book_boundary", "business_model_assessment", "instrument_classification", "regulatory_accounting_divergence"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 352", "IFRS 9"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain both classification frameworks, identify specific inconsistencies, and describe the reconciliation challenge"}
+      }
+    },
+    {
+      "id": 38,
+      "question": "What are the key differences between Basel III and Basel II in terms of capital quality requirements?",
+      "category": "comparison",
+      "difficulty": "medium",
+      "ground_truth": "Basel III fundamentally reformed capital quality requirements compared to Basel II in several ways. First, Basel III elevated CET1 as the predominant form of regulatory capital, raising the minimum from 2% (core Tier 1 under Basel II) to 4.5% of RWA, with the Capital Conservation Buffer effectively raising it to 7%. Second, Basel III introduced much stricter eligibility criteria for capital instruments: innovative hybrid instruments that qualified as Tier 1 under Basel II were phased out, and all Tier 1 instruments must be perpetual with fully discretionary distributions. Third, Basel III increased regulatory adjustments (deductions) from capital, requiring items like goodwill, deferred tax assets, and minority interests to be deducted from CET1 rather than from total capital. Fourth, Basel III introduced the leverage ratio as a non-risk-based backstop. Fifth, Tier 2 capital criteria were simplified, and the distinction between Upper and Lower Tier 2 was eliminated. Basel II's Tier 3 capital category was completely abolished.",
+      "expected_entities": ["Basel_III", "Basel_II", "CET1", "Tier_1", "Tier_2", "Tier_3", "Capital_Conservation_Buffer"],
+      "expected_concepts": ["capital_quality", "eligibility_criteria", "regulatory_deductions", "hybrid_instruments", "capital_hierarchy"],
+      "source_references": ["Basel III Framework, Section II.A", "Basel II Framework, Section II", "BCBS 189"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Basel_III", "Basel_II", "CET1", "Tier_1", "Tier_2"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["capital_quality", "eligibility_criteria", "regulatory_deductions"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework", "Basel II Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must compare at least four specific dimensions of capital quality differences between Basel II and III"}
+      }
+    },
+    {
+      "id": 39,
+      "question": "How do the LGPD and GDPR compare in terms of legal bases for processing personal data?",
+      "category": "comparison",
+      "difficulty": "medium",
+      "ground_truth": "Both the LGPD and GDPR establish defined legal bases for processing personal data, but with notable differences. GDPR Article 6 provides six legal bases: consent, contract performance, legal obligation, vital interests, public interest, and legitimate interest. The LGPD Article 7 provides ten legal bases, including the same six as GDPR plus four additional ones: studies by research bodies, exercise of rights in legal proceedings, health protection, and credit protection. The credit protection basis under LGPD is particularly relevant for financial institutions and has no direct GDPR equivalent. Both regulations require consent to be freely given, specific, informed, and unambiguous, but the LGPD provides more granular consent requirements. Legitimate interest under both frameworks requires a balancing test, though the LGPD explicitly requires a Legitimate Interest Assessment report (LIA). The LGPD does not have the public interest basis applicable in the same way as GDPR, reflecting differences in the underlying legal traditions. For sensitive data, GDPR Article 9 provides ten specific conditions, while LGPD Article 11 provides a more limited set.",
+      "expected_entities": ["LGPD", "GDPR", "Article_6", "Article_7", "Article_9", "Article_11"],
+      "expected_concepts": ["legal_bases", "consent", "legitimate_interest", "credit_protection", "sensitive_data"],
+      "source_references": ["GDPR, Article 6", "LGPD, Article 7", "GDPR, Article 9", "LGPD, Article 11"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["LGPD", "GDPR", "Article_6", "Article_7"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["legal_bases", "consent", "legitimate_interest", "credit_protection"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Article 6", "LGPD, Article 7"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must compare the number and types of legal bases, highlight unique LGPD bases (especially credit protection), and contrast consent requirements"}
+      }
+    },
+    {
+      "id": 40,
+      "question": "What are the key differences between the Standardized Approach and the Internal Ratings-Based (IRB) approach for credit risk under Basel III?",
+      "category": "comparison",
+      "difficulty": "medium",
+      "ground_truth": "The Standardized Approach (SA) and the Internal Ratings-Based (IRB) approach differ fundamentally in how they determine risk weights for credit exposures. Under the SA, risk weights are prescribed by regulators based on asset class and external credit ratings (e.g., 0% for AAA-rated sovereigns, 100% for unrated corporates), providing simplicity and comparability but limited risk sensitivity. Under the IRB approach, banks use their own internal models to estimate key risk parameters: Foundation IRB (F-IRB) requires banks to estimate only Probability of Default (PD), while Advanced IRB (A-IRB) also requires banks to estimate Loss Given Default (LGD), Exposure at Default (EAD), and maturity. The IRB approach is generally more risk-sensitive and can produce lower RWA for high-quality portfolios, but requires significant investment in modeling infrastructure and is subject to supervisory approval and ongoing validation. Under Basel III final reforms, the A-IRB approach is no longer available for certain low-default portfolios (large corporates, banks, financial institutions), and the output floor constrains the RWA benefit of internal models to no more than 27.5% below the SA.",
+      "expected_entities": ["Standardized_Approach", "IRB", "F-IRB", "A-IRB", "PD", "LGD", "EAD", "output_floor"],
+      "expected_concepts": ["risk_sensitivity", "external_ratings", "internal_models", "supervisory_approval", "model_validation"],
+      "source_references": ["Basel III Framework, Credit Risk SA", "Basel III Framework, IRB Approach", "BCBS 424"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Standardized_Approach", "IRB", "F-IRB", "A-IRB", "PD", "LGD"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["risk_sensitivity", "external_ratings", "internal_models"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must distinguish SA and both IRB variants, explain risk parameter estimation differences, and mention A-IRB restrictions and output floor"}
+      }
+    },
+    {
+      "id": 41,
+      "question": "How do the GDPR and LGPD differ in their approaches to data breach notification requirements?",
+      "category": "comparison",
+      "difficulty": "simple",
+      "ground_truth": "The GDPR and LGPD both require organizations to notify authorities and potentially affected individuals of data breaches, but differ in several key respects. Under GDPR Article 33, notification to the Supervisory Authority must occur within 72 hours of awareness of the breach, unless the breach is unlikely to result in a risk to individuals. Under the LGPD Article 48, notification to the ANPD must be made within a 'reasonable timeframe,' which the ANPD has indicated should be within 2 business days through Resolution CD/ANPD No. 15/2024. GDPR requires notification to data subjects under Article 34 when the breach is likely to result in 'high risk,' while LGPD requires notification when the breach may cause 'relevant risk or damage.' The GDPR specifies detailed minimum content for notifications including the nature of the breach, likely consequences, and measures taken. The LGPD requires similar content but also mandates information about the risks involved and the reasons for delay if notification is not immediate. GDPR penalties for failure to notify can reach up to EUR 10 million or 2% of global turnover, while LGPD penalties are capped at R$50 million per violation.",
+      "expected_entities": ["GDPR", "LGPD", "Article_33", "Article_48", "ANPD", "Supervisory_Authority"],
+      "expected_concepts": ["breach_notification_timeline", "notification_threshold", "penalty_differences", "notification_content", "reasonable_timeframe"],
+      "source_references": ["GDPR, Articles 33-34", "LGPD, Articles 48-49", "ANPD Resolution CD/ANPD No. 15"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "LGPD", "Article_33", "Article_48", "ANPD"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["breach_notification_timeline", "notification_threshold", "penalty_differences"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Articles 33-34", "LGPD, Articles 48-49"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must compare notification timelines (72h vs reasonable), thresholds (high risk vs relevant risk), and penalties under both laws"}
+      }
+    },
+    {
+      "id": 42,
+      "question": "How do the Basel III LCR and NSFR complement each other as short-term and long-term liquidity standards?",
+      "category": "comparison",
+      "difficulty": "medium",
+      "ground_truth": "The LCR and NSFR serve complementary but distinct purposes within the Basel III liquidity framework. The LCR addresses short-term liquidity resilience by requiring banks to hold sufficient HQLA to survive a 30-day acute stress scenario, focusing on immediate cash flow needs. The NSFR addresses structural liquidity mismatches over a one-year horizon by requiring that long-term assets are funded by sufficiently stable sources. The LCR uses a stock-based approach (HQLA stock versus net cash outflows), while the NSFR uses a balance-sheet-based approach (ASF versus RSF). They can produce different signals: a bank may have a strong LCR due to a large HQLA portfolio but weak NSFR due to excessive reliance on short-term wholesale funding to finance long-term illiquid assets. Conversely, a bank with stable long-term funding (strong NSFR) may have temporarily low HQLA holdings (weak LCR). Together, they prevent banks from gaming one ratio by creating vulnerabilities captured by the other. The LCR focuses on survival under stress, while the NSFR promotes sound funding structures under normal conditions.",
+      "expected_entities": ["LCR", "NSFR", "HQLA", "ASF", "RSF", "Basel_III"],
+      "expected_concepts": ["short_term_liquidity", "long_term_funding", "complementary_standards", "structural_mismatch", "stress_resilience"],
+      "source_references": ["Basel III Framework, LCR Standard", "Basel III Framework, NSFR Standard"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["LCR", "NSFR", "HQLA", "ASF", "RSF"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["short_term_liquidity", "long_term_funding", "complementary_standards"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain the different time horizons, how each is calculated, scenarios where they diverge, and how they prevent gaming"}
+      }
+    },
+    {
+      "id": 43,
+      "question": "How does Basel III's treatment of securitization exposures differ from Basel II's approach?",
+      "category": "comparison",
+      "difficulty": "hard",
+      "ground_truth": "Basel III significantly revised the securitization framework compared to Basel II to address weaknesses exposed by the 2007-2009 financial crisis. Under Basel II, banks could use the Ratings-Based Approach (RBA), the Internal Assessment Approach (IAA), or the Supervisory Formula Approach (SFA). Basel III replaced these with three new approaches: the SEC-IRBA (for banks using IRB for underlying exposures), the SEC-ERBA (External Ratings-Based Approach, replacing the RBA with higher risk weights), and the SEC-SA (Standardized Approach). Basel III introduced higher risk-weight floors: the minimum risk weight increased from 7% under Basel II to 15% under Basel III. The revised framework imposed stricter due diligence requirements, requiring banks to understand the structural features, performance, and risk of their securitization exposures. Basel III also introduced a more conservative treatment of re-securitizations (CDO-squared), with a separate and much higher risk-weight schedule. Additionally, Basel III requires significant risk transfer (SRT) tests to be more rigorous before banks can achieve capital relief from securitizations.",
+      "expected_entities": ["Basel_III", "Basel_II", "SEC-IRBA", "SEC-ERBA", "SEC-SA", "SRT"],
+      "expected_concepts": ["securitization", "risk_weight_floors", "due_diligence", "re-securitization", "capital_relief"],
+      "source_references": ["Basel III Framework, Securitization Chapter", "BCBS 374, Securitization Framework", "Basel II Framework, Securitization"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Basel_III", "Basel_II", "SEC-IRBA", "SEC-ERBA", "SEC-SA"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["securitization", "risk_weight_floors", "due_diligence", "capital_relief"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework, Securitization Chapter"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must compare the old and new approaches, mention the risk weight floor increase (7% to 15%), and explain SRT requirements"}
+      }
+    },
+    {
+      "id": 44,
+      "question": "How do the GDPR and LGPD compare in terms of penalties and enforcement mechanisms?",
+      "category": "comparison",
+      "difficulty": "simple",
+      "ground_truth": "The GDPR and LGPD both establish significant penalty frameworks but differ in their maximum fines and enforcement structures. Under GDPR, the maximum administrative fine is EUR 20 million or 4% of the undertaking's worldwide annual turnover (whichever is higher) for the most serious infringements, with a lower tier of EUR 10 million or 2% for less severe violations. Under the LGPD, the maximum fine is 2% of the company's revenue in Brazil (not global), capped at R$50 million per violation per year. The GDPR is enforced by independent national Data Protection Authorities (DPAs) across EU member states, with a lead authority mechanism for cross-border cases and the European Data Protection Board (EDPB) for consistency. The LGPD is enforced by the ANPD, a single national authority. Beyond monetary fines, the LGPD provides for additional sanctions including publicization of the infraction, blocking or deletion of personal data, and suspension of data processing activities. The GDPR similarly allows for corrective powers including data processing bans. The LGPD's penalty framework has been criticized as less deterrent than GDPR's due to the revenue cap being limited to Brazilian operations rather than global turnover.",
+      "expected_entities": ["GDPR", "LGPD", "ANPD", "EDPB", "DPAs"],
+      "expected_concepts": ["administrative_fines", "enforcement_structure", "penalty_caps", "corrective_powers", "cross_border_enforcement"],
+      "source_references": ["GDPR, Article 83", "LGPD, Article 52", "LGPD, Articles 55-A to 55-L"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["GDPR", "LGPD", "ANPD", "EDPB"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["administrative_fines", "enforcement_structure", "penalty_caps"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["GDPR, Article 83", "LGPD, Article 52"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must compare maximum fines (EUR 20M/4% vs R$50M/2%), enforcement bodies, and additional non-monetary sanctions"}
+      }
+    },
+    {
+      "id": 45,
+      "question": "How does the Basel III Standardized Approach for counterparty credit risk (SA-CCR) differ from the previous Current Exposure Method (CEM)?",
+      "category": "comparison",
+      "difficulty": "hard",
+      "ground_truth": "The SA-CCR replaced the Current Exposure Method (CEM) and the Standardised Method (SM) for calculating counterparty credit risk exposure for derivatives. Under CEM, exposure was calculated as the current market value plus a simple add-on based on notional amount and asset class, which was criticized for not recognizing netting, margin agreements, or the distinction between margined and unmargined trades. SA-CCR addresses these shortcomings by calculating exposure as alpha times the sum of Replacement Cost (RC) and Potential Future Exposure (PFE), where alpha is 1.4. RC reflects the current exposure considering margin agreements, while PFE uses an aggregation formula that properly accounts for netting within defined hedging sets, with add-on factors varying by asset class (interest rate, foreign exchange, credit, equity, commodity). SA-CCR differentiates between margined and unmargined trade sets, providing lower exposure for margined transactions. The method also accounts for the maturity of transactions, applies a multiplier that reduces PFE when the portfolio is out of the money, and treats long and short positions differently within hedging sets, providing better risk sensitivity than CEM.",
+      "expected_entities": ["SA-CCR", "CEM", "PFE", "RC", "Basel_III"],
+      "expected_concepts": ["counterparty_credit_risk", "replacement_cost", "potential_future_exposure", "netting_recognition", "margin_agreements"],
+      "source_references": ["BCBS 279, SA-CCR Standard", "Basel III Framework, Counterparty Credit Risk"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["SA-CCR", "CEM", "PFE", "RC"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["counterparty_credit_risk", "replacement_cost", "netting_recognition"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 279"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain both methods, highlight CEM limitations, and describe SA-CCR improvements including netting and margin treatment"}
+      }
+    },
+    {
+      "id": 46,
+      "question": "What are the key components of an effective internal control framework for a bank's regulatory reporting function?",
+      "category": "audit",
+      "difficulty": "medium",
+      "ground_truth": "An effective internal control framework for regulatory reporting must encompass five interrelated components aligned with the COSO framework: the control environment, which sets the organizational tone and establishes accountability for accurate reporting; risk assessment, which identifies and evaluates risks of material misstatement in regulatory returns including data quality, system, and process risks; control activities, which include automated and manual controls such as reconciliations between general ledger and regulatory systems, data validation checks, four-eyes review of submissions, and automated edit checks; information and communication, ensuring that data flows from source systems through transformation and aggregation to final reporting are documented, traceable, and subject to data lineage controls; and monitoring activities, including ongoing control testing, independent validation of key metrics (CET1, RWA, LCR), and periodic internal audit reviews. The framework must also address BCBS 239 principles for risk data aggregation and reporting, ensuring completeness, accuracy, timeliness, and adaptability of regulatory data.",
+      "expected_entities": ["COSO", "BCBS_239", "CET1", "RWA", "LCR", "internal_audit"],
+      "expected_concepts": ["internal_controls", "control_environment", "risk_assessment", "data_quality", "regulatory_reporting"],
+      "source_references": ["COSO Internal Control Framework", "BCBS 239, Risk Data Aggregation Principles"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["COSO", "BCBS_239", "internal_audit"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["internal_controls", "control_environment", "data_quality", "regulatory_reporting"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["COSO Internal Control Framework", "BCBS 239"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must describe all five COSO components in the context of regulatory reporting and reference BCBS 239 principles"}
+      }
+    },
+    {
+      "id": 47,
+      "question": "What are the key requirements of SOX Section 404 for financial institutions, and how do they relate to internal audit activities?",
+      "category": "audit",
+      "difficulty": "medium",
+      "ground_truth": "SOX Section 404 requires management of public companies, including financial institutions, to establish and maintain adequate internal controls over financial reporting (ICFR) and to include an annual assessment of their effectiveness in the annual report. The external auditor must attest to and report on management's assessment. For financial institutions, this encompasses controls over loan loss provisioning, fair value measurements, revenue recognition, regulatory capital calculations, and financial instrument valuation. Internal audit plays a critical role by performing independent testing of key controls, evaluating design and operating effectiveness, identifying control deficiencies (classified as deficiency, significant deficiency, or material weakness), and reporting findings to the Audit Committee and senior management. The internal audit function must maintain independence, have direct reporting lines to the Audit Committee, and follow the IIA Standards. Key testing areas include IT general controls (access management, change management, operations), entity-level controls, and process-level controls for significant accounts and disclosures.",
+      "expected_entities": ["SOX", "Section_404", "ICFR", "Audit_Committee", "IIA", "material_weakness"],
+      "expected_concepts": ["internal_controls_over_financial_reporting", "management_assessment", "external_auditor_attestation", "control_deficiencies", "audit_independence"],
+      "source_references": ["Sarbanes-Oxley Act, Section 404", "PCAOB AS 2201", "IIA Standards"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["SOX", "Section_404", "ICFR", "Audit_Committee"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["internal_controls_over_financial_reporting", "management_assessment", "control_deficiencies"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Sarbanes-Oxley Act, Section 404"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must explain Section 404 requirements, the role of internal audit, deficiency classification, and key testing areas for financial institutions"}
+      }
+    },
+    {
+      "id": 48,
+      "question": "What are the typical audit findings related to Basel III capital adequacy calculations, and what remediation steps are usually required?",
+      "category": "audit",
+      "difficulty": "hard",
+      "ground_truth": "Common audit findings in Basel III capital adequacy calculations include: incorrect classification of capital instruments (e.g., including instruments that no longer qualify as CET1 after transitional provisions expire); errors in RWA calculation due to incorrect risk weight assignment, improper credit risk mitigation recognition, or incomplete off-balance-sheet exposure capture; data quality issues in risk parameter estimation under the IRB approach, including stale PD models or LGD estimates not reflecting downturn conditions; inadequate documentation of the ICAAP; and insufficient stress testing coverage. Remediation typically involves: establishing automated validation rules for capital instrument classification; implementing end-to-end reconciliation of RWA between source systems and regulatory returns; enhancing model validation and governance with independent review; strengthening data lineage and quality controls aligned with BCBS 239 principles; and developing comprehensive remediation action plans with defined timelines and accountability. Audit findings are typically classified by severity (high, medium, low) and tracked through to closure with follow-up validation by internal audit.",
+      "expected_entities": ["Basel_III", "CET1", "RWA", "IRB", "ICAAP", "BCBS_239", "PD", "LGD"],
+      "expected_concepts": ["audit_findings", "capital_instrument_classification", "data_quality", "remediation", "model_validation"],
+      "source_references": ["Basel III Framework", "BCBS 239", "IIA Practice Advisory on Banking"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["Basel_III", "CET1", "RWA", "IRB", "BCBS_239"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["audit_findings", "capital_instrument_classification", "data_quality", "remediation"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["Basel III Framework", "BCBS 239"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must list at least four specific audit findings and corresponding remediation actions with reference to regulatory standards"}
+      }
+    },
+    {
+      "id": 49,
+      "question": "How should internal audit assess the effectiveness of a bank's Anti-Money Laundering (AML) and Know Your Customer (KYC) controls?",
+      "category": "audit",
+      "difficulty": "medium",
+      "ground_truth": "Internal audit assessment of AML/KYC controls should cover four main areas. First, governance and organizational structure: audit should evaluate whether the bank has appointed a qualified Money Laundering Reporting Officer (MLRO), whether the AML compliance function has adequate independence, resources, and board-level oversight, and whether AML policies are current and approved at the appropriate level. Second, customer due diligence (CDD) processes: audit should test a sample of customer onboarding files to verify identity verification, beneficial ownership identification, risk categorization, and enhanced due diligence (EDD) for high-risk customers and politically exposed persons (PEPs). Third, transaction monitoring: audit should assess the calibration of automated monitoring systems, evaluate alert management and investigation quality, review suspicious activity report (SAR) filing timeliness and quality, and test for false negative scenarios. Fourth, training and awareness: audit should verify that all staff complete mandatory AML training, that training content reflects current typologies and regulatory requirements, and that training effectiveness is measured. Audit findings should be reported to the Audit Committee with risk-rated recommendations and defined remediation timelines.",
+      "expected_entities": ["AML", "KYC", "MLRO", "CDD", "EDD", "PEPs", "SAR", "Audit_Committee"],
+      "expected_concepts": ["anti_money_laundering", "customer_due_diligence", "transaction_monitoring", "suspicious_activity_reporting", "audit_assessment"],
+      "source_references": ["FATF Recommendations", "BCBS Sound Management of AML/CFT Risks", "IIA Practice Advisory"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["AML", "KYC", "MLRO", "CDD", "PEPs", "SAR"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["anti_money_laundering", "customer_due_diligence", "transaction_monitoring"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["FATF Recommendations"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must cover all four assessment areas (governance, CDD, transaction monitoring, training) with specific testing procedures"}
+      }
+    },
+    {
+      "id": 50,
+      "question": "What are the audit considerations for evaluating a bank's compliance with BCBS 239 principles on risk data aggregation and reporting?",
+      "category": "audit",
+      "difficulty": "hard",
+      "ground_truth": "Auditing compliance with BCBS 239 requires evaluating the bank against fourteen principles organized into four themes. For governance and infrastructure (Principles 1-2), auditors should assess whether the board and senior management have defined and overseen a strong data governance framework with clear roles, ownership, and accountability for data quality. For risk data aggregation (Principles 3-6), auditors must test the accuracy and integrity of risk data by reconciling source data to aggregated outputs, evaluate completeness of data capture across all risk types and business lines, verify timeliness of data aggregation (ability to produce critical risk data within prescribed timeframes including during stress), and assess adaptability of systems to produce ad-hoc risk reports. For risk reporting (Principles 7-11), auditors should evaluate whether reports are accurate, comprehensive, clear, useful, and distributed to appropriate decision-makers with adequate frequency. For supervisory review (Principles 12-14), auditors should assess remediation progress and interaction with regulators. Key audit procedures include data lineage walkthroughs, automated vs. manual process assessment, end-user computing risk evaluation, and testing of data dictionaries and metadata management. Findings are typically severe given that many G-SIBs have struggled with full compliance even years after the standard's effective date.",
+      "expected_entities": ["BCBS_239", "G-SIBs", "data_governance", "risk_data_aggregation", "board_oversight"],
+      "expected_concepts": ["data_quality", "data_lineage", "risk_reporting", "timeliness", "adaptability", "metadata_management"],
+      "source_references": ["BCBS 239, Principles for Effective Risk Data Aggregation", "BCBS Progress Reports on BCBS 239 Adoption"],
+      "requires_multi_hop": false,
+      "scoring_rubric": {
+        "entity_coverage": {"max_score": 1.0, "required_entities": ["BCBS_239", "G-SIBs", "data_governance"]},
+        "concept_coverage": {"max_score": 1.0, "required_concepts": ["data_quality", "data_lineage", "risk_reporting", "timeliness"]},
+        "source_attribution": {"max_score": 1.0, "required_sources": ["BCBS 239"]},
+        "response_quality": {"max_score": 1.0, "criteria": "Must reference all four principle themes, list specific audit procedures, and mention the industry-wide compliance challenges"}
+      }
+    }
+  ]
+}

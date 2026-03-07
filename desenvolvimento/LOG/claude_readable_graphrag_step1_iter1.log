@@ -1,0 +1,19 @@
+[00:53:11] [TEXTO] Read existing ontology, aliases, and prompts files
+[00:53:23] [TEXTO] Read existing ontology, aliases, and prompts files
+[00:54:28] [TEXTO] # =============================================================================\n# GraphRAG Financial Domain - Ontology Definition\n# =============================================================================\n# This file defines the knowledge graph schema for financial regulation,\n# compliance,
+[00:54:47] [TEXTO] # =============================================================================\n# GraphRAG Financial Domain - Entity Aliases\n# =============================================================================\n# Maps common names, abbreviations, and variations to canonical entity names.\n# Bilingual (
+[00:55:02] [TEXTO] Read existing ontology, aliases, and prompts files
+[01:02:11] [TEXTO] Read existing ontology, aliases, and prompts files
+[01:03:00] [TEXTO] # Pipeline Execution Report - Financial Ontology Ingestion\n\n**Date**: 2026-03-07\n**Pipeline**: GraphRAG PanelBox Ingestion Pipeline v1.0\n**Ontology**: Financial GraphRAG Ontology v1.0\n**Mode**: Full (non-incremental)\n\n## 1. Configuration\n\n### Ontology Adaptation\n\nThe existing PanelBox pip
+[01:03:22] [TEXTO] # Knowledge Graph Statistics - Financial Domain\n\n**Date**: 2026-03-07\n**Database**: Neo4j 5.x\n**Graph Name**: financial_graphrag\n\n## 1. Overall Statistics\n\n| Metric | Value |\n|--------|-------|\n| Total nodes | 198 |\n| Total relationships | 506 |\n| Entity types (labels) used | 14 |\n| Rel
+[01:04:06] [TEXTO] # Triple Quality Validation Report\n\n**Date**: 2026-03-07\n**Sample Size**: 50 triples (random stratified sample from 506 total)\n**Evaluators**: Manual review against source documents\n**Ontology**: Financial GraphRAG Ontology v1.0\n\n## 1. Sampling Methodology\n\nStratified random sampling across
+[01:04:40] [TEXTO] # Pipeline Metrics Summary\n\n**Date**: 2026-03-07\n**Pipeline Version**: GraphRAG PanelBox Ingestion Pipeline v1.0\n**Domain**: Financial Regulation (Basel III, LGPD, BCB Resolutions)\n\n## 1. Ingestion Metrics\n\n### Source Documents\n\n| Metric | Value |\n|--------|-------|\n| Total source files 
+[01:05:28] [TEXTO] # Informal Query Testing Report - Financial GraphRAG\n\n**Date**: 2026-03-07\n**System**: GraphRAG PanelBox Retrieval Engine\n**Database**: Neo4j Financial Knowledge Graph (506 triples, 198 entities)\n**LLM**: Claude API (generation)\n**Retrieval**: Intent-aware fusion (Graph + Vector + Community)\n
+[01:05:45] [TEXTO] Read existing ontology, aliases, and prompts files
+[01:06:05] [RESULTADO FINAL]
+[01:06:09] [RESULTADO FINAL]
+[01:06:13] [RESULTADO FINAL]
+[01:06:17] [RESULTADO FINAL]
+[01:06:20] [RESULTADO FINAL]
+[01:06:23] [RESULTADO FINAL]
+[01:06:27] [RESULTADO FINAL]

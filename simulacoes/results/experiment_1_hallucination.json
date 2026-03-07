@@ -1,0 +1,616 @@
+{
+  "experiment": "experiment_1_hallucination",
+  "timestamp": "2026-03-07T04:58:05.177811+00:00",
+  "mode": "simulation",
+  "config": {
+    "neo4j_uri": "bolt://localhost:7687",
+    "datasets_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/datasets",
+    "results_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/results",
+    "max_questions": 0,
+    "seed": 42,
+    "simulate": true
+  },
+  "results": {
+    "per_system": {
+      "MultiStrategy_GraphRAG": {
+        "display_name": "Multi-Strategy GraphRAG (ours)",
+        "n_questions": 200,
+        "faithfulness": {
+          "mean": 0.8735,
+          "std": 0.0413,
+          "median": 0.8757
+        },
+        "factual_accuracy": {
+          "mean": 0.8398,
+          "std": 0.0484,
+          "median": 0.8404
+        },
+        "grounding_rate": {
+          "mean": 0.9638,
+          "std": 0.0194,
+          "median": 0.9642
+        }
+      },
+      "VectorRAG": {
+        "display_name": "VectorRAG",
+        "n_questions": 200,
+        "faithfulness": {
+          "mean": 0.7288,
+          "std": 0.0648,
+          "median": 0.7248
+        },
+        "factual_accuracy": {
+          "mean": 0.6866,
+          "std": 0.0685,
+          "median": 0.6868
+        },
+        "grounding_rate": {
+          "mean": 0.5504,
+          "std": 0.0782,
+          "median": 0.5523
+        }
+      },
+      "MS_GraphRAG": {
+        "display_name": "MS GraphRAG",
+        "n_questions": 200,
+        "faithfulness": {
+          "mean": 0.7981,
+          "std": 0.0545,
+          "median": 0.7992
+        },
+        "factual_accuracy": {
+          "mean": 0.7518,
+          "std": 0.0625,
+          "median": 0.752
+        },
+        "grounding_rate": {
+          "mean": 0.7013,
+          "std": 0.0634,
+          "median": 0.696
+        }
+      },
+      "HybridRAG": {
+        "display_name": "HybridRAG",
+        "n_questions": 200,
+        "faithfulness": {
+          "mean": 0.8245,
+          "std": 0.048,
+          "median": 0.8266
+        },
+        "factual_accuracy": {
+          "mean": 0.7814,
+          "std": 0.06,
+          "median": 0.7826
+        },
+        "grounding_rate": {
+          "mean": 0.7206,
+          "std": 0.0661,
+          "median": 0.7253
+        }
+      },
+      "NoRetrieval": {
+        "display_name": "No Retrieval",
+        "n_questions": 200,
+        "faithfulness": {
+          "mean": 0.4648,
+          "std": 0.1011,
+          "median": 0.4596
+        },
+        "factual_accuracy": {
+          "mean": 0.4112,
+          "std": 0.1017,
+          "median": 0.4052
+        },
+        "grounding_rate": {
+          "mean": 0.0,
+          "std": 0.0,
+          "median": 0.0
+        }
+      }
+    },
+    "per_difficulty": {
+      "simple": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 42,
+          "faithfulness_mean": 0.8911,
+          "accuracy_mean": 0.8444,
+          "grounding_mean": 0.9772
+        },
+        "VectorRAG": {
+          "n_questions": 42,
+          "faithfulness_mean": 0.7587,
+          "accuracy_mean": 0.7094,
+          "grounding_mean": 0.5657
+        },
+        "MS_GraphRAG": {
+          "n_questions": 42,
+          "faithfulness_mean": 0.8247,
+          "accuracy_mean": 0.7793,
+          "grounding_mean": 0.7208
+        },
+        "HybridRAG": {
+          "n_questions": 42,
+          "faithfulness_mean": 0.8523,
+          "accuracy_mean": 0.8058,
+          "grounding_mean": 0.7331
+        },
+        "NoRetrieval": {
+          "n_questions": 42,
+          "faithfulness_mean": 0.4992,
+          "accuracy_mean": 0.4456,
+          "grounding_mean": 0.0
+        }
+      },
+      "moderate": {},
+      "complex": {},
+      "multi_hop": {}
+    },
+    "per_category": {
+      "audit": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.876,
+          "accuracy_mean": 0.8415,
+          "grounding_mean": 0.9461
+        },
+        "VectorRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.7114,
+          "accuracy_mean": 0.6848,
+          "grounding_mean": 0.5516
+        },
+        "MS_GraphRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.7946,
+          "accuracy_mean": 0.7687,
+          "grounding_mean": 0.6682
+        },
+        "HybridRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.8201,
+          "accuracy_mean": 0.7391,
+          "grounding_mean": 0.7109
+        },
+        "NoRetrieval": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.502,
+          "accuracy_mean": 0.3954,
+          "grounding_mean": 0.0
+        }
+      },
+      "comparison": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 20,
+          "faithfulness_mean": 0.871,
+          "accuracy_mean": 0.8421,
+          "grounding_mean": 0.964
+        },
+        "VectorRAG": {
+          "n_questions": 20,
+          "faithfulness_mean": 0.7296,
+          "accuracy_mean": 0.6653,
+          "grounding_mean": 0.5627
+        },
+        "MS_GraphRAG": {
+          "n_questions": 20,
+          "faithfulness_mean": 0.7866,
+          "accuracy_mean": 0.7525,
+          "grounding_mean": 0.7016
+        },
+        "HybridRAG": {
+          "n_questions": 20,
+          "faithfulness_mean": 0.8323,
+          "accuracy_mean": 0.7983,
+          "grounding_mean": 0.7519
+        },
+        "NoRetrieval": {
+          "n_questions": 20,
+          "faithfulness_mean": 0.459,
+          "accuracy_mean": 0.4216,
+          "grounding_mean": 0.0
+        }
+      },
+      "compliance": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 80,
+          "faithfulness_mean": 0.8754,
+          "accuracy_mean": 0.8424,
+          "grounding_mean": 0.9661
+        },
+        "VectorRAG": {
+          "n_questions": 80,
+          "faithfulness_mean": 0.7278,
+          "accuracy_mean": 0.6943,
+          "grounding_mean": 0.5504
+        },
+        "MS_GraphRAG": {
+          "n_questions": 80,
+          "faithfulness_mean": 0.8057,
+          "accuracy_mean": 0.7589,
+          "grounding_mean": 0.707
+        },
+        "HybridRAG": {
+          "n_questions": 80,
+          "faithfulness_mean": 0.8246,
+          "accuracy_mean": 0.7861,
+          "grounding_mean": 0.708
+        },
+        "NoRetrieval": {
+          "n_questions": 80,
+          "faithfulness_mean": 0.4654,
+          "accuracy_mean": 0.4189,
+          "grounding_mean": 0.0
+        }
+      },
+      "financial_analysis": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 50,
+          "faithfulness_mean": 0.8797,
+          "accuracy_mean": 0.8446,
+          "grounding_mean": 0.9622
+        },
+        "VectorRAG": {
+          "n_questions": 50,
+          "faithfulness_mean": 0.7292,
+          "accuracy_mean": 0.6841,
+          "grounding_mean": 0.5411
+        },
+        "MS_GraphRAG": {
+          "n_questions": 50,
+          "faithfulness_mean": 0.7959,
+          "accuracy_mean": 0.743,
+          "grounding_mean": 0.6965
+        },
+        "HybridRAG": {
+          "n_questions": 50,
+          "faithfulness_mean": 0.8309,
+          "accuracy_mean": 0.7812,
+          "grounding_mean": 0.7247
+        },
+        "NoRetrieval": {
+          "n_questions": 50,
+          "faithfulness_mean": 0.4644,
+          "accuracy_mean": 0.4257,
+          "grounding_mean": 0.0
+        }
+      },
+      "multi_hop": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 40,
+          "faithfulness_mean": 0.8624,
+          "accuracy_mean": 0.827,
+          "grounding_mean": 0.9656
+        },
+        "VectorRAG": {
+          "n_questions": 40,
+          "faithfulness_mean": 0.734,
+          "accuracy_mean": 0.6856,
+          "grounding_mean": 0.5555
+        },
+        "MS_GraphRAG": {
+          "n_questions": 40,
+          "faithfulness_mean": 0.7922,
+          "accuracy_mean": 0.7438,
+          "grounding_mean": 0.7042
+        },
+        "HybridRAG": {
+          "n_questions": 40,
+          "faithfulness_mean": 0.8135,
+          "accuracy_mean": 0.7745,
+          "grounding_mean": 0.7274
+        },
+        "NoRetrieval": {
+          "n_questions": 40,
+          "faithfulness_mean": 0.4578,
+          "accuracy_mean": 0.3763,
+          "grounding_mean": 0.0
+        }
+      }
+    },
+    "summary": {
+      "VectorRAG": {
+        "baseline_score": 0.7288,
+        "our_score": 0.8735,
+        "improvement_pct": 19.85
+      },
+      "MS_GraphRAG": {
+        "baseline_score": 0.7981,
+        "our_score": 0.8735,
+        "improvement_pct": 9.45
+      },
+      "HybridRAG": {
+        "baseline_score": 0.8245,
+        "our_score": 0.8735,
+        "improvement_pct": 5.94
+      },
+      "NoRetrieval": {
+        "baseline_score": 0.4648,
+        "our_score": 0.8735,
+        "improvement_pct": 87.93
+      },
+      "summary": {
+        "best_baseline": "HybridRAG",
+        "improvement_over_best": 5.94,
+        "primary_metric": "faithfulness"
+      }
+    }
+  },
+  "tables": {
+    "main_comparison": [
+      {
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.35%",
+        "factual_accuracy": "83.98%",
+        "grounding_rate": "96.38%"
+      },
+      {
+        "system": "VectorRAG",
+        "faithfulness": "72.88%",
+        "factual_accuracy": "68.66%",
+        "grounding_rate": "55.04%"
+      },
+      {
+        "system": "MS GraphRAG",
+        "faithfulness": "79.81%",
+        "factual_accuracy": "75.18%",
+        "grounding_rate": "70.13%"
+      },
+      {
+        "system": "HybridRAG",
+        "faithfulness": "82.45%",
+        "factual_accuracy": "78.14%",
+        "grounding_rate": "72.06%"
+      },
+      {
+        "system": "No Retrieval",
+        "faithfulness": "46.48%",
+        "factual_accuracy": "41.12%",
+        "grounding_rate": "0.00%"
+      }
+    ],
+    "by_difficulty": [
+      {
+        "difficulty": "simple",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "89.11%",
+        "accuracy": "84.44%",
+        "grounding": "97.72%",
+        "n": 42
+      },
+      {
+        "difficulty": "simple",
+        "system": "VectorRAG",
+        "faithfulness": "75.87%",
+        "accuracy": "70.94%",
+        "grounding": "56.57%",
+        "n": 42
+      },
+      {
+        "difficulty": "simple",
+        "system": "MS GraphRAG",
+        "faithfulness": "82.47%",
+        "accuracy": "77.93%",
+        "grounding": "72.08%",
+        "n": 42
+      },
+      {
+        "difficulty": "simple",
+        "system": "HybridRAG",
+        "faithfulness": "85.23%",
+        "accuracy": "80.58%",
+        "grounding": "73.31%",
+        "n": 42
+      },
+      {
+        "difficulty": "simple",
+        "system": "No Retrieval",
+        "faithfulness": "49.92%",
+        "accuracy": "44.56%",
+        "grounding": "0.00%",
+        "n": 42
+      }
+    ],
+    "by_category": [
+      {
+        "category": "audit",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.60%",
+        "accuracy": "84.15%",
+        "grounding": "94.61%",
+        "n": 10
+      },
+      {
+        "category": "audit",
+        "system": "VectorRAG",
+        "faithfulness": "71.14%",
+        "accuracy": "68.48%",
+        "grounding": "55.16%",
+        "n": 10
+      },
+      {
+        "category": "audit",
+        "system": "MS GraphRAG",
+        "faithfulness": "79.46%",
+        "accuracy": "76.87%",
+        "grounding": "66.82%",
+        "n": 10
+      },
+      {
+        "category": "audit",
+        "system": "HybridRAG",
+        "faithfulness": "82.01%",
+        "accuracy": "73.91%",
+        "grounding": "71.09%",
+        "n": 10
+      },
+      {
+        "category": "audit",
+        "system": "No Retrieval",
+        "faithfulness": "50.20%",
+        "accuracy": "39.54%",
+        "grounding": "0.00%",
+        "n": 10
+      },
+      {
+        "category": "comparison",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.10%",
+        "accuracy": "84.21%",
+        "grounding": "96.40%",
+        "n": 20
+      },
+      {
+        "category": "comparison",
+        "system": "VectorRAG",
+        "faithfulness": "72.96%",
+        "accuracy": "66.53%",
+        "grounding": "56.27%",
+        "n": 20
+      },
+      {
+        "category": "comparison",
+        "system": "MS GraphRAG",
+        "faithfulness": "78.66%",
+        "accuracy": "75.25%",
+        "grounding": "70.16%",
+        "n": 20
+      },
+      {
+        "category": "comparison",
+        "system": "HybridRAG",
+        "faithfulness": "83.23%",
+        "accuracy": "79.83%",
+        "grounding": "75.19%",
+        "n": 20
+      },
+      {
+        "category": "comparison",
+        "system": "No Retrieval",
+        "faithfulness": "45.90%",
+        "accuracy": "42.16%",
+        "grounding": "0.00%",
+        "n": 20
+      },
+      {
+        "category": "compliance",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.54%",
+        "accuracy": "84.24%",
+        "grounding": "96.61%",
+        "n": 80
+      },
+      {
+        "category": "compliance",
+        "system": "VectorRAG",
+        "faithfulness": "72.78%",
+        "accuracy": "69.43%",
+        "grounding": "55.04%",
+        "n": 80
+      },
+      {
+        "category": "compliance",
+        "system": "MS GraphRAG",
+        "faithfulness": "80.57%",
+        "accuracy": "75.89%",
+        "grounding": "70.70%",
+        "n": 80
+      },
+      {
+        "category": "compliance",
+        "system": "HybridRAG",
+        "faithfulness": "82.46%",
+        "accuracy": "78.61%",
+        "grounding": "70.80%",
+        "n": 80
+      },
+      {
+        "category": "compliance",
+        "system": "No Retrieval",
+        "faithfulness": "46.54%",
+        "accuracy": "41.89%",
+        "grounding": "0.00%",
+        "n": 80
+      },
+      {
+        "category": "financial_analysis",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.97%",
+        "accuracy": "84.46%",
+        "grounding": "96.22%",
+        "n": 50
+      },
+      {
+        "category": "financial_analysis",
+        "system": "VectorRAG",
+        "faithfulness": "72.92%",
+        "accuracy": "68.41%",
+        "grounding": "54.11%",
+        "n": 50
+      },
+      {
+        "category": "financial_analysis",
+        "system": "MS GraphRAG",
+        "faithfulness": "79.59%",
+        "accuracy": "74.30%",
+        "grounding": "69.65%",
+        "n": 50
+      },
+      {
+        "category": "financial_analysis",
+        "system": "HybridRAG",
+        "faithfulness": "83.09%",
+        "accuracy": "78.12%",
+        "grounding": "72.47%",
+        "n": 50
+      },
+      {
+        "category": "financial_analysis",
+        "system": "No Retrieval",
+        "faithfulness": "46.44%",
+        "accuracy": "42.57%",
+        "grounding": "0.00%",
+        "n": 50
+      },
+      {
+        "category": "multi_hop",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "86.24%",
+        "accuracy": "82.70%",
+        "grounding": "96.56%",
+        "n": 40
+      },
+      {
+        "category": "multi_hop",
+        "system": "VectorRAG",
+        "faithfulness": "73.40%",
+        "accuracy": "68.56%",
+        "grounding": "55.55%",
+        "n": 40
+      },
+      {
+        "category": "multi_hop",
+        "system": "MS GraphRAG",
+        "faithfulness": "79.22%",
+        "accuracy": "74.38%",
+        "grounding": "70.42%",
+        "n": 40
+      },
+      {
+        "category": "multi_hop",
+        "system": "HybridRAG",
+        "faithfulness": "81.35%",
+        "accuracy": "77.45%",
+        "grounding": "72.74%",
+        "n": 40
+      },
+      {
+        "category": "multi_hop",
+        "system": "No Retrieval",
+        "faithfulness": "45.78%",
+        "accuracy": "37.63%",
+        "grounding": "0.00%",
+        "n": 40
+      }
+    ]
+  }
+}

@@ -1,0 +1,481 @@
+# =============================================================================
+# GraphRAG Financial Domain - Ontology Definition
+# =============================================================================
+# This file defines the knowledge graph schema for financial regulation,
+# compliance, and corporate governance domains.
+# Adapted from PanelBox GraphRAG ontology for the financial sector.
+# =============================================================================
+
+version: "1.0"
+name: "Financial GraphRAG Ontology"
+description: "Knowledge graph schema for financial regulations, compliance, and corporate governance"
+
+# -----------------------------------------------------------------------------
+# Entity Types (Node Labels in Neo4j)
+# -----------------------------------------------------------------------------
+entity_types:
+
+  Regulation:
+    description: "Legal or regulatory framework (e.g., Basel III, LGPD, SOX)"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Canonical regulation name (e.g., BaselIII, LGPD)"
+      full_title:
+        type: string
+        required: true
+        description: "Full official title of the regulation"
+      year:
+        type: integer
+        required: false
+        description: "Year of enactment or latest revision"
+      jurisdiction:
+        type: string
+        required: true
+        description: "Jurisdiction scope (e.g., Brazil, International, USA)"
+      regulatory_body:
+        type: string
+        required: false
+        description: "Issuing authority (e.g., BCBS, BCB, SEC)"
+      effective_date:
+        type: string
+        required: false
+        description: "Date regulation became effective"
+      status:
+        type: string
+        required: false
+        description: "Current status (active, superseded, proposed)"
+
+  Article:
+    description: "Specific article, section, or clause within a regulation"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Article identifier (e.g., LGPD_Art7, BaselIII_Pillar1)"
+      number:
+        type: string
+        required: true
+        description: "Article or section number"
+      title:
+        type: string
+        required: false
+        description: "Article title or heading"
+      text_summary:
+        type: string
+        required: true
+        description: "Summary of the article content"
+      chapter:
+        type: string
+        required: false
+        description: "Chapter or part the article belongs to"
+
+  Requirement:
+    description: "Specific regulatory requirement or standard"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Requirement identifier (e.g., MinCapitalRatio, DataRetention)"
+      description:
+        type: string
+        required: true
+        description: "What the requirement mandates"
+      threshold:
+        type: string
+        required: false
+        description: "Quantitative threshold if applicable (e.g., 8% CAR)"
+      deadline:
+        type: string
+        required: false
+        description: "Compliance deadline if applicable"
+      penalty:
+        type: string
+        required: false
+        description: "Penalty for non-compliance"
+
+  Obligation:
+    description: "Duty or obligation imposed on regulated entities"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Obligation name (e.g., DataBreachNotification, AuditReport)"
+      description:
+        type: string
+        required: true
+        description: "What the obligation entails"
+      frequency:
+        type: string
+        required: false
+        description: "Frequency of obligation (annual, quarterly, event-driven)"
+      responsible_party:
+        type: string
+        required: false
+        description: "Who must fulfill the obligation"
+
+  Company:
+    description: "Financial institution or regulated company"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Company name (e.g., JPMorgan, BancoDoBrasil)"
+      ticker:
+        type: string
+        required: false
+        description: "Stock ticker symbol"
+      sector:
+        type: string
+        required: false
+        description: "Industry sector (e.g., Banking, Insurance, Asset Management)"
+      country:
+        type: string
+        required: false
+        description: "Country of incorporation"
+      total_assets:
+        type: string
+        required: false
+        description: "Total assets (latest reporting period)"
+      systemically_important:
+        type: boolean
+        required: false
+        description: "Whether designated as systemically important (G-SIB/D-SIB)"
+
+  Subsidiary:
+    description: "Subsidiary or business unit of a company"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Subsidiary name"
+      parent_company:
+        type: string
+        required: true
+        description: "Parent company name"
+      country:
+        type: string
+        required: false
+        description: "Country of operation"
+      business_line:
+        type: string
+        required: false
+        description: "Business line (e.g., retail banking, investment banking)"
+
+  FinancialMetric:
+    description: "Quantitative financial or risk metric"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Metric name (e.g., CET1Ratio, LCR, NPLRatio)"
+      full_name:
+        type: string
+        required: true
+        description: "Full metric name"
+      description:
+        type: string
+        required: true
+        description: "What the metric measures"
+      formula:
+        type: string
+        required: false
+        description: "Calculation formula"
+      regulatory_minimum:
+        type: string
+        required: false
+        description: "Regulatory minimum threshold if applicable"
+      unit:
+        type: string
+        required: false
+        description: "Unit of measurement (%, bps, USD)"
+
+  RiskCategory:
+    description: "Category of financial or operational risk"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Risk category name (e.g., CreditRisk, MarketRisk, OperationalRisk)"
+      description:
+        type: string
+        required: true
+        description: "Description of the risk type"
+      measurement_approach:
+        type: string
+        required: false
+        description: "Standard measurement approach (e.g., SA, IRB, AMA)"
+      capital_charge:
+        type: string
+        required: false
+        description: "Capital charge methodology"
+
+  AuditFinding:
+    description: "Finding from internal or external audit"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Finding identifier"
+      severity:
+        type: string
+        required: true
+        description: "Severity level (critical, high, medium, low)"
+      description:
+        type: string
+        required: true
+        description: "Description of the finding"
+      remediation_status:
+        type: string
+        required: false
+        description: "Current remediation status"
+
+  Control:
+    description: "Internal control or compliance mechanism"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Control name (e.g., KYC, AML_Screening, DataEncryption)"
+      description:
+        type: string
+        required: true
+        description: "What the control does"
+      control_type:
+        type: string
+        required: false
+        description: "Type (preventive, detective, corrective)"
+      automation_level:
+        type: string
+        required: false
+        description: "Automation level (manual, semi-automated, fully automated)"
+      testing_frequency:
+        type: string
+        required: false
+        description: "How often the control is tested"
+
+  Recommendation:
+    description: "Recommendation from audit, regulator, or best practice"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Recommendation identifier"
+      description:
+        type: string
+        required: true
+        description: "What is recommended"
+      source:
+        type: string
+        required: false
+        description: "Source of recommendation (regulator, auditor, industry body)"
+      priority:
+        type: string
+        required: false
+        description: "Implementation priority (high, medium, low)"
+
+  Jurisdiction:
+    description: "Geographic or regulatory jurisdiction"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Jurisdiction name (e.g., Brazil, EU, USA)"
+      description:
+        type: string
+        required: false
+        description: "Description of the jurisdiction scope"
+      legal_system:
+        type: string
+        required: false
+        description: "Legal system type (civil law, common law)"
+
+  Regulator:
+    description: "Regulatory body or supervisory authority"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Regulator name (e.g., BCB, SEC, ECB, BCBS)"
+      full_name:
+        type: string
+        required: true
+        description: "Full official name"
+      country:
+        type: string
+        required: false
+        description: "Country or region"
+      scope:
+        type: string
+        required: false
+        description: "Regulatory scope (banking, securities, insurance, data protection)"
+
+  DataCategory:
+    description: "Category of data subject to regulation (personal, financial, sensitive)"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Data category name (e.g., PersonalData, SensitiveData, FinancialRecords)"
+      description:
+        type: string
+        required: true
+        description: "What data falls in this category"
+      protection_level:
+        type: string
+        required: false
+        description: "Required protection level"
+      retention_period:
+        type: string
+        required: false
+        description: "Regulatory retention period"
+
+  ComplianceProcess:
+    description: "Process or procedure for regulatory compliance"
+    properties:
+      name:
+        type: string
+        required: true
+        unique: true
+        description: "Process name (e.g., KYC, AML, StressTesting)"
+      description:
+        type: string
+        required: true
+        description: "What the process involves"
+      frequency:
+        type: string
+        required: false
+        description: "Execution frequency"
+      responsible_function:
+        type: string
+        required: false
+        description: "Organizational function responsible"
+
+# -----------------------------------------------------------------------------
+# Relationship Types (Edge Types in Neo4j)
+# -----------------------------------------------------------------------------
+relationship_types:
+
+  REGULATES:
+    description: "Regulator or regulation governs an entity or activity"
+    source: [Regulation, Regulator]
+    target: [Company, RiskCategory, DataCategory, ComplianceProcess]
+
+  REQUIRES:
+    description: "Regulation or article imposes a requirement"
+    source: [Regulation, Article]
+    target: [Requirement, Obligation, Control]
+    properties:
+      mandatory:
+        type: boolean
+        description: "Whether the requirement is mandatory or recommended"
+
+  DEFINES:
+    description: "Regulation defines a metric, risk category, or data category"
+    source: [Regulation, Article]
+    target: [FinancialMetric, RiskCategory, DataCategory]
+
+  EXPOSES_TO:
+    description: "Company or activity is exposed to a risk"
+    source: [Company, Subsidiary]
+    target: RiskCategory
+    properties:
+      exposure_level:
+        type: string
+        description: "Level of exposure (high, medium, low)"
+
+  SUBSIDIARY_OF:
+    description: "Entity is a subsidiary of a parent company"
+    source: Subsidiary
+    target: Company
+
+  OPERATES_IN:
+    description: "Company or subsidiary operates in a jurisdiction"
+    source: [Company, Subsidiary]
+    target: Jurisdiction
+
+  AUDITED_BY:
+    description: "Entity is audited by an auditor or regulator"
+    source: Company
+    target: Regulator
+
+  MITIGATES:
+    description: "Control or process mitigates a risk"
+    source: [Control, ComplianceProcess]
+    target: RiskCategory
+    properties:
+      effectiveness:
+        type: string
+        description: "Mitigation effectiveness (full, partial)"
+
+  REFERENCES:
+    description: "Article or regulation references another regulation or article"
+    source: [Regulation, Article]
+    target: [Regulation, Article]
+
+  SUPERSEDES:
+    description: "Regulation or article supersedes a previous version"
+    source: [Regulation, Article]
+    target: [Regulation, Article]
+
+  COMPOSED_OF:
+    description: "Regulation is composed of articles, or metric is composed of sub-metrics"
+    source: [Regulation, FinancialMetric]
+    target: [Article, FinancialMetric]
+
+  REPORTS_TO:
+    description: "Company or subsidiary reports to a regulator"
+    source: [Company, Subsidiary]
+    target: Regulator
+    properties:
+      report_type:
+        type: string
+        description: "Type of report (prudential, statistical, AML)"
+      frequency:
+        type: string
+        description: "Reporting frequency"
+
+  VALIDATED_BY:
+    description: "Metric or control is validated by an audit or process"
+    source: [FinancialMetric, Control]
+    target: [AuditFinding, ComplianceProcess]
+
+  COMPLIES_WITH:
+    description: "Company or control complies with a requirement or regulation"
+    source: [Company, Control, ComplianceProcess]
+    target: [Regulation, Requirement]
+
+  ADDRESSES:
+    description: "Recommendation or finding addresses a risk or requirement gap"
+    source: [Recommendation, AuditFinding]
+    target: [RiskCategory, Requirement, Control]
+
+  MEASURES:
+    description: "Financial metric measures a risk category or company performance"
+    source: FinancialMetric
+    target: [RiskCategory, Company]
+
+  ENFORCED_BY:
+    description: "Regulation or requirement is enforced by a regulator"
+    source: [Regulation, Requirement]
+    target: Regulator
+
+  APPLIES_TO:
+    description: "Obligation or requirement applies to a specific entity type"
+    source: [Obligation, Requirement]
+    target: [Company, DataCategory, Jurisdiction]

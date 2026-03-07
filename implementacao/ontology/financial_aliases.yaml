@@ -1,0 +1,222 @@
+# =============================================================================
+# GraphRAG Financial Domain - Entity Aliases
+# =============================================================================
+# Maps common names, abbreviations, and variations to canonical entity names.
+# Bilingual (Portuguese/English) for Brazilian financial regulation context.
+# Used during entity resolution in the ingestion pipeline.
+# =============================================================================
+
+version: "1.0"
+
+regulation_aliases:
+  # Basel III / Basileia III
+  "Basel III": "BaselIII"
+  "Basel 3": "BaselIII"
+  "Basileia III": "BaselIII"
+  "Basileia 3": "BaselIII"
+  "Basel III Framework": "BaselIII"
+  "Acordo de Basileia": "BaselIII"
+  "Basel Accord": "BaselIII"
+  # LGPD
+  "LGPD": "LGPD"
+  "Lei Geral de Protecao de Dados": "LGPD"
+  "Lei 13.709": "LGPD"
+  "Lei 13709": "LGPD"
+  "Lei 13.709/2018": "LGPD"
+  "Brazilian Data Protection Law": "LGPD"
+  "General Data Protection Law": "LGPD"
+  # GDPR
+  "GDPR": "GDPR"
+  "General Data Protection Regulation": "GDPR"
+  "Regulamento Geral de Protecao de Dados": "GDPR"
+  # SOX
+  "SOX": "SarbanesOxley"
+  "Sarbanes-Oxley": "SarbanesOxley"
+  "Sarbanes Oxley": "SarbanesOxley"
+  "Sarbanes-Oxley Act": "SarbanesOxley"
+  # Dodd-Frank
+  "Dodd-Frank": "DoddFrank"
+  "Dodd Frank": "DoddFrank"
+  "Dodd-Frank Act": "DoddFrank"
+  # MiFID II
+  "MiFID II": "MiFIDII"
+  "MiFID 2": "MiFIDII"
+  "Markets in Financial Instruments Directive": "MiFIDII"
+  # BCB Resolutions
+  "Resolucao 4.893": "ResBCB4893"
+  "Resolucao BCB 4893": "ResBCB4893"
+  "Resolucao 4893/2021": "ResBCB4893"
+  "Resolution 4893": "ResBCB4893"
+  "Resolucao 4.658": "ResBCB4658"
+  "Resolucao BCB 4658": "ResBCB4658"
+  "Resolucao 4658/2018": "ResBCB4658"
+  "Resolution 4658": "ResBCB4658"
+
+regulator_aliases:
+  # Banco Central do Brasil
+  "BCB": "BancoCentralBrasil"
+  "Bacen": "BancoCentralBrasil"
+  "Banco Central": "BancoCentralBrasil"
+  "Banco Central do Brasil": "BancoCentralBrasil"
+  "Central Bank of Brazil": "BancoCentralBrasil"
+  # BCBS
+  "BCBS": "BaselCommittee"
+  "Basel Committee": "BaselCommittee"
+  "Comite de Basileia": "BaselCommittee"
+  "Basel Committee on Banking Supervision": "BaselCommittee"
+  # SEC
+  "SEC": "SEC"
+  "Securities and Exchange Commission": "SEC"
+  "Comissao de Valores Mobiliarios americana": "SEC"
+  # CVM
+  "CVM": "CVM"
+  "Comissao de Valores Mobiliarios": "CVM"
+  "Brazilian Securities Commission": "CVM"
+  # ECB
+  "ECB": "ECB"
+  "European Central Bank": "ECB"
+  "Banco Central Europeu": "ECB"
+  "BCE": "ECB"
+  # ANPD
+  "ANPD": "ANPD"
+  "Autoridade Nacional de Protecao de Dados": "ANPD"
+  "National Data Protection Authority": "ANPD"
+  # Federal Reserve
+  "Fed": "FederalReserve"
+  "Federal Reserve": "FederalReserve"
+  "Federal Reserve System": "FederalReserve"
+  "Reserva Federal": "FederalReserve"
+
+company_aliases:
+  # Brazilian Banks
+  "Banco do Brasil": "BancoDoBrasil"
+  "BB": "BancoDoBrasil"
+  "Itau": "ItauUnibanco"
+  "Itau Unibanco": "ItauUnibanco"
+  "Bradesco": "Bradesco"
+  "Banco Bradesco": "Bradesco"
+  "Santander Brasil": "SantanderBrasil"
+  "Santander BR": "SantanderBrasil"
+  "BTG Pactual": "BTGPactual"
+  "BTG": "BTGPactual"
+  # US Banks
+  "JPMorgan": "JPMorgan"
+  "JP Morgan": "JPMorgan"
+  "JPMorgan Chase": "JPMorgan"
+  "Goldman Sachs": "GoldmanSachs"
+  "Goldman": "GoldmanSachs"
+  "Bank of America": "BankOfAmerica"
+  "BofA": "BankOfAmerica"
+  "Citigroup": "Citigroup"
+  "Citi": "Citigroup"
+  "Morgan Stanley": "MorganStanley"
+  "Wells Fargo": "WellsFargo"
+
+financial_metric_aliases:
+  # Capital Ratios
+  "CET1": "CET1Ratio"
+  "CET1 Ratio": "CET1Ratio"
+  "Common Equity Tier 1": "CET1Ratio"
+  "Capital Proprio de Nivel 1": "CET1Ratio"
+  "CAR": "CapitalAdequacyRatio"
+  "Capital Adequacy Ratio": "CapitalAdequacyRatio"
+  "Indice de Adequacao de Capital": "CapitalAdequacyRatio"
+  "Indice de Basileia": "CapitalAdequacyRatio"
+  "Tier 1": "Tier1Capital"
+  "Tier 1 Capital": "Tier1Capital"
+  "Capital de Nivel 1": "Tier1Capital"
+  "Tier 2": "Tier2Capital"
+  "Tier 2 Capital": "Tier2Capital"
+  "Capital de Nivel 2": "Tier2Capital"
+  # Liquidity
+  "LCR": "LCR"
+  "Liquidity Coverage Ratio": "LCR"
+  "Indice de Cobertura de Liquidez": "LCR"
+  "NSFR": "NSFR"
+  "Net Stable Funding Ratio": "NSFR"
+  "Indice de Financiamento Estavel": "NSFR"
+  # Credit Risk
+  "NPL": "NPLRatio"
+  "NPL Ratio": "NPLRatio"
+  "Non-Performing Loans": "NPLRatio"
+  "Inadimplencia": "NPLRatio"
+  "PD": "ProbabilityOfDefault"
+  "Probability of Default": "ProbabilityOfDefault"
+  "Probabilidade de Default": "ProbabilityOfDefault"
+  "LGD": "LossGivenDefault"
+  "Loss Given Default": "LossGivenDefault"
+  "Perda Dado o Default": "LossGivenDefault"
+  "EAD": "ExposureAtDefault"
+  "Exposure at Default": "ExposureAtDefault"
+  "Exposicao no Momento do Default": "ExposureAtDefault"
+  # Market Risk
+  "VaR": "ValueAtRisk"
+  "Value at Risk": "ValueAtRisk"
+  "Valor em Risco": "ValueAtRisk"
+  "ES": "ExpectedShortfall"
+  "Expected Shortfall": "ExpectedShortfall"
+  "CVaR": "ExpectedShortfall"
+  "Conditional VaR": "ExpectedShortfall"
+  # Leverage
+  "Leverage Ratio": "LeverageRatio"
+  "Indice de Alavancagem": "LeverageRatio"
+  "RWA": "RiskWeightedAssets"
+  "Risk-Weighted Assets": "RiskWeightedAssets"
+  "Ativos Ponderados pelo Risco": "RiskWeightedAssets"
+  "APR": "RiskWeightedAssets"
+
+risk_category_aliases:
+  "Credit Risk": "CreditRisk"
+  "Risco de Credito": "CreditRisk"
+  "Market Risk": "MarketRisk"
+  "Risco de Mercado": "MarketRisk"
+  "Operational Risk": "OperationalRisk"
+  "Risco Operacional": "OperationalRisk"
+  "Liquidity Risk": "LiquidityRisk"
+  "Risco de Liquidez": "LiquidityRisk"
+  "Systemic Risk": "SystemicRisk"
+  "Risco Sistemico": "SystemicRisk"
+  "Cyber Risk": "CyberRisk"
+  "Risco Cibernetico": "CyberRisk"
+  "Compliance Risk": "ComplianceRisk"
+  "Risco de Conformidade": "ComplianceRisk"
+  "Reputational Risk": "ReputationalRisk"
+  "Risco Reputacional": "ReputationalRisk"
+
+jurisdiction_aliases:
+  "Brasil": "Brazil"
+  "Brazil": "Brazil"
+  "Estados Unidos": "USA"
+  "United States": "USA"
+  "USA": "USA"
+  "US": "USA"
+  "Uniao Europeia": "EU"
+  "European Union": "EU"
+  "EU": "EU"
+  "UE": "EU"
+  "Reino Unido": "UK"
+  "United Kingdom": "UK"
+  "UK": "UK"
+
+data_category_aliases:
+  "Dados Pessoais": "PersonalData"
+  "Personal Data": "PersonalData"
+  "Dados Sensiveis": "SensitiveData"
+  "Sensitive Data": "SensitiveData"
+  "Dados Anonimizados": "AnonymizedData"
+  "Anonymized Data": "AnonymizedData"
+  "Dados Financeiros": "FinancialData"
+  "Financial Data": "FinancialData"
+
+compliance_process_aliases:
+  "KYC": "KYC"
+  "Know Your Customer": "KYC"
+  "Conheca Seu Cliente": "KYC"
+  "AML": "AML"
+  "Anti-Money Laundering": "AML"
+  "Prevencao a Lavagem de Dinheiro": "AML"
+  "PLD": "AML"
+  "Stress Testing": "StressTesting"
+  "Teste de Estresse": "StressTesting"
+  "ICAAP": "ICAAP"
+  "Internal Capital Adequacy Assessment Process": "ICAAP"

@@ -1,0 +1,22 @@
+{
+  "run_timestamp": "2026-03-07T04:58:05.192390+00:00",
+  "mode": "simulation",
+  "seed": 42,
+  "total_runtime_seconds": 0.03,
+  "experiments_completed": [
+    "experiment_1_hallucination",
+    "experiment_2_tokens",
+    "experiment_3_speed",
+    "experiment_5_benchmark"
+  ],
+  "results_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/results",
+  "headline_results": {
+    "faithfulness": 0.8735,
+    "factual_accuracy": 0.8398,
+    "grounding_rate": 0.9638,
+    "token_reduction_vs_full_doc_pct": 69.85,
+    "parallel_p50_s": 1.785,
+    "speedup_parallel_vs_serial": 2.35,
+    "benchmark_weighted_score": 0.8795
+  }
+}

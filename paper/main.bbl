@@ -1,0 +1,323 @@
+\begin{thebibliography}{41}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{{AI Financial Reporting Authors}(2025)}]{kgfinreporting2025}
+\bibinfo{author}{{AI Financial Reporting Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Integrating {AI}-powered knowledge graph and natural
+  language processing for financial reporting}.
+\newblock \bibinfo{journal}{World Journal of Advanced Research and Reviews
+  (WJARR)} .
+%Type = Inproceedings
+\bibitem[{Arun et~al.(2025)Arun, Gupta, Kotal, Karmakar and
+  Mehta}]{arun2025finreflectkg}
+\bibinfo{author}{Arun, A.}, \bibinfo{author}{Gupta, S.},
+  \bibinfo{author}{Kotal, A.}, \bibinfo{author}{Karmakar, S.},
+  \bibinfo{author}{Mehta, D.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{FinReflectKG}: Agentic construction and evaluation
+  of financial knowledge graphs}, in: \bibinfo{booktitle}{Proceedings of the
+  6th ACM International Conference on AI in Finance (ICAIF)}.
+\newblock \bibinfo{note}{ArXiv:2508.17906}.
+%Type = Article
+\bibitem[{{Benchmarking Authors}(2025)}]{benchmarkretrieval2025}
+\bibinfo{author}{{Benchmarking Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Benchmarking vector, graph and hybrid retrieval
+  approaches}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2507.03608} .
+%Type = Article
+\bibitem[{Chang and Zhang(2024)}]{chang2024communitykg}
+\bibinfo{author}{Chang, F.}, \bibinfo{author}{Zhang, M.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{CommunityKG-RAG}: Leveraging community structures in
+  knowledge graphs for advanced retrieval-augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2408.08535} .
+%Type = Article
+\bibitem[{{Core-Based Authors}(2026)}]{corehierarchy2026}
+\bibinfo{author}{{Core-Based Authors}}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Core-based hierarchies for {GraphRAG}}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2603.05207} .
+%Type = Article
+\bibitem[{Edge et~al.(2024)Edge, Trinh, Cheng, Bradley, Chao, Mody, Truitt and
+  Larson}]{edge2024graphrag}
+\bibinfo{author}{Edge, D.}, \bibinfo{author}{Trinh, H.},
+  \bibinfo{author}{Cheng, N.}, \bibinfo{author}{Bradley, J.},
+  \bibinfo{author}{Chao, A.}, \bibinfo{author}{Mody, A.},
+  \bibinfo{author}{Truitt, S.}, \bibinfo{author}{Larson, J.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{From local to global: A graph {RAG} approach to
+  query-focused summarization}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2404.16130}
+  \bibinfo{note}{Microsoft Research}.
+%Type = Article
+\bibitem[{{FairRAG Authors}(2025)}]{fairrag2025}
+\bibinfo{author}{{FairRAG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{FairRAG}: Fair retrieval-augmented generation}.
+\newblock \bibinfo{journal}{Applied Sciences} \bibinfo{note}{MIT Open Access}.
+%Type = Article
+\bibitem[{{Graph Learning Fraud Authors}(2024)}]{frauddetection2024}
+\bibinfo{author}{{Graph Learning Fraud Authors}}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Graph learning-empowered financial fraud detection: A
+  survey}.
+\newblock \bibinfo{journal}{Intelligent Computing} .
+%Type = Article
+\bibitem[{{GraphCompliance Authors}(2025)}]{graphcompliance2025}
+\bibinfo{author}{{GraphCompliance Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{GraphCompliance}: Aligning policy and context graphs
+  for {LLM}-based regulatory compliance}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2510.26309} .
+%Type = Article
+\bibitem[{Guo et~al.(2024)Guo, Shi, Wang, Zhong and Li}]{guo2024lightrag}
+\bibinfo{author}{Guo, Z.}, \bibinfo{author}{Shi, L.}, \bibinfo{author}{Wang,
+  Z.}, \bibinfo{author}{Zhong, Y.}, \bibinfo{author}{Li, J.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{LightRAG}: Simple and fast retrieval-augmented
+  generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2410.05779} .
+%Type = Inproceedings
+\bibitem[{Gutierrez et~al.(2024)Gutierrez, Zhu, Huang, Ning, Yu, Sinha, Li,
+  Dong and Sun}]{gutierrez2024hipporag}
+\bibinfo{author}{Gutierrez, B.J.}, \bibinfo{author}{Zhu, Y.},
+  \bibinfo{author}{Huang, Z.}, \bibinfo{author}{Ning, S.}, \bibinfo{author}{Yu,
+  Z.}, \bibinfo{author}{Sinha, G.}, \bibinfo{author}{Li, C.},
+  \bibinfo{author}{Dong, H.}, \bibinfo{author}{Sun, H.J.Y.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{HippoRAG}: Neurobiologically inspired long-term
+  memory for large language models}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems (NeurIPS)}.
+\newblock \bibinfo{note}{ArXiv:2405.14831}.
+%Type = Article
+\bibitem[{Han et~al.(2025a)Han, Gong, Wu, Li, Zheng, Lin and
+  Fan}]{han2025ragvsgraphrag}
+\bibinfo{author}{Han, J.}, \bibinfo{author}{Gong, Z.}, \bibinfo{author}{Wu,
+  J.}, \bibinfo{author}{Li, Y.}, \bibinfo{author}{Zheng, Z.},
+  \bibinfo{author}{Lin, Z.}, \bibinfo{author}{Fan, J.}, \bibinfo{year}{2025}a.
+\newblock \bibinfo{title}{{RAG} vs. {GraphRAG}: A systematic evaluation and key
+  insights}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2502.11371} .
+%Type = Article
+\bibitem[{Han et~al.(2025b)Han, Gong, Wu, Ye, Li, Zheng, Lin and
+  Fan}]{han2025graphragsurvey}
+\bibinfo{author}{Han, J.}, \bibinfo{author}{Gong, Z.}, \bibinfo{author}{Wu,
+  J.}, \bibinfo{author}{Ye, Y.}, \bibinfo{author}{Li, Y.},
+  \bibinfo{author}{Zheng, Z.}, \bibinfo{author}{Lin, Z.}, \bibinfo{author}{Fan,
+  J.}, \bibinfo{year}{2025}b.
+\newblock \bibinfo{title}{Retrieval-augmented generation with graphs -- a
+  comprehensive survey}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2501.00309} .
+%Type = Article
+\bibitem[{Hu et~al.(2024)Hu, Lei, Zhang, Pan, Ling and Zhao}]{hu2024grag}
+\bibinfo{author}{Hu, Y.}, \bibinfo{author}{Lei, Z.}, \bibinfo{author}{Zhang,
+  Z.}, \bibinfo{author}{Pan, B.}, \bibinfo{author}{Ling, C.},
+  \bibinfo{author}{Zhao, L.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{GRAG}: Graph retrieval-augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2405.16506} .
+%Type = Article
+\bibitem[{Islam et~al.(2023)Islam, Kannappan, Kiber, Ruchkin, Shah and
+  Barrow}]{islam2023financebench}
+\bibinfo{author}{Islam, P.}, \bibinfo{author}{Kannappan, A.},
+  \bibinfo{author}{Kiber, D.}, \bibinfo{author}{Ruchkin, R.},
+  \bibinfo{author}{Shah, D.}, \bibinfo{author}{Barrow, J.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{{FinanceBench}: A new benchmark for financial
+  question answering}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2311.11944} .
+%Type = Inproceedings
+\bibitem[{Jomraj et~al.(2025)}]{jomraj2025ragulating}
+\bibinfo{author}{Jomraj, A.}, et~al., \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{RAGulating} compliance: A multi-agent knowledge
+  graph for regulatory {QA}}, in: \bibinfo{booktitle}{Proceedings of the
+  International Semantic Web Conference (ISWC)}.
+\newblock \bibinfo{note}{ArXiv:2508.09893}.
+%Type = Article
+\bibitem[{{KG Audit Authors}(2024)}]{kgaudit2024}
+\bibinfo{author}{{KG Audit Authors}}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Knowledge graphs in intelligent audit: Current state
+  and future directions}.
+\newblock \bibinfo{journal}{Journal of Cloud Computing} .
+%Type = Inproceedings
+\bibitem[{Lewis et~al.(2020)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  K{\"u}ttler, Lewis, Yih, Rockt{\"a}schel, Riedel and Kiela}]{lewis2020rag}
+\bibinfo{author}{Lewis, P.}, \bibinfo{author}{Perez, E.},
+  \bibinfo{author}{Piktus, A.}, \bibinfo{author}{Petroni, F.},
+  \bibinfo{author}{Karpukhin, V.}, \bibinfo{author}{Goyal, N.},
+  \bibinfo{author}{K{\"u}ttler, H.}, \bibinfo{author}{Lewis, M.},
+  \bibinfo{author}{Yih, W.t.}, \bibinfo{author}{Rockt{\"a}schel, T.},
+  \bibinfo{author}{Riedel, S.}, \bibinfo{author}{Kiela, D.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Retrieval-augmented generation for
+  knowledge-intensive {NLP} tasks}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems (NeurIPS)}, pp. \bibinfo{pages}{9459--9474}.
+%Type = Inproceedings
+\bibitem[{Li et~al.(2025)Li, Zhu, Wu, He and Chen}]{li2025subgraphrag}
+\bibinfo{author}{Li, T.}, \bibinfo{author}{Zhu, Y.}, \bibinfo{author}{Wu, J.},
+  \bibinfo{author}{He, S.}, \bibinfo{author}{Chen, W.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{SubgraphRAG}: Retrieval-augmented generation for
+  open-domain question answering -- simple is effective}, in:
+  \bibinfo{booktitle}{Proceedings of the International Conference on Learning
+  Representations (ICLR)}.
+\newblock \bibinfo{note}{ArXiv:2410.20724}.
+%Type = Inproceedings
+\bibitem[{Li et~al.(2024)Li, Du and Kovalchuk}]{li2024findkg}
+\bibinfo{author}{Li, V.X.}, \bibinfo{author}{Du, F.},
+  \bibinfo{author}{Kovalchuk, Y.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{FinDKG}: Dynamic knowledge graphs with large
+  language models for detecting global trends in financial markets}, in:
+  \bibinfo{booktitle}{Proceedings of the 5th ACM International Conference on AI
+  in Finance (ICAIF)}.
+\newblock \bibinfo{note}{ArXiv:2407.10909}.
+%Type = Inproceedings
+\bibitem[{Luo et~al.(2025)Luo, Ju, Xiong, Li, Haffari and Pan}]{luo2025gfmrag}
+\bibinfo{author}{Luo, L.}, \bibinfo{author}{Ju, Z.}, \bibinfo{author}{Xiong,
+  W.}, \bibinfo{author}{Li, Y.}, \bibinfo{author}{Haffari, G.},
+  \bibinfo{author}{Pan, S.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{GFM-RAG}: Graph foundation model for
+  retrieval-augmented generation}, in: \bibinfo{booktitle}{Advances in Neural
+  Information Processing Systems (NeurIPS)}.
+\newblock \bibinfo{note}{ArXiv:2502.01113}.
+%Type = Article
+\bibitem[{{Maximizing RAG Authors}(2025)}]{ragefficiency2025}
+\bibinfo{author}{{Maximizing RAG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Maximizing {RAG} efficiency: A comparative analysis
+  of approaches}.
+\newblock \bibinfo{journal}{Natural Language Processing} .
+%Type = Article
+\bibitem[{{MIA-RAG Authors}(2024)}]{mia2024}
+\bibinfo{author}{{MIA-RAG Authors}}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Membership inference attacks against
+  retrieval-augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2405.20446} .
+%Type = Techreport
+\bibitem[{{Microsoft Research}(2025)}]{lazygraphrag2025}
+\bibinfo{author}{{Microsoft Research}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{LazyGraphRAG}: Setting a New Standard for Quality
+  and Cost}.
+\newblock \bibinfo{type}{Technical Report}. Microsoft Research.
+\newblock \bibinfo{note}{Microsoft Research Blog and Technical Report}.
+%Type = Article
+\bibitem[{Peng et~al.(2024)Peng, Galley, He, Cheng, Xie, Hu, Huang, Liden, Yu,
+  Chen and Gao}]{peng2024graphrag}
+\bibinfo{author}{Peng, B.}, \bibinfo{author}{Galley, M.}, \bibinfo{author}{He,
+  P.}, \bibinfo{author}{Cheng, H.}, \bibinfo{author}{Xie, Y.},
+  \bibinfo{author}{Hu, Y.}, \bibinfo{author}{Huang, Q.},
+  \bibinfo{author}{Liden, L.}, \bibinfo{author}{Yu, Z.}, \bibinfo{author}{Chen,
+  W.}, \bibinfo{author}{Gao, J.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Graph retrieval-augmented generation: A survey}.
+\newblock \bibinfo{journal}{ACM Transactions on Information Systems}
+  \bibinfo{note}{ArXiv:2408.08921}.
+%Type = Article
+\bibitem[{{PolyG Authors}(2025)}]{polyg2025}
+\bibinfo{author}{{PolyG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{PolyG}: Adaptive graph traversal for diverse
+  {GraphRAG} questions}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2504.02112} .
+%Type = Techreport
+\bibitem[{{PricewaterhouseCoopers}(2024)}]{pwc2024graphllm}
+\bibinfo{author}{{PricewaterhouseCoopers}}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Graph {LLMs} in Banking and Insurance}.
+\newblock \bibinfo{type}{Technical Report}. PwC.
+%Type = Article
+\bibitem[{{Privacy-Aware RAG Authors}(2025)}]{privacyaware2025}
+\bibinfo{author}{{Privacy-Aware RAG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Privacy-aware retrieval-augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2503.15548} .
+%Type = Article
+\bibitem[{{Privacy Risks Authors}(2025)}]{privacyrisks2025}
+\bibinfo{author}{{Privacy Risks Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Privacy risks in {GraphRAG}}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2508.17222} .
+%Type = Article
+\bibitem[{{RAG Security Authors}(2025)}]{ragsecurity2025}
+\bibinfo{author}{{RAG Security Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{A comprehensive threat model for {RAG} security}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2509.20324} .
+%Type = Article
+\bibitem[{{Role of RAG Authors}(2025)}]{ragfinancial2025}
+\bibinfo{author}{{Role of RAG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Role of retrieval-augmented generation in financial
+  document processing}.
+\newblock \bibinfo{journal}{International Journal of Management and Technology
+  (IJMT)} \bibinfo{volume}{12}.
+%Type = Article
+\bibitem[{{SAG Authors}(2025)}]{sag2025}
+\bibinfo{author}{{SAG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{SAG}: Provably secure retrieval-augmented
+  generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2508.01084} .
+%Type = Article
+\bibitem[{Sarmah et~al.(2024)Sarmah, Hall, Rao, Patel, Pasquali and
+  Mehta}]{sarmah2024hybridrag}
+\bibinfo{author}{Sarmah, B.}, \bibinfo{author}{Hall, B.}, \bibinfo{author}{Rao,
+  R.}, \bibinfo{author}{Patel, S.}, \bibinfo{author}{Pasquali, S.},
+  \bibinfo{author}{Mehta, D.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{HybridRAG}: Integrating knowledge graphs and vector
+  retrieval augmented generation for efficient information extraction}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2408.04948}
+  \bibinfo{note}{BlackRock and NVIDIA}.
+%Type = Inproceedings
+\bibitem[{Sarthi et~al.(2024)Sarthi, Abdullah, Tuli, Khanna, Goldie and
+  Manning}]{sarthi2024raptor}
+\bibinfo{author}{Sarthi, P.}, \bibinfo{author}{Abdullah, S.},
+  \bibinfo{author}{Tuli, A.}, \bibinfo{author}{Khanna, S.},
+  \bibinfo{author}{Goldie, A.}, \bibinfo{author}{Manning, C.D.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{RAPTOR}: Recursive abstractive processing for
+  tree-organized retrieval}, in: \bibinfo{booktitle}{Proceedings of the
+  International Conference on Learning Representations (ICLR)}.
+\newblock \bibinfo{note}{ArXiv:2401.18059}.
+%Type = Article
+\bibitem[{{TERAG Authors}(2025)}]{terag2025}
+\bibinfo{author}{{TERAG Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{TERAG}: Token-efficient graph-based
+  retrieval-augmented generation}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2509.18667} .
+%Type = Article
+\bibitem[{Traag et~al.(2019)Traag, Waltman and van Eck}]{traag2019leiden}
+\bibinfo{author}{Traag, V.A.}, \bibinfo{author}{Waltman, L.},
+  \bibinfo{author}{van Eck, N.J.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{From {Louvain} to {Leiden}: Guaranteeing
+  well-connected communities}.
+\newblock \bibinfo{journal}{Scientific Reports} \bibinfo{volume}{9},
+  \bibinfo{pages}{5233}.
+%Type = Article
+\bibitem[{{Unbiased Evaluation Authors}(2025)}]{unbiased2025}
+\bibinfo{author}{{Unbiased Evaluation Authors}}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{An unbiased evaluation framework for {GraphRAG}}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2506.06331} .
+%Type = Misc
+\bibitem[{{Vector Institute}(2024)}]{vectorinstitute2024}
+\bibinfo{author}{{Vector Institute}}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{KG-RAG} for {SEC} 10-{Q} financial document
+  analysis}.
+\newblock \bibinfo{howpublished}{GitHub Repository}.
+\newblock \bibinfo{note}{Vector Institute for Artificial Intelligence}.
+%Type = Inproceedings
+\bibitem[{{When-to-Use Authors}(2026)}]{whenusegraphs2025}
+\bibinfo{author}{{When-to-Use Authors}}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{When to use graphs in retrieval-augmented
+  generation}, in: \bibinfo{booktitle}{Proceedings of the International
+  Conference on Learning Representations (ICLR)}.
+\newblock \bibinfo{note}{ArXiv:2506.05690}.
+%Type = Article
+\bibitem[{Zhao et~al.(2025)}]{zhao2025e2graphrag}
+\bibinfo{author}{Zhao, Y.}, et~al., \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{E2GraphRAG}: Streamlining graph-based
+  retrieval-augmented generation for high efficiency and effectiveness}.
+\newblock \bibinfo{journal}{arXiv preprint arXiv:2505.24226} .
+%Type = Inproceedings
+\bibitem[{Zhu et~al.(2025)}]{zhu2025kg2rag}
+\bibinfo{author}{Zhu, Y.}, et~al., \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{{KG2RAG}: Knowledge graph-guided retrieval-augmented
+  generation}, in: \bibinfo{booktitle}{Proceedings of the Conference of the
+  North American Chapter of the Association for Computational Linguistics
+  (NAACL)}.
+
+\end{thebibliography}
