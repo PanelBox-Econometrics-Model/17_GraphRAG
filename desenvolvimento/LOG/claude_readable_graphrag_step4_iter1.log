@@ -1,9 +1,0 @@
-[02:07:49] [TEXTO] Read source documents (proposal, literature review, existing results)
-[02:08:11] [TEXTO] Read source documents (proposal, literature review, existing results)
-[02:14:22] [TEXTO] \\documentclass[review]{elsarticle}\n\n\\usepackage[utf8]{inputenc}\n\\usepackage{amsmath,amssymb}\n\\usepackage{graphicx}\n\\usepackage{booktabs}\n\\usepackage{algorithm}\n\\usepackage{algpseudocode}\n\\usepackage{listings}\n\\usepackage{xcolor}\n\\usepackage{hyperref}\n\\usepackage{multirow}\n\\us
-[02:14:33] [TEXTO] Read source documents (proposal, literature review, existing results)
-[02:21:37] [TEXTO] Read source documents (proposal, literature review, existing results)
-[02:23:41] [TEXTO] Highlights\n\n- Multi-strategy GraphRAG for regulated financial institutions\n- Intent-aware retrieval fusion reduces hallucination by 14 pp\n- Token consumption reduced 70% via structured graph retrieval\n- Formal security model achieves 0% cross-tenant data leakage\n- Open-source implementation wi
-[02:24:45] [TEXTO] Read source documents (proposal, literature review, existing results)
-[02:24:58] [RESULTADO FINAL]
-[02:25:06] [RESULTADO FINAL]
