@@ -15,6 +15,10 @@
     urlcolor=blue,
     pdfborder={0 0 0}
 }
+\pdfstringdefDisableCommands{%
+  \def\corref#1{}%
+  \def\cnotenum{}%
+}
 \usepackage{multirow}
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -31,15 +35,22 @@
 
 \title{GraphRAG versus VectorRAG for Financial Document Processing: Architecture, Evaluation, and Token Economy}
 
-\author[inst1]{Anonymous Author\corref{cor1}}
+\author[inst1]{Gustavo Coelho Haase\corref{cor1}}
 \cortext[cor1]{Corresponding author}
-\ead{anonymous@institution.edu}
-\affiliation[inst1]{organization={Anonymous Institution}, country={Country}}
+\ead{gustavo.haase@bb.com.br}
+
+\author[inst1]{Jo\~{a}o Paulo Costa}
+\ead{joao.paulo.costa@bb.com.br}
+
+\author[inst1]{Maur\'{i}cio Almeida Pinto}
+\ead{mauricio.pinto@bb.com.br}
+
+\affiliation[inst1]{organization={Banco do Brasil S.A.}, city={Bras\'{i}lia}, state={DF}, country={Brazil}}
 
 \begin{highlights}
-\item Multi-strategy GraphRAG architecture combining graph, vector, and community retrieval
-\item Intent-aware retrieval fusion achieves 87.4\% faithfulness versus 72.9\% for VectorRAG
-\item Structured graph retrieval cuts token consumption by 70\% over full-document retrieval
+\item Multi-strategy GraphRAG combining graph, vector, and community retrieval
+\item Intent-aware fusion achieves 87.4\% faithfulness versus 72.9\% for VectorRAG
+\item Structured graph retrieval cuts token usage by 70\% over full-document retrieval
 \item Ablation study quantifies the contribution of each retrieval strategy
 \item Empirical evaluation on 250 financial and regulatory questions
 \end{highlights}
@@ -145,7 +156,11 @@ This section presents the architecture of the proposed multi-strategy GraphRAG s
 
 \textbf{Entity types.} The financial domain ontology defines 10 entity types:
 \begin{equation}
-\mathcal{T}_V = \{\textsc{Regulation}, \textsc{Article}, \textsc{Requirement}, \textsc{RiskCategory}, \textsc{FinancialMetric}, \textsc{Company}, \textsc{Subsidiary}, \textsc{Jurisdiction}, \textsc{Control}, \textsc{AuditFinding}\}
+\begin{split}
+\mathcal{T}_V = \{&\textsc{Regulation}, \textsc{Article}, \textsc{Requirement}, \textsc{RiskCategory}, \\
+&\textsc{FinancialMetric}, \textsc{Company}, \textsc{Subsidiary}, \\
+&\textsc{Jurisdiction}, \textsc{Control}, \textsc{AuditFinding}\}
+\end{split}
 \end{equation}
 
 \textbf{Relationship types.} The ontology defines 14 relationship types:
@@ -184,7 +199,7 @@ AuditFinding & 200 & Audit findings with risk ratings \\
 
 A triple $t = (s, p, o) \in V \times \mathcal{T}_E \times V$ represents a relationship with confidence $c(t) \in [0, 1]$. The document corpus is segmented into chunks $\mathcal{C} = \{c_1, \ldots, c_K\}$ with embeddings $\mathbf{e}(c_k) \in \mathbb{R}^{384}$ (all-MiniLM-L6-v2) and content hashes for incremental processing. Communities $\Gamma = \{\gamma_1, \ldots, \gamma_L\}$ are computed via the Leiden algorithm with LLM-generated summaries.
 
-Each query $q$ has an intent $\iota(q) \in \mathcal{I} = \{\textsc{Validation}, \textsc{Comparison}, \textsc{Recommendation}, \textsc{Explanation}, \textsc{CodeExample}, \textsc{General}\}$.
+Each query $q$ has an intent $\iota(q) \in \mathcal{I}$ where $\mathcal{I} = \{\textsc{Validation},$ $\textsc{Comparison},$ $\textsc{Recommendation},$ $\textsc{Explanation},$ $\textsc{CodeExample},$ $\textsc{General}\}$.
 
 \subsection{Ingestion pipeline}
 \label{sec:ingestion}
@@ -234,7 +249,7 @@ The ingestion pipeline transforms raw financial documents into a knowledge graph
 \subsection{Multi-strategy retrieval}
 \label{sec:retrieval}
 
-The central contribution is the multi-strategy retrieval engine that executes three strategies in parallel and fuses results using intent-aware weighting. Algorithm~\ref{alg:retrieval} provides the pseudocode and Figure~\ref{fig:retrieval} illustrates the pipeline.
+The central contribution is the multi-strategy retrieval engine that executes three strategies in parallel and fuses results using intent-aware weighting. Algorithm~\ref{alg:retrieval} provides the pseudocode.
 
 \begin{algorithm}[t]
 \caption{Multi-Strategy Intent-Aware Retrieval}
@@ -291,7 +306,7 @@ yielding scores in $[0.5, 1.0]$. Intent-specific patterns prioritize different r
 
 \subsubsection{Vector retriever}
 
-The vector retriever computes the query embedding using sentence-transformers (all-MiniLM-L6-v2) and searches the Neo4j vector index for chunks with cosine similarity above 0.5, filtered by chunk type based on intent. Retrieved chunks are enriched with their graph neighborhood.
+The vector retriever computes the query embedding using sentence-transformers (all-MiniLM-L6-v2, $d=384$) and searches the Neo4j vector index for chunks with cosine similarity above 0.5, filtered by chunk type based on intent. Each retrieved chunk is enriched with its graph neighborhood.
 
 \subsubsection{Community retriever}
 
@@ -407,7 +422,7 @@ We compare the proposed system against four baselines (Table~\ref{tab:baselines}
 \toprule
 \textbf{System} & \textbf{Description} \\
 \midrule
-VectorRAG & Embedding-based retrieval (all-MiniLM-L6-v2) with cosine similarity. Industry-standard RAG. \\
+VectorRAG & Embedding-based retrieval (all-MiniLM-L6-v2, cosine similarity). Industry-standard RAG approach. \\
 MS GraphRAG & Microsoft GraphRAG \citep{edge2024graphrag} with Leiden communities and global summarization. \\
 HybridRAG & Graph + vector retrieval without community detection \citep{sarmah2024hybridrag}. \\
 No Retrieval & LLM generation without external context. \\
@@ -506,7 +521,7 @@ Table~\ref{tab:tokens} presents token consumption and cost analysis.
 \caption{Token consumption and cost per 1,000 queries. Best retrieval-augmented results in \textbf{bold}.}
 \label{tab:tokens}
 \centering
-\small
+\footnotesize
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
 \textbf{System} & \textbf{Context} & \textbf{Output} & \textbf{Total} & \textbf{Cost/1K} & \textbf{Cost/1K} \\
@@ -671,8 +686,9 @@ The practical guidelines for when to adopt GraphRAG versus VectorRAG provide act
 
 
 \section*{CRediT authorship contribution statement}
-\textbf{[Author 1]:} Conceptualization, Methodology, Software, Formal analysis, Writing -- original draft, Writing -- review \& editing.
-\textbf{[Author 2]:} Validation, Investigation, Data curation, Writing -- review \& editing.
+\textbf{Gustavo Coelho Haase:} Conceptualization, Methodology, Software, Formal analysis, Writing -- original draft, Writing -- review \& editing.
+\textbf{Jo\~{a}o Paulo Costa:} Validation, Investigation, Data curation, Writing -- review \& editing.
+\textbf{Maur\'{i}cio Almeida Pinto:} Supervision, Writing -- review \& editing.
 
 \section*{Declaration of competing interest}
 The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
