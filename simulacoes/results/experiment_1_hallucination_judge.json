@@ -1,0 +1,335 @@
+{
+  "experiment": "experiment_1_hallucination",
+  "timestamp": "2026-03-09T17:33:15.541130+00:00",
+  "mode": "simulation",
+  "config": {
+    "neo4j_uri": "bolt://localhost:7687",
+    "datasets_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/datasets",
+    "results_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/results",
+    "max_questions": 10,
+    "seed": 42,
+    "simulate": true
+  },
+  "results": {
+    "per_system": {
+      "MultiStrategy_GraphRAG": {
+        "display_name": "Multi-Strategy GraphRAG (ours)",
+        "n_questions": 10,
+        "faithfulness": {
+          "mean": 0.8722,
+          "std": 0.0267,
+          "median": 0.8814
+        },
+        "factual_accuracy": {
+          "mean": 0.8237,
+          "std": 0.0338,
+          "median": 0.8145
+        },
+        "grounding_rate": {
+          "mean": 1.0,
+          "std": 0.0,
+          "median": 1.0
+        }
+      },
+      "VectorRAG": {
+        "display_name": "VectorRAG",
+        "n_questions": 10,
+        "faithfulness": {
+          "mean": 0.7187,
+          "std": 0.0563,
+          "median": 0.7251
+        },
+        "factual_accuracy": {
+          "mean": 0.7086,
+          "std": 0.0347,
+          "median": 0.7068
+        },
+        "grounding_rate": {
+          "mean": 0.8,
+          "std": 0.4,
+          "median": 1.0
+        }
+      },
+      "MS_GraphRAG": {
+        "display_name": "MS GraphRAG",
+        "n_questions": 10,
+        "faithfulness": {
+          "mean": 0.7954,
+          "std": 0.041,
+          "median": 0.788
+        },
+        "factual_accuracy": {
+          "mean": 0.7418,
+          "std": 0.0563,
+          "median": 0.7414
+        },
+        "grounding_rate": {
+          "mean": 1.0,
+          "std": 0.0,
+          "median": 1.0
+        }
+      },
+      "HybridRAG": {
+        "display_name": "HybridRAG",
+        "n_questions": 10,
+        "faithfulness": {
+          "mean": 0.8261,
+          "std": 0.046,
+          "median": 0.8393
+        },
+        "factual_accuracy": {
+          "mean": 0.7862,
+          "std": 0.0395,
+          "median": 0.7859
+        },
+        "grounding_rate": {
+          "mean": 1.0,
+          "std": 0.0,
+          "median": 1.0
+        }
+      },
+      "NoRetrieval": {
+        "display_name": "No Retrieval",
+        "n_questions": 10,
+        "faithfulness": {
+          "mean": 0.4367,
+          "std": 0.0634,
+          "median": 0.442
+        },
+        "factual_accuracy": {
+          "mean": 0.4072,
+          "std": 0.1016,
+          "median": 0.3977
+        },
+        "grounding_rate": {
+          "mean": 0.0,
+          "std": 0.0,
+          "median": 0.0
+        }
+      }
+    },
+    "per_difficulty": {
+      "simple": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 6,
+          "faithfulness_mean": 0.8771,
+          "accuracy_mean": 0.8211,
+          "grounding_mean": 1.0
+        },
+        "VectorRAG": {
+          "n_questions": 6,
+          "faithfulness_mean": 0.7373,
+          "accuracy_mean": 0.699,
+          "grounding_mean": 0.8333
+        },
+        "MS_GraphRAG": {
+          "n_questions": 6,
+          "faithfulness_mean": 0.8196,
+          "accuracy_mean": 0.7637,
+          "grounding_mean": 1.0
+        },
+        "HybridRAG": {
+          "n_questions": 6,
+          "faithfulness_mean": 0.8429,
+          "accuracy_mean": 0.7932,
+          "grounding_mean": 1.0
+        },
+        "NoRetrieval": {
+          "n_questions": 6,
+          "faithfulness_mean": 0.4309,
+          "accuracy_mean": 0.413,
+          "grounding_mean": 0.0
+        }
+      },
+      "moderate": {},
+      "complex": {},
+      "multi_hop": {}
+    },
+    "per_category": {
+      "compliance": {
+        "MultiStrategy_GraphRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.8722,
+          "accuracy_mean": 0.8237,
+          "grounding_mean": 1.0
+        },
+        "VectorRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.7187,
+          "accuracy_mean": 0.7086,
+          "grounding_mean": 0.8
+        },
+        "MS_GraphRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.7954,
+          "accuracy_mean": 0.7418,
+          "grounding_mean": 1.0
+        },
+        "HybridRAG": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.8261,
+          "accuracy_mean": 0.7862,
+          "grounding_mean": 1.0
+        },
+        "NoRetrieval": {
+          "n_questions": 10,
+          "faithfulness_mean": 0.4367,
+          "accuracy_mean": 0.4072,
+          "grounding_mean": 0.0
+        }
+      }
+    },
+    "summary": {
+      "VectorRAG": {
+        "baseline_score": 0.7187,
+        "our_score": 0.8722,
+        "improvement_pct": 21.36
+      },
+      "MS_GraphRAG": {
+        "baseline_score": 0.7954,
+        "our_score": 0.8722,
+        "improvement_pct": 9.66
+      },
+      "HybridRAG": {
+        "baseline_score": 0.8261,
+        "our_score": 0.8722,
+        "improvement_pct": 5.58
+      },
+      "NoRetrieval": {
+        "baseline_score": 0.4367,
+        "our_score": 0.8722,
+        "improvement_pct": 99.73
+      },
+      "summary": {
+        "best_baseline": "HybridRAG",
+        "improvement_over_best": 5.58,
+        "primary_metric": "faithfulness"
+      }
+    }
+  },
+  "tables": {
+    "main_comparison": [
+      {
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.22%",
+        "factual_accuracy": "82.37%",
+        "grounding_rate": "100.00%"
+      },
+      {
+        "system": "VectorRAG",
+        "faithfulness": "71.87%",
+        "factual_accuracy": "70.86%",
+        "grounding_rate": "80.00%"
+      },
+      {
+        "system": "MS GraphRAG",
+        "faithfulness": "79.54%",
+        "factual_accuracy": "74.18%",
+        "grounding_rate": "100.00%"
+      },
+      {
+        "system": "HybridRAG",
+        "faithfulness": "82.61%",
+        "factual_accuracy": "78.62%",
+        "grounding_rate": "100.00%"
+      },
+      {
+        "system": "No Retrieval",
+        "faithfulness": "43.67%",
+        "factual_accuracy": "40.72%",
+        "grounding_rate": "0.00%"
+      }
+    ],
+    "by_difficulty": [
+      {
+        "difficulty": "simple",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.71%",
+        "accuracy": "82.11%",
+        "grounding": "100.00%",
+        "n": 6
+      },
+      {
+        "difficulty": "simple",
+        "system": "VectorRAG",
+        "faithfulness": "73.73%",
+        "accuracy": "69.90%",
+        "grounding": "83.33%",
+        "n": 6
+      },
+      {
+        "difficulty": "simple",
+        "system": "MS GraphRAG",
+        "faithfulness": "81.96%",
+        "accuracy": "76.37%",
+        "grounding": "100.00%",
+        "n": 6
+      },
+      {
+        "difficulty": "simple",
+        "system": "HybridRAG",
+        "faithfulness": "84.29%",
+        "accuracy": "79.32%",
+        "grounding": "100.00%",
+        "n": 6
+      },
+      {
+        "difficulty": "simple",
+        "system": "No Retrieval",
+        "faithfulness": "43.09%",
+        "accuracy": "41.30%",
+        "grounding": "0.00%",
+        "n": 6
+      }
+    ],
+    "by_category": [
+      {
+        "category": "compliance",
+        "system": "Multi-Strategy GraphRAG (ours)",
+        "faithfulness": "87.22%",
+        "accuracy": "82.37%",
+        "grounding": "100.00%",
+        "n": 10
+      },
+      {
+        "category": "compliance",
+        "system": "VectorRAG",
+        "faithfulness": "71.87%",
+        "accuracy": "70.86%",
+        "grounding": "80.00%",
+        "n": 10
+      },
+      {
+        "category": "compliance",
+        "system": "MS GraphRAG",
+        "faithfulness": "79.54%",
+        "accuracy": "74.18%",
+        "grounding": "100.00%",
+        "n": 10
+      },
+      {
+        "category": "compliance",
+        "system": "HybridRAG",
+        "faithfulness": "82.61%",
+        "accuracy": "78.62%",
+        "grounding": "100.00%",
+        "n": 10
+      },
+      {
+        "category": "compliance",
+        "system": "No Retrieval",
+        "faithfulness": "43.67%",
+        "accuracy": "40.72%",
+        "grounding": "0.00%",
+        "n": 10
+      }
+    ]
+  },
+  "judge_metadata": {
+    "judge_mode": "llm",
+    "judge_model": "simulated",
+    "total_judge_tokens": 60962,
+    "total_judge_calls": 150,
+    "estimated_judge_cost_usd": 0.0
+  }
+}

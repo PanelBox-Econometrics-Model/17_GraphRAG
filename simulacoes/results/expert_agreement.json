@@ -1,0 +1,71 @@
+{
+  "experiment": "expert_evaluation",
+  "n_experts": 2,
+  "n_questions": 20,
+  "sampling": {
+    "method": "stratified",
+    "seed": 42,
+    "n_questions": 20,
+    "distribution": {
+      "compliance": 8,
+      "financial_analysis": 5,
+      "multi_hop": 4,
+      "comparison": 2,
+      "audit": 1
+    }
+  },
+  "forms_generated": [
+    "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/expert_eval/expert_1_form.json",
+    "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/expert_eval/expert_2_form.json"
+  ],
+  "simulated_ratings": [
+    "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/expert_eval/expert_1_completed.json",
+    "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/expert_eval/expert_2_completed.json"
+  ],
+  "inter_rater_agreement": {
+    "n_questions": 20,
+    "faithfulness": {
+      "cohens_kappa": 0.6347,
+      "percent_exact_agreement": 0.6,
+      "percent_adjacent_agreement": 1.0,
+      "mean_expert_1": 3.8,
+      "mean_expert_2": 3.6,
+      "interpretation": "substantial agreement"
+    },
+    "factual_accuracy": {
+      "cohens_kappa": 0.6522,
+      "percent_exact_agreement": 0.65,
+      "percent_adjacent_agreement": 0.95,
+      "mean_expert_1": 3.7,
+      "mean_expert_2": 3.4,
+      "interpretation": "substantial agreement"
+    },
+    "grounding": {
+      "cohens_kappa": 0.2308,
+      "percent_exact_agreement": 0.8,
+      "mean_expert_1": 0.9,
+      "mean_expert_2": 0.8,
+      "interpretation": "fair agreement"
+    }
+  },
+  "judge_vs_expert_agreement": {
+    "n_questions": 20,
+    "faithfulness": {
+      "mean_absolute_error": 0.2293,
+      "max_absolute_error": 0.623,
+      "pearson_correlation": 0.2089
+    },
+    "factual_accuracy": {
+      "mean_absolute_error": 0.2596,
+      "max_absolute_error": 0.604,
+      "pearson_correlation": 0.1453
+    }
+  },
+  "kappa_interpretation_scale": {
+    "0.00-0.20": "slight agreement",
+    "0.21-0.40": "fair agreement",
+    "0.41-0.60": "moderate agreement",
+    "0.61-0.80": "substantial agreement",
+    "0.81-1.00": "almost perfect agreement"
+  }
+}

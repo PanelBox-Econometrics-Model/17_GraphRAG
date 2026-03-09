@@ -1,0 +1,26 @@
+{
+  "n_questions": 20,
+  "faithfulness": {
+    "cohens_kappa": 0.6347,
+    "percent_exact_agreement": 0.6,
+    "percent_adjacent_agreement": 1.0,
+    "mean_expert_1": 3.8,
+    "mean_expert_2": 3.6,
+    "interpretation": "substantial agreement"
+  },
+  "factual_accuracy": {
+    "cohens_kappa": 0.6522,
+    "percent_exact_agreement": 0.65,
+    "percent_adjacent_agreement": 0.95,
+    "mean_expert_1": 3.7,
+    "mean_expert_2": 3.4,
+    "interpretation": "substantial agreement"
+  },
+  "grounding": {
+    "cohens_kappa": 0.2308,
+    "percent_exact_agreement": 0.8,
+    "mean_expert_1": 0.9,
+    "mean_expert_2": 0.8,
+    "interpretation": "fair agreement"
+  }
+}

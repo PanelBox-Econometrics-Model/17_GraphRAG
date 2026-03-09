@@ -1,0 +1,298 @@
+{
+  "experiment": "experiment_6_ablation",
+  "timestamp": "2026-03-09T18:01:56.604535+00:00",
+  "mode": "simulation",
+  "config": {
+    "neo4j_uri": "bolt://localhost:7687",
+    "datasets_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/datasets",
+    "results_dir": "/home/guhaase/projetos/panelbox/papers/17_GraphRAG/simulacoes/results",
+    "max_questions": 0,
+    "seed": 42,
+    "simulate": true
+  },
+  "results": {
+    "configurations": {
+      "full_system": {
+        "display_name": "Full system (Graph + Vector + Community)",
+        "components": [
+          "graph",
+          "vector",
+          "community"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.8742,
+          "std": 0.0415
+        },
+        "concept_coverage": {
+          "mean": 0.8452,
+          "std": 0.0497
+        },
+        "source_attribution": {
+          "mean": 0.9418,
+          "std": 0.0357
+        },
+        "response_quality": {
+          "mean": 0.8187,
+          "std": 0.0593
+        },
+        "weighted_score": {
+          "mean": 0.8735,
+          "std": 0.0252
+        },
+        "delta_pp": 0.0
+      },
+      "without_graph": {
+        "display_name": "Without Graph retriever",
+        "components": [
+          "vector",
+          "community"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.7241,
+          "std": 0.0767
+        },
+        "concept_coverage": {
+          "mean": 0.6836,
+          "std": 0.084
+        },
+        "source_attribution": {
+          "mean": 0.7547,
+          "std": 0.0815
+        },
+        "response_quality": {
+          "mean": 0.7334,
+          "std": 0.0709
+        },
+        "weighted_score": {
+          "mean": 0.719,
+          "std": 0.0412
+        },
+        "delta_pp": -15.45
+      },
+      "without_vector": {
+        "display_name": "Without Vector retriever",
+        "components": [
+          "graph",
+          "community"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.7867,
+          "std": 0.0629
+        },
+        "concept_coverage": {
+          "mean": 0.7629,
+          "std": 0.0703
+        },
+        "source_attribution": {
+          "mean": 0.81,
+          "std": 0.0578
+        },
+        "response_quality": {
+          "mean": 0.7535,
+          "std": 0.0718
+        },
+        "weighted_score": {
+          "mean": 0.7809,
+          "std": 0.0399
+        },
+        "delta_pp": -9.26
+      },
+      "without_community": {
+        "display_name": "Without Community retriever",
+        "components": [
+          "graph",
+          "vector"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.8301,
+          "std": 0.0487
+        },
+        "concept_coverage": {
+          "mean": 0.805,
+          "std": 0.0641
+        },
+        "source_attribution": {
+          "mean": 0.8685,
+          "std": 0.0521
+        },
+        "response_quality": {
+          "mean": 0.7975,
+          "std": 0.0655
+        },
+        "weighted_score": {
+          "mean": 0.827,
+          "std": 0.0298
+        },
+        "delta_pp": -4.65
+      },
+      "graph_only": {
+        "display_name": "Graph only",
+        "components": [
+          "graph"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.7841,
+          "std": 0.0627
+        },
+        "concept_coverage": {
+          "mean": 0.7303,
+          "std": 0.0903
+        },
+        "source_attribution": {
+          "mean": 0.7124,
+          "std": 0.0873
+        },
+        "response_quality": {
+          "mean": 0.6923,
+          "std": 0.0811
+        },
+        "weighted_score": {
+          "mean": 0.7444,
+          "std": 0.0439
+        },
+        "delta_pp": -12.91
+      },
+      "vector_only": {
+        "display_name": "Vector only",
+        "components": [
+          "vector"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.5995,
+          "std": 0.0758
+        },
+        "concept_coverage": {
+          "mean": 0.5648,
+          "std": 0.1001
+        },
+        "source_attribution": {
+          "mean": 0.626,
+          "std": 0.1174
+        },
+        "response_quality": {
+          "mean": 0.6128,
+          "std": 0.0924
+        },
+        "weighted_score": {
+          "mean": 0.5957,
+          "std": 0.0571
+        },
+        "delta_pp": -27.78
+      },
+      "community_only": {
+        "display_name": "Community only",
+        "components": [
+          "community"
+        ],
+        "n_questions": 50,
+        "entity_coverage": {
+          "mean": 0.5128,
+          "std": 0.0989
+        },
+        "concept_coverage": {
+          "mean": 0.4657,
+          "std": 0.1186
+        },
+        "source_attribution": {
+          "mean": 0.5571,
+          "std": 0.1347
+        },
+        "response_quality": {
+          "mean": 0.554,
+          "std": 0.1141
+        },
+        "weighted_score": {
+          "mean": 0.5116,
+          "std": 0.0635
+        },
+        "delta_pp": -36.19
+      }
+    },
+    "analysis": {
+      "most_impactful_component": "graph",
+      "component_contributions_pp": {
+        "graph": 15.45,
+        "vector": 9.26,
+        "community": 4.65
+      },
+      "best_single_component": "graph_only",
+      "best_single_score": 0.7444,
+      "complementarity": "full_system (0.8735) > best_single (0.7444)"
+    }
+  },
+  "tables": {
+    "main_comparison": [
+      {
+        "configuration": "Full system (Graph + Vector + Community)",
+        "weighted_score": "87.35%",
+        "delta_pp": "---",
+        "entity_cov": "87.42%",
+        "concept_cov": "84.52%",
+        "source_attr": "94.18%",
+        "resp_quality": "81.87%"
+      },
+      {
+        "configuration": "Without Graph retriever",
+        "weighted_score": "71.90%",
+        "delta_pp": "-15.45 pp",
+        "entity_cov": "72.41%",
+        "concept_cov": "68.36%",
+        "source_attr": "75.47%",
+        "resp_quality": "73.34%"
+      },
+      {
+        "configuration": "Without Vector retriever",
+        "weighted_score": "78.09%",
+        "delta_pp": "-9.26 pp",
+        "entity_cov": "78.67%",
+        "concept_cov": "76.29%",
+        "source_attr": "81.00%",
+        "resp_quality": "75.35%"
+      },
+      {
+        "configuration": "Without Community retriever",
+        "weighted_score": "82.70%",
+        "delta_pp": "-4.65 pp",
+        "entity_cov": "83.01%",
+        "concept_cov": "80.50%",
+        "source_attr": "86.85%",
+        "resp_quality": "79.75%"
+      },
+      {
+        "configuration": "Graph only",
+        "weighted_score": "74.44%",
+        "delta_pp": "-12.91 pp",
+        "entity_cov": "78.41%",
+        "concept_cov": "73.03%",
+        "source_attr": "71.24%",
+        "resp_quality": "69.23%"
+      },
+      {
+        "configuration": "Vector only",
+        "weighted_score": "59.57%",
+        "delta_pp": "-27.78 pp",
+        "entity_cov": "59.95%",
+        "concept_cov": "56.48%",
+        "source_attr": "62.60%",
+        "resp_quality": "61.28%"
+      },
+      {
+        "configuration": "Community only",
+        "weighted_score": "51.16%",
+        "delta_pp": "-36.19 pp",
+        "entity_cov": "51.28%",
+        "concept_cov": "46.57%",
+        "source_attr": "55.71%",
+        "resp_quality": "55.40%"
+      }
+    ]
+  },
+  "dataset": "benchmark_50.json",
+  "num_questions": 50
+}

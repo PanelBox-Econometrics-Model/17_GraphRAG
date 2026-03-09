@@ -1,0 +1,373 @@
+{
+  "expert_id": "expert_1",
+  "instructions": "## Instrucoes para Avaliacao\n\nVoce recebera 20 perguntas sobre regulacao financeira (Basel III e LGPD) e as\nrespectivas respostas geradas por um sistema de RAG. Para cada resposta, avalie:\n\n### 1. Faithfulness (Fidelidade ao Contexto) — Escala 1-5\nAvalie se as afirmacoes na resposta sao suportadas pelo contexto recuperado.\n- 5 = Todas as afirmacoes estao no contexto\n- 4 = Maioria suportada, detalhes menores nao suportados\n- 3 = Mistura de afirmacoes suportadas e nao suportadas\n- 2 = Maioria nao suportada\n- 1 = Resposta contradiz ou ignora o contexto\n\n### 2. Factual Accuracy (Precisao Factual) — Escala 1-5\nCompare a resposta com o ground truth fornecido.\n- 5 = Todos os fatos-chave estao corretos\n- 4 = Maioria correta, omissoes menores\n- 3 = Parcialmente correto, com omissoes significativas\n- 2 = Erros factuais relevantes\n- 1 = Completamente incorreto\n\n### 3. Grounding (Atribuicao de Fonte) — Binario 0/1\nA resposta cita fontes especificas?\n- 1 = Sim (ex: \"Art. 18 da LGPD\", \"Basel III Pillar 1, para. 50\")\n- 0 = Nao (sem citacao especifica)\n\n### 4. Comentarios (opcional)\nNotas adicionais sobre a qualidade da resposta.\n",
+  "rating_scale": {
+    "faithfulness": {
+      "1": "Completely unfaithful - response contradicts or ignores context",
+      "2": "Mostly unfaithful - major unsupported claims",
+      "3": "Mixed - some claims supported, some not",
+      "4": "Mostly faithful - minor unsupported details",
+      "5": "Fully faithful - all claims grounded in context"
+    },
+    "factual_accuracy": {
+      "1": "Completely inaccurate",
+      "2": "Major factual errors",
+      "3": "Partially accurate, significant omissions",
+      "4": "Mostly accurate, minor issues",
+      "5": "Fully accurate"
+    },
+    "grounding": {
+      "0": "No explicit source attribution",
+      "1": "Has explicit source attribution (article/section/regulation)"
+    }
+  },
+  "evaluations": [
+    {
+      "question_id": "15",
+      "question": "What is the Liquidity Coverage Ratio (LCR) under Basel III?",
+      "category": "compliance",
+      "difficulty": "simple",
+      "ground_truth": "The LCR requires banks to hold sufficient HQLA to cover net cash outflows over a 30-day stress scenario. The minimum LCR is 100%, meaning HQLA must be at least equal to total net cash outflows.",
+      "source_articles": [
+        "Basel III Framework, LCR Standard"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 5,
+        "factual_accuracy": 3,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "4",
+      "question": "What is the Countercyclical Capital Buffer (CCyB) in Basel III?",
+      "category": "compliance",
+      "difficulty": "medium",
+      "ground_truth": "The CCyB is a buffer of up to 2.5% of CET1 capital that national authorities can activate during periods of excessive credit growth. It aims to ensure the banking system has sufficient capital to maintain credit flow during stress periods.",
+      "source_articles": [
+        "Basel III Framework, Section IV.2"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 3,
+        "factual_accuracy": 2,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "36",
+      "question": "What are the key requirements for Basel III credit risk mitigation techniques?",
+      "category": "compliance",
+      "difficulty": "simple",
+      "ground_truth": "The Basel III credit risk mitigation techniques establishes specific requirements for financial institutions. Banks must comply with detailed quantitative standards and qualitative guidelines as specified in the regulatory framework. These requirements are essential for maintaining financial stability and protecting stakeholders.",
+      "source_articles": [
+        "Basel III Framework, CRM"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 5,
+        "factual_accuracy": 5,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "32",
+      "question": "What are the key requirements for Basel III interest rate risk in the banking book (IRRBB)?",
+      "category": "compliance",
+      "difficulty": "hard",
+      "ground_truth": "The Basel III interest rate risk in the banking book (IRRBB) establishes specific requirements for financial institutions. Banks must comply with detailed quantitative standards and qualitative guidelines as specified in the regulatory framework. These requirements are essential for maintaining financial stability and protecting stakeholders.",
+      "source_articles": [
+        "Basel III Framework, IRRBB"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "29",
+      "question": "What are the key requirements for Basel III credit valuation adjustment (CVA) risk?",
+      "category": "compliance",
+      "difficulty": "hard",
+      "ground_truth": "The Basel III credit valuation adjustment (CVA) risk establishes specific requirements for financial institutions. Banks must comply with detailed quantitative standards and qualitative guidelines as specified in the regulatory framework. These requirements are essential for maintaining financial stability and protecting stakeholders.",
+      "source_articles": [
+        "Basel III Framework, CVA"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 2,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "18",
+      "question": "What is the difference between CET1, AT1, and Tier 2 capital?",
+      "category": "compliance",
+      "difficulty": "medium",
+      "ground_truth": "CET1 includes common shares and retained earnings. AT1 includes perpetual non-cumulative instruments without maturity dates. Tier 2 includes subordinated debt with a minimum original maturity of five years. Each tier has progressively lower loss-absorption capacity.",
+      "source_articles": [
+        "Basel III Framework, Section 2"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 2,
+        "factual_accuracy": 3,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "14",
+      "question": "What is the leverage ratio requirement under Basel III?",
+      "category": "compliance",
+      "difficulty": "simple",
+      "ground_truth": "Basel III requires a minimum leverage ratio of 3%, calculated as Tier 1 capital divided by total exposure measure. G-SIBs face an additional leverage buffer of 50% of their risk-weighted G-SIB surcharge.",
+      "source_articles": [
+        "Basel III Framework, Leverage Ratio"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 5,
+        "factual_accuracy": 5,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "70",
+      "question": "What are the key requirements for Basel III output floor requirements?",
+      "category": "compliance",
+      "difficulty": "medium",
+      "ground_truth": "The Basel III output floor requirements establishes specific requirements for financial institutions. Banks must comply with detailed quantitative standards and qualitative guidelines as specified in the regulatory framework. These requirements are essential for maintaining financial stability and protecting stakeholders.",
+      "source_articles": [
+        "Basel III Framework, Output Floor"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 3,
+        "factual_accuracy": 5,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "86",
+      "question": "How is the credit risk RWA under the standardized approach performed in practice?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "The credit risk RWA under the standardized approach involves specific quantitative methodologies defined in the regulatory framework. Banks must follow prescribed formulas, apply appropriate risk weights, and ensure data quality. Results are reported to supervisors and disclosed under Pillar 3.",
+      "source_articles": [
+        "Basel III Framework"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "118",
+      "question": "How is the securitization exposure RWA calculation performed in practice?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "The securitization exposure RWA calculation involves specific quantitative methodologies defined in the regulatory framework. Banks must follow prescribed formulas, apply appropriate risk weights, and ensure data quality. Results are reported to supervisors and disclosed under Pillar 3.",
+      "source_articles": [
+        "Basel III Framework"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 3,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "108",
+      "question": "How is the market risk capital charge under FRTB performed in practice?",
+      "category": "financial_analysis",
+      "difficulty": "hard",
+      "ground_truth": "The market risk capital charge under FRTB involves specific quantitative methodologies defined in the regulatory framework. Banks must follow prescribed formulas, apply appropriate risk weights, and ensure data quality. Results are reported to supervisors and disclosed under Pillar 3.",
+      "source_articles": [
+        "Basel III Framework"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 5,
+        "factual_accuracy": 5,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "83",
+      "question": "How is the LCR calculation methodology and stress assumptions performed in practice?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "The LCR calculation methodology and stress assumptions involves specific quantitative methodologies defined in the regulatory framework. Banks must follow prescribed formulas, apply appropriate risk weights, and ensure data quality. Results are reported to supervisors and disclosed under Pillar 3.",
+      "source_articles": [
+        "Basel III Framework"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 3,
+        "grounding": 0,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "82",
+      "question": "How is the risk-weighted assets computation for credit exposures performed in practice?",
+      "category": "financial_analysis",
+      "difficulty": "medium",
+      "ground_truth": "The risk-weighted assets computation for credit exposures involves specific quantitative methodologies defined in the regulatory framework. Banks must follow prescribed formulas, apply appropriate risk weights, and ensure data quality. Results are reported to supervisors and disclosed under Pillar 3.",
+      "source_articles": [
+        "Basel III Framework"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 3,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "136",
+      "question": "How does a bank's ICAAP assessment of concentration risk relate to its large exposure framework compliance?",
+      "category": "multi_hop",
+      "difficulty": "medium",
+      "ground_truth": "This question requires connecting multiple regulatory entities and relationships. The answer depends on the interaction between ICAAP and concentration_risk and large_exposures. Banks must consider the cross-regulatory implications and ensure compliance with all applicable frameworks simultaneously.",
+      "source_articles": [
+        "Basel III Framework, Pillar 2",
+        "Basel III Framework, LEX"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 5,
+        "factual_accuracy": 3,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "144",
+      "question": "How do Basel III capital buffers interact with LGPD penalty calculations for banks that suffer data breaches? (variant 2)",
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "ground_truth": "This question requires connecting multiple regulatory entities and relationships. The answer depends on the interaction between Basel_III and CCB and LGPD. Banks must consider the cross-regulatory implications and ensure compliance with all applicable frameworks simultaneously.",
+      "source_articles": [
+        "Basel III Framework, Capital Buffers",
+        "LGPD, Article 52"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "145",
+      "question": "Which risk types under Basel III Pillar 1 are affected when a bank's operational risk event involves LGPD violations? (variant 2)",
+      "category": "multi_hop",
+      "difficulty": "medium",
+      "ground_truth": "This question requires connecting multiple regulatory entities and relationships. The answer depends on the interaction between Basel_III and operational_risk and LGPD. Banks must consider the cross-regulatory implications and ensure compliance with all applicable frameworks simultaneously.",
+      "source_articles": [
+        "Basel III Framework, Pillar 1",
+        "LGPD, Article 52"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 3,
+        "factual_accuracy": 5,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "163",
+      "question": "What LGPD articles apply when a bank transfers client credit data to a subsidiary operating in a non-adequate jurisdiction? (variant 4)",
+      "category": "multi_hop",
+      "difficulty": "hard",
+      "ground_truth": "This question requires connecting multiple regulatory entities and relationships. The answer depends on the interaction between LGPD and international_transfer and credit_data. Banks must consider the cross-regulatory implications and ensure compliance with all applicable frameworks simultaneously.",
+      "source_articles": [
+        "LGPD, Articles 33-36",
+        "LGPD, Article 7"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "190",
+      "question": "Compare LGPD's legitimate interest basis with GDPR Article 6(1)(f)? (extended analysis)",
+      "category": "comparison",
+      "difficulty": "medium",
+      "ground_truth": "The comparison between these frameworks reveals important differences in scope, requirements, and implementation. Understanding these distinctions is critical for multinational financial institutions operating under multiple regulatory regimes.",
+      "source_articles": [
+        "LGPD, Article 10",
+        "GDPR, Article 6(1)(f)"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 3,
+        "factual_accuracy": 2,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "171",
+      "question": "How do Basel III and Basel II differ in their treatment of credit risk capital requirements?",
+      "category": "comparison",
+      "difficulty": "medium",
+      "ground_truth": "The comparison between these frameworks reveals important differences in scope, requirements, and implementation. Understanding these distinctions is critical for multinational financial institutions operating under multiple regulatory regimes.",
+      "source_articles": [
+        "Basel III Framework",
+        "Basel II Framework"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 2,
+        "grounding": 0,
+        "comments": "[Simulated by expert_1]"
+      }
+    },
+    {
+      "question_id": "199",
+      "question": "What are the key audit findings related to LCR and NSFR reporting accuracy?",
+      "category": "audit",
+      "difficulty": "medium",
+      "ground_truth": "Audit assessment of key audit findings related to lcr and nsfr reporting accuracy? requires systematic evaluation procedures, documented findings, and risk-rated recommendations. Internal audit must maintain independence and follow IIA Standards throughout the assessment process.",
+      "source_articles": [
+        "Basel III Framework, LCR",
+        "Basel III Framework, NSFR"
+      ],
+      "system_response": "[response would be filled from experiment results]",
+      "rating": {
+        "faithfulness": 4,
+        "factual_accuracy": 4,
+        "grounding": 1,
+        "comments": "[Simulated by expert_1]"
+      }
+    }
+  ]
+}

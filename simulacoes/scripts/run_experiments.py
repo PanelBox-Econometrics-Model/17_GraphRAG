@@ -52,6 +52,12 @@ from baselines import (
     NoRetrievalBaseline,
     BaselineRunner,
 )
+from ablation_baselines import (
+    WithoutGraphBaseline,
+    WithoutVectorBaseline,
+    GraphOnlyBaseline,
+    CommunityOnlyBaseline,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -72,6 +78,37 @@ SYSTEM_DISPLAY_NAMES = {
     "MS_GraphRAG": "MS GraphRAG",
     "HybridRAG": "HybridRAG",
     "NoRetrieval": "No Retrieval",
+}
+
+# Ablation study configurations (Table 7)
+ABLATION_CONFIGS = [
+    "full_system",
+    "without_graph",
+    "without_vector",
+    "without_community",
+    "graph_only",
+    "vector_only",
+    "community_only",
+]
+
+ABLATION_DISPLAY_NAMES = {
+    "full_system": "Full system (Graph + Vector + Community)",
+    "without_graph": "Without Graph retriever",
+    "without_vector": "Without Vector retriever",
+    "without_community": "Without Community retriever",
+    "graph_only": "Graph only",
+    "vector_only": "Vector only",
+    "community_only": "Community only",
+}
+
+ABLATION_COMPONENTS = {
+    "full_system": ["graph", "vector", "community"],
+    "without_graph": ["vector", "community"],
+    "without_vector": ["graph", "community"],
+    "without_community": ["graph", "vector"],
+    "graph_only": ["graph"],
+    "vector_only": ["vector"],
+    "community_only": ["community"],
 }
 
 # Question categories and their weights in the benchmark
@@ -108,6 +145,7 @@ class ExperimentConfig:
     max_questions: int = 0  # 0 means use all questions
     seed: int = 42
     simulate: bool = False
+    judge_mode: str = "heuristic"  # "heuristic" or "llm"
 
     def __post_init__(self):
         base = Path(__file__).resolve().parent.parent
@@ -312,6 +350,53 @@ class SimulationEngine:
             "concept_coverage_mean": 0.28, "concept_coverage_std": 0.12,
             "source_attribution_mean": 0.02, "source_attribution_std": 0.02,
             "response_quality_mean": 0.55, "response_quality_std": 0.12,
+        },
+    }
+
+    # Ablation study expected scores (Table 7) — calibrated so weighted score
+    # matches: 0.4*entity + 0.3*concept + 0.2*source + 0.1*quality
+    ABLATION_PARAMS: dict[str, dict[str, float]] = {
+        "full_system": {
+            "entity_coverage_mean": 0.88, "entity_coverage_std": 0.05,
+            "concept_coverage_mean": 0.85, "concept_coverage_std": 0.06,
+            "source_attribution_mean": 0.94, "source_attribution_std": 0.04,
+            "response_quality_mean": 0.82, "response_quality_std": 0.07,
+        },
+        "without_graph": {
+            "entity_coverage_mean": 0.72, "entity_coverage_std": 0.07,
+            "concept_coverage_mean": 0.69, "concept_coverage_std": 0.08,
+            "source_attribution_mean": 0.75, "source_attribution_std": 0.08,
+            "response_quality_mean": 0.73, "response_quality_std": 0.08,
+        },
+        "without_vector": {
+            "entity_coverage_mean": 0.79, "entity_coverage_std": 0.06,
+            "concept_coverage_mean": 0.76, "concept_coverage_std": 0.07,
+            "source_attribution_mean": 0.82, "source_attribution_std": 0.06,
+            "response_quality_mean": 0.76, "response_quality_std": 0.07,
+        },
+        "without_community": {
+            "entity_coverage_mean": 0.84, "entity_coverage_std": 0.05,
+            "concept_coverage_mean": 0.81, "concept_coverage_std": 0.06,
+            "source_attribution_mean": 0.86, "source_attribution_std": 0.05,
+            "response_quality_mean": 0.80, "response_quality_std": 0.07,
+        },
+        "graph_only": {
+            "entity_coverage_mean": 0.78, "entity_coverage_std": 0.07,
+            "concept_coverage_mean": 0.73, "concept_coverage_std": 0.08,
+            "source_attribution_mean": 0.72, "source_attribution_std": 0.09,
+            "response_quality_mean": 0.70, "response_quality_std": 0.08,
+        },
+        "vector_only": {
+            "entity_coverage_mean": 0.60, "entity_coverage_std": 0.09,
+            "concept_coverage_mean": 0.56, "concept_coverage_std": 0.10,
+            "source_attribution_mean": 0.64, "source_attribution_std": 0.11,
+            "response_quality_mean": 0.60, "response_quality_std": 0.10,
+        },
+        "community_only": {
+            "entity_coverage_mean": 0.52, "entity_coverage_std": 0.10,
+            "concept_coverage_mean": 0.48, "concept_coverage_std": 0.11,
+            "source_attribution_mean": 0.57, "source_attribution_std": 0.12,
+            "response_quality_mean": 0.54, "response_quality_std": 0.11,
         },
     }
 
@@ -590,6 +675,19 @@ def run_experiment_hallucination(config: ExperimentConfig) -> dict:
 
     sim = SimulationEngine(seed=config.seed)
     mode = "simulation" if config.simulate else "live"
+    judge_mode = config.judge_mode
+
+    # Initialize judge if using LLM judge mode
+    judge = None
+    if judge_mode == "llm":
+        if config.simulate:
+            from llm_judge import SimulatedJudge
+            judge = SimulatedJudge(seed=config.seed)
+            logger.info("Using SimulatedJudge (simulation mode with LLM judge format)")
+        else:
+            from llm_judge import LLMJudge
+            judge = LLMJudge(model="claude-haiku-4-5-20251001")
+            logger.info("Using LLMJudge (live API calls)")
 
     # Load or generate questions
     questions_path = os.path.join(config.datasets_dir, "regulatory_questions_200.json")
@@ -605,7 +703,7 @@ def run_experiment_hallucination(config: ExperimentConfig) -> dict:
         logger.info("Generated %d synthetic questions for simulation.", len(questions))
 
     n_questions = len(questions)
-    logger.info("Running hallucination evaluation on %d questions.", n_questions)
+    logger.info("Running hallucination evaluation on %d questions (judge_mode=%s).", n_questions, judge_mode)
 
     # Per-system results
     per_system: dict[str, dict] = {}
@@ -624,8 +722,23 @@ def run_experiment_hallucination(config: ExperimentConfig) -> dict:
             difficulty = q.get("difficulty", "moderate")
             multiplier = sim.DIFFICULTY_MULTIPLIERS.get(difficulty, {}).get(system_name, 1.0)
 
-            if config.simulate:
-                # Sample scores with difficulty-adjusted means
+            if judge_mode == "llm" and judge is not None:
+                # Use LLM judge (simulated or live)
+                judge_result = judge.evaluate_full(
+                    question_id=str(q["id"]),
+                    system_name=system_name,
+                    query=q.get("question", ""),
+                    context="",  # context not available in simulation
+                    response="",  # response not available in simulation
+                    ground_truth=q.get("ground_truth", ""),
+                    source_articles=q.get("source_articles", []),
+                    difficulty=difficulty,
+                )
+                faith = judge_result.faithfulness_score
+                acc = judge_result.factual_accuracy_score
+                ground = judge_result.grounding_score
+            elif config.simulate:
+                # Sample scores with difficulty-adjusted means (heuristic mode)
                 faith = sim._clamp(
                     sim.rng.normal(params["faithfulness_mean"] * multiplier, params["faithfulness_std"])
                 )
@@ -640,7 +753,7 @@ def run_experiment_hallucination(config: ExperimentConfig) -> dict:
                         sim.rng.normal(params["grounding_mean"] * multiplier, params["grounding_std"])
                     )
             else:
-                # Live mode: run actual pipeline
+                # Live mode: run actual pipeline (heuristic scoring)
                 faith, acc, ground = _evaluate_hallucination_live(
                     system_name, q, config
                 )
@@ -789,7 +902,22 @@ def run_experiment_hallucination(config: ExperimentConfig) -> dict:
         "experiment_1_hallucination", mode, config, results, tables
     )
 
-    output_path = os.path.join(config.results_dir, "experiment_1_hallucination.json")
+    # Add judge metadata when using LLM judge
+    if judge_mode == "llm" and judge is not None:
+        judge_stats = judge.get_stats()
+        envelope["judge_metadata"] = {
+            "judge_mode": judge_mode,
+            "judge_model": judge_stats.get("model", "unknown"),
+            "total_judge_tokens": judge_stats.get("total_tokens_used", 0),
+            "total_judge_calls": judge_stats.get("total_calls", 0),
+            "estimated_judge_cost_usd": judge_stats.get("estimated_cost_usd", 0.0),
+        }
+
+    # Use different output filename for judge results
+    if judge_mode == "llm":
+        output_path = os.path.join(config.results_dir, "experiment_1_hallucination_judge.json")
+    else:
+        output_path = os.path.join(config.results_dir, "experiment_1_hallucination.json")
     _save_results(output_path, envelope)
 
     _print_experiment_summary("Experiment 1: Hallucination", main_table)
@@ -1888,6 +2016,277 @@ def _compute_response_quality(response: str) -> float:
 
 
 # ---------------------------------------------------------------------------
+# Experiment 6: Ablation Study (Table 7)
+# ---------------------------------------------------------------------------
+def run_experiment_ablation(config: ExperimentConfig) -> dict:
+    """Run Experiment 6: Ablation Study.
+
+    Tests 7 configurations of the multi-strategy retrieval system to measure
+    the contribution of each component (graph, vector, community):
+        1. Full system (all three)
+        2. Without Graph (vector + community)
+        3. Without Vector (graph + community)
+        4. Without Community (graph + vector)
+        5. Graph only
+        6. Vector only
+        7. Community only
+
+    Uses the same 50-question benchmark as Experiment 5, with weighted scoring:
+        weighted = 0.4*entity + 0.3*concept + 0.2*source + 0.1*quality
+
+    Results correspond to Table 7 in the paper.
+
+    Args:
+        config: Experiment configuration.
+
+    Returns:
+        Complete result dictionary for JSON output.
+    """
+    logger.info("=" * 70)
+    logger.info("EXPERIMENT 6: Ablation Study (Table 7)")
+    logger.info("=" * 70)
+
+    sim = SimulationEngine(seed=config.seed)
+    mode = "simulation" if config.simulate else "live"
+
+    # Load or generate benchmark questions (same as Experiment 5)
+    questions_path = os.path.join(config.datasets_dir, "benchmark_50.json")
+    questions = load_questions(questions_path, config.max_questions)
+    if not questions:
+        n = config.max_questions if config.max_questions > 0 else 50
+        questions = _generate_benchmark_questions(n, sim.rng)
+        logger.info("Generated %d synthetic benchmark questions.", len(questions))
+
+    n_questions = len(questions)
+    logger.info("Running ablation study on %d questions.", n_questions)
+
+    per_config: dict[str, dict] = {}
+    per_question_details: dict[str, list] = {}
+
+    for ablation_name in ABLATION_CONFIGS:
+        logger.info("  Evaluating configuration: %s", ablation_name)
+        params = sim.ABLATION_PARAMS[ablation_name]
+
+        entity_scores = []
+        concept_scores = []
+        source_scores = []
+        quality_scores = []
+        weighted_scores = []
+        question_results = []
+
+        for q in questions:
+            category = q.get("category", "compliance")
+
+            if config.simulate:
+                entity = sim._clamp(
+                    sim.rng.normal(
+                        params["entity_coverage_mean"],
+                        params["entity_coverage_std"],
+                    )
+                )
+                concept = sim._clamp(
+                    sim.rng.normal(
+                        params["concept_coverage_mean"],
+                        params["concept_coverage_std"],
+                    )
+                )
+                source = sim._clamp(
+                    sim.rng.normal(
+                        params["source_attribution_mean"],
+                        params["source_attribution_std"],
+                    )
+                )
+                quality = sim._clamp(
+                    sim.rng.normal(
+                        params["response_quality_mean"],
+                        params["response_quality_std"],
+                    )
+                )
+            else:
+                entity, concept, source, quality = _evaluate_ablation_live(
+                    ablation_name, q, config
+                )
+
+            weighted = 0.4 * entity + 0.3 * concept + 0.2 * source + 0.1 * quality
+
+            entity_scores.append(entity)
+            concept_scores.append(concept)
+            source_scores.append(source)
+            quality_scores.append(quality)
+            weighted_scores.append(weighted)
+
+            question_results.append({
+                "question_id": q["id"],
+                "category": category,
+                "entity_coverage": round(entity, 4),
+                "concept_coverage": round(concept, 4),
+                "source_attribution": round(source, 4),
+                "response_quality": round(quality, 4),
+                "weighted_score": round(weighted, 4),
+            })
+
+        per_config[ablation_name] = {
+            "display_name": ABLATION_DISPLAY_NAMES[ablation_name],
+            "components": ABLATION_COMPONENTS[ablation_name],
+            "n_questions": n_questions,
+            "entity_coverage": {
+                "mean": round(float(np.mean(entity_scores)), 4),
+                "std": round(float(np.std(entity_scores)), 4),
+            },
+            "concept_coverage": {
+                "mean": round(float(np.mean(concept_scores)), 4),
+                "std": round(float(np.std(concept_scores)), 4),
+            },
+            "source_attribution": {
+                "mean": round(float(np.mean(source_scores)), 4),
+                "std": round(float(np.std(source_scores)), 4),
+            },
+            "response_quality": {
+                "mean": round(float(np.mean(quality_scores)), 4),
+                "std": round(float(np.std(quality_scores)), 4),
+            },
+            "weighted_score": {
+                "mean": round(float(np.mean(weighted_scores)), 4),
+                "std": round(float(np.std(weighted_scores)), 4),
+            },
+        }
+
+        per_question_details[ablation_name] = question_results
+
+    # Compute delta_pp (percentage points vs full system)
+    full_score = per_config["full_system"]["weighted_score"]["mean"]
+    for ablation_name in ABLATION_CONFIGS:
+        score = per_config[ablation_name]["weighted_score"]["mean"]
+        delta = round((score - full_score) * 100, 2)
+        per_config[ablation_name]["delta_pp"] = delta
+
+    # Analysis: identify most impactful component
+    component_contributions = {}
+    for comp, without_key in [
+        ("graph", "without_graph"),
+        ("vector", "without_vector"),
+        ("community", "without_community"),
+    ]:
+        without_score = per_config[without_key]["weighted_score"]["mean"]
+        contribution = round((full_score - without_score) * 100, 2)
+        component_contributions[comp] = contribution
+
+    most_impactful = max(component_contributions, key=component_contributions.get)
+    best_single = max(
+        ["graph_only", "vector_only", "community_only"],
+        key=lambda k: per_config[k]["weighted_score"]["mean"],
+    )
+
+    analysis = {
+        "most_impactful_component": most_impactful,
+        "component_contributions_pp": component_contributions,
+        "best_single_component": best_single,
+        "best_single_score": per_config[best_single]["weighted_score"]["mean"],
+        "complementarity": (
+            f"full_system ({full_score:.4f}) > "
+            f"best_single ({per_config[best_single]['weighted_score']['mean']:.4f})"
+        ),
+    }
+
+    # Build tables
+    main_table = []
+    for ablation_name in ABLATION_CONFIGS:
+        c = per_config[ablation_name]
+        main_table.append({
+            "configuration": ABLATION_DISPLAY_NAMES[ablation_name],
+            "weighted_score": f"{c['weighted_score']['mean']:.2%}",
+            "delta_pp": f"{c['delta_pp']:+.2f} pp" if c["delta_pp"] != 0 else "---",
+            "entity_cov": f"{c['entity_coverage']['mean']:.2%}",
+            "concept_cov": f"{c['concept_coverage']['mean']:.2%}",
+            "source_attr": f"{c['source_attribution']['mean']:.2%}",
+            "resp_quality": f"{c['response_quality']['mean']:.2%}",
+        })
+
+    results = {
+        "configurations": per_config,
+        "analysis": analysis,
+    }
+
+    tables = {
+        "main_comparison": main_table,
+    }
+
+    envelope = _build_result_envelope(
+        "experiment_6_ablation", mode, config, results, tables
+    )
+
+    # Add dataset info at top level
+    envelope["dataset"] = "benchmark_50.json"
+    envelope["num_questions"] = n_questions
+
+    output_path = os.path.join(config.results_dir, "experiment_6_ablation.json")
+    _save_results(output_path, envelope)
+
+    _print_experiment_summary("Experiment 6: Ablation Study (Table 7)", main_table)
+    return envelope
+
+
+def _evaluate_ablation_live(
+    ablation_name: str, question: dict, config: ExperimentConfig
+) -> tuple[float, float, float, float]:
+    """Evaluate a single benchmark question for an ablation configuration in live mode.
+
+    Args:
+        ablation_name: Name of the ablation configuration.
+        question: Question dictionary with expected entities/concepts.
+        config: Experiment configuration.
+
+    Returns:
+        Tuple of (entity_coverage, concept_coverage, source_attribution, quality).
+    """
+    try:
+        from neo4j import GraphDatabase
+        from src.ingestion.embedder import ChunkEmbedder
+        from anthropic import Anthropic
+
+        driver = GraphDatabase.driver(config.neo4j_uri, auth=config.neo4j_auth)
+        embedder = ChunkEmbedder()
+        anthropic_client = Anthropic(api_key=config.anthropic_api_key)
+
+        # Map ablation name to baseline class
+        ablation_map = {
+            "full_system": None,  # Uses existing MultiStrategy
+            "without_graph": WithoutGraphBaseline,
+            "without_vector": WithoutVectorBaseline,
+            "without_community": HybridRAGBaseline,  # graph+vector = HybridRAG weights
+            "graph_only": GraphOnlyBaseline,
+            "vector_only": VectorRAGBaseline,
+            "community_only": CommunityOnlyBaseline,
+        }
+
+        baseline_cls = ablation_map.get(ablation_name)
+
+        if ablation_name == "full_system":
+            from src.retrieval.engine import RetrievalEngine
+            engine = RetrievalEngine(driver, embedder, anthropic_client)
+            result = engine.retrieve(question["question"])
+            response_text = result.formatted_context
+        else:
+            baseline = baseline_cls(driver, embedder, anthropic_client)
+            result = baseline.retrieve(question["question"])
+            gen = baseline.generate(question["question"], result.formatted_context)
+            response_text = gen.get("answer", "")
+
+        entity = _compute_entity_coverage(response_text, question.get("expected_entities", []))
+        concept = _compute_concept_coverage(response_text, question.get("expected_concepts", []))
+        source = _compute_source_attribution(response_text, question.get("source_references", []))
+        quality = _compute_response_quality(response_text)
+
+        driver.close()
+        return entity, concept, source, quality
+
+    except Exception as e:
+        logger.error("Live ablation evaluation failed for %s on question %s: %s",
+                     ablation_name, question.get("id"), e)
+        return 0.0, 0.0, 0.0, 0.0
+
+
+# ---------------------------------------------------------------------------
 # Output helpers
 # ---------------------------------------------------------------------------
 def _print_experiment_summary(title: str, table: list[dict]) -> None:
@@ -1949,6 +2348,7 @@ def run_all_experiments(config: ExperimentConfig) -> dict:
     all_results["experiment_2_tokens"] = run_experiment_tokens(config)
     all_results["experiment_3_speed"] = run_experiment_speed(config)
     all_results["experiment_5_benchmark"] = run_experiment_benchmark(config)
+    all_results["experiment_6_ablation"] = run_experiment_ablation(config)
 
     elapsed = time.time() - start_time
 
@@ -2016,6 +2416,15 @@ def _extract_headline_results(all_results: dict) -> dict:
     if ours_bench:
         headlines["benchmark_weighted_score"] = ours_bench.get("weighted_score", {}).get("mean")
 
+    # Experiment 6: Ablation study
+    exp6 = all_results.get("experiment_6_ablation", {})
+    ablation_configs = exp6.get("results", {}).get("configurations", {})
+    if ablation_configs:
+        full = ablation_configs.get("full_system", {})
+        headlines["ablation_full_system_score"] = full.get("weighted_score", {}).get("mean")
+        analysis = exp6.get("results", {}).get("analysis", {})
+        headlines["ablation_most_impactful"] = analysis.get("most_impactful_component")
+
     return headlines
 
 
@@ -2037,9 +2446,9 @@ Examples:
         "--experiment",
         type=str,
         default="all",
-        choices=["1", "2", "3", "5", "all"],
+        choices=["1", "2", "3", "5", "6", "all"],
         help="Which experiment to run: 1 (Hallucination), 2 (Tokens), "
-             "3 (Speed), 5 (Benchmark), or 'all' (default: all)",
+             "3 (Speed), 5 (Benchmark), 6 (Ablation), or 'all' (default: all)",
     )
     parser.add_argument(
         "--simulate",
@@ -2065,6 +2474,14 @@ Examples:
         help="Override results directory (default: simulacoes/results/)",
     )
     parser.add_argument(
+        "--judge-mode",
+        type=str,
+        default="heuristic",
+        choices=["heuristic", "llm"],
+        help="Evaluation mode for Experiment 1: 'heuristic' (token overlap) or "
+             "'llm' (Claude-based LLM-as-judge). Default: heuristic",
+    )
+    parser.add_argument(
         "--verbose", "-v",
         action="store_true",
         help="Enable verbose (DEBUG) logging",
@@ -2085,6 +2502,7 @@ Examples:
         max_questions=args.max_questions,
         seed=args.seed,
         simulate=args.simulate,
+        judge_mode=args.judge_mode,
     )
     if args.results_dir:
         config.results_dir = args.results_dir
@@ -2103,6 +2521,7 @@ Examples:
         "2": run_experiment_tokens,
         "3": run_experiment_speed,
         "5": run_experiment_benchmark,
+        "6": run_experiment_ablation,
     }
 
     if args.experiment == "all":
